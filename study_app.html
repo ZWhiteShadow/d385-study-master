@@ -579,47 +579,47 @@ ShowData()` }
         ];
 
         const FLASHCARDS = [
-          { id: 201, question: "What is LDAP?", answer: "commonly used to handle directory services such as user authentication, authorization, and directory management" },
-          { id: 202, question: "What is ACL?", answer: "a list of permissions associated with a network resource or object that specifies which users or systems are allowed or denied access to that resource" },
-          { id: 203, question: "What is a GET Request?", answer: "used to retrieve data from a specified resource on a web server. It is one of the most common HTTP methods and is used to request data without modifying or affecting the server's state" },
-          { id: 204, question: "What does response.history provide?", answer: "provides a list of Response objects that represent the intermediate responses encountered while following redirects" },
-          { id: 205, question: "What is Denial of Service?", answer: "an attempt to overload a website or network, with the aim of degrading its performance or even making it completely inaccessible" },
-          { id: 206, question: "What is API Mass Assignment?", answer: "an application allows users to update multiple fields or attributes of an object via an API endpoint without proper validation or restrictions" },
-          { id: 207, question: "What is Man in the Middle Interception?", answer: "criminal puts themselves between client and server, done via creating an unsecure wifi network, finding entry into an insecure network via packet sniffer, creaking fake websites, or manipulating IP protocols" },
-          { id: 208, question: "What is Man in the Middle Decryption?", answer: "Use of data capture tools to transmit any login info or web activity back to the criminal to be decrypted" },
-          { id: 209, question: "What is Cross Site Scripting prevention?", answer: "Validate and Sanitize all user inputs" },
-          { id: 210, question: "What is Code Injection prevention?", answer: "input validation" },
-          { id: 211, question: "What is Man in the Middle prevention?", answer: "HTTPS, up to date certificates, authenticate users/devices, avoid open wifi networks" },
-          { id: 212, question: "What is Broken Access Control prevention?", answer: "Implement strong authentication and authorization, Role-Based Access Control" },
-          { id: 213, question: "What is Broken Function Level Authorization prevention?", answer: "Role Based Access Control, Server Side Authorization Checks" },
-          { id: 214, question: "What is field-level access control?", answer: "regulates access to specific fields or attributes within a resource, rather than the resource as a whole" },
-          { id: 215, question: "What is resource-level access control?", answer: "governs which users or entities can access specific resources within a system, application, or service" },
-          { id: 216, question: "What is ACAO client.url?", answer: "Access Control Allow Origin (ACAO) - client request to (server) www.client.url , what does server send back?" },
-          { id: 217, question: "What is XSS Example/Explanation?", answer: "Attacker inserts malicious script (generally through input fields or url parameters not properly sanitized) that is executed by other users who visit the site" },
-          { id: 218, question: "What is 200 OK?", answer: "Your request was successful!" },
-          { id: 219, question: "What is 201 Created?", answer: "The request was accepted, and the resource was created" },
-          { id: 220, question: "What is 400 - Bad Request?", answer: "indicates that the server could not understand or process the request due to invalid syntax or bad formatting" },
-          { id: 221, question: "What is 401 - Unauthorized?", answer: "indicates that the request lacks valid authentication credentials" },
-          { id: 222, question: "What is 403 - Forbidden?", answer: "indicates that the server understands the request but refuses to authorize it" },
-          { id: 223, question: "What is 404 - Not Found?", answer: "indicates that the server could not find the requested resource" },
-          { id: 224, question: "What is 405 Method Not Allowed?", answer: "The endpoint doesn't allow for that specific HTTP method" },
-          { id: 225, question: "What is 500 Internal Server Error?", answer: "Your request wasn't expected and probably broke something on the server side" },
-          { id: 226, question: "What is response.status_code?", answer: "represents the HTTP status code returned by the server in response to a request" },
-          { id: 227, question: "What is rate limited requests?", answer: "refers to a request that is constrained by a rate limit imposed by a server or API to control the frequency of requests from a client" },
-          { id: 228, question: "What is Privilege Escalation?", answer: "occurs when an attacker gains elevated access rights or permissions beyond those originally granted to them" },
-          { id: 229, question: "What is Authentication?", answer: "refers to giving a user permissions to access a particular resource. Since, everyone can't be allowed to access data from every URL, one would require authentication primarily" },
-          { id: 230, question: "What is 403 - The user can reach the site but not access further?", answer: "more permission needed. Headers and Cookies provide necessary data that is validated for requests" }
+          { id: 201, category: "Authentication", difficulty: "Easy", question: "What is LDAP?", answer: "commonly used to handle directory services such as user authentication, authorization, and directory management" },
+          { id: 202, category: "Access Control", difficulty: "Easy", question: "What is ACL?", answer: "a list of permissions associated with a network resource or object that specifies which users or systems are allowed or denied access to that resource" },
+          { id: 203, category: "HTTP Methods", difficulty: "Easy", question: "What is a GET Request?", answer: "used to retrieve data from a specified resource on a web server. It is one of the most common HTTP methods and is used to request data without modifying or affecting the server's state" },
+          { id: 204, category: "HTTP Response", difficulty: "Medium", question: "What does response.history provide?", answer: "provides a list of Response objects that represent the intermediate responses encountered while following redirects" },
+          { id: 205, category: "Attacks", difficulty: "Easy", question: "What is Denial of Service?", answer: "an attempt to overload a website or network, with the aim of degrading its performance or even making it completely inaccessible" },
+          { id: 206, category: "API Security", difficulty: "Medium", question: "What is API Mass Assignment?", answer: "an application allows users to update multiple fields or attributes of an object via an API endpoint without proper validation or restrictions" },
+          { id: 207, category: "Attacks", difficulty: "Medium", question: "What is Man in the Middle Interception?", answer: "criminal puts themselves between client and server, done via creating an unsecure wifi network, finding entry into an insecure network via packet sniffer, creaking fake websites, or manipulating IP protocols" },
+          { id: 208, category: "Attacks", difficulty: "Medium", question: "What is Man in the Middle Decryption?", answer: "Use of data capture tools to transmit any login info or web activity back to the criminal to be decrypted" },
+          { id: 209, category: "Prevention", difficulty: "Easy", question: "What is Cross Site Scripting prevention?", answer: "Validate and Sanitize all user inputs" },
+          { id: 210, category: "Prevention", difficulty: "Easy", question: "What is Code Injection prevention?", answer: "input validation" },
+          { id: 211, category: "Prevention", difficulty: "Medium", question: "What is Man in the Middle prevention?", answer: "HTTPS, up to date certificates, authenticate users/devices, avoid open wifi networks" },
+          { id: 212, category: "Prevention", difficulty: "Medium", question: "What is Broken Access Control prevention?", answer: "Implement strong authentication and authorization, Role-Based Access Control" },
+          { id: 213, category: "Prevention", difficulty: "Medium", question: "What is Broken Function Level Authorization prevention?", answer: "Role Based Access Control, Server Side Authorization Checks" },
+          { id: 214, category: "Access Control", difficulty: "Hard", question: "What is field-level access control?", answer: "regulates access to specific fields or attributes within a resource, rather than the resource as a whole" },
+          { id: 215, category: "Access Control", difficulty: "Hard", question: "What is resource-level access control?", answer: "governs which users or entities can access specific resources within a system, application, or service" },
+          { id: 216, category: "CORS", difficulty: "Hard", question: "What is ACAO client.url?", answer: "Access Control Allow Origin (ACAO) - client request to (server) www.client.url , what does server send back?" },
+          { id: 217, category: "Attacks", difficulty: "Medium", question: "What is XSS Example/Explanation?", answer: "Attacker inserts malicious script (generally through input fields or url parameters not properly sanitized) that is executed by other users who visit the site" },
+          { id: 218, category: "HTTP Status", difficulty: "Easy", question: "What is 200 OK?", answer: "Your request was successful!" },
+          { id: 219, category: "HTTP Status", difficulty: "Easy", question: "What is 201 Created?", answer: "The request was accepted, and the resource was created" },
+          { id: 220, category: "HTTP Status", difficulty: "Easy", question: "What is 400 - Bad Request?", answer: "indicates that the server could not understand or process the request due to invalid syntax or bad formatting" },
+          { id: 221, category: "HTTP Status", difficulty: "Easy", question: "What is 401 - Unauthorized?", answer: "indicates that the request lacks valid authentication credentials" },
+          { id: 222, category: "HTTP Status", difficulty: "Easy", question: "What is 403 - Forbidden?", answer: "indicates that the server understands the request but refuses to authorize it" },
+          { id: 223, category: "HTTP Status", difficulty: "Easy", question: "What is 404 - Not Found?", answer: "indicates that the server could not find the requested resource" },
+          { id: 224, category: "HTTP Status", difficulty: "Medium", question: "What is 405 Method Not Allowed?", answer: "The endpoint doesn't allow for that specific HTTP method" },
+          { id: 225, category: "HTTP Status", difficulty: "Easy", question: "What is 500 Internal Server Error?", answer: "Your request wasn't expected and probably broke something on the server side" },
+          { id: 226, category: "HTTP Response", difficulty: "Medium", question: "What is response.status_code?", answer: "represents the HTTP status code returned by the server in response to a request" },
+          { id: 227, category: "Rate Limiting", difficulty: "Medium", question: "What is rate limited requests?", answer: "refers to a request that is constrained by a rate limit imposed by a server or API to control the frequency of requests from a client" },
+          { id: 228, category: "Attacks", difficulty: "Hard", question: "What is Privilege Escalation?", answer: "occurs when an attacker gains elevated access rights or permissions beyond those originally granted to them" },
+          { id: 229, category: "Authentication", difficulty: "Easy", question: "What is Authentication?", answer: "refers to giving a user permissions to access a particular resource. Since, everyone can't be allowed to access data from every URL, one would require authentication primarily" },
+          { id: 230, category: "HTTP Status", difficulty: "Medium", question: "What is 403 - The user can reach the site but not access further?", answer: "more permission needed. Headers and Cookies provide necessary data that is validated for requests" }
         ];
 
         const MC_QUESTIONS = [
-          { id: 101, category: "Logging", question: "What is the primary defense against log injection attacks?", options: ["Sanitize outbound log messages", "Do not use parameterized stored procedures", "Allow all users to write to logs", "Use API calls to log actions"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Sanitizing prevents malicious injection.", "❌ WRONG: For SQL injection, not log injection.", "❌ WRONG: Would CREATE vulnerability.", "❌ WRONG: Logging method, not security defense."] },
-          { id: 102, category: "XSS", question: "An attacker exploits XSS. What can they do?", options: ["Access the user's data", "Execute shell commands", "Discover other users' credentials", "Access server files"], correctIndex: 0, optionExplanations: ["✅ CORRECT: XSS runs in browser, accessing client-side data.", "❌ WRONG: XSS is client-side, can't execute server commands.", "❌ WRONG: XSS targets one user, not credential database.", "❌ WRONG: XSS runs in browser, can't access server files."] },
-          { id: 103, category: "Code Injection", question: "Which Python function is prone to code injection?", options: ["eval()", "type()", "print()", "append()"], correctIndex: 0, optionExplanations: ["✅ CORRECT: eval() executes strings as code.", "❌ WRONG: type() only returns object type.", "❌ WRONG: print() outputs text, doesn't execute.", "❌ WRONG: append() adds to lists, doesn't execute."] },
-          { id: 104, category: "Defensive Coding", question: "What are two common defensive coding techniques?", options: ["Check preconditions and postconditions", "Encrypt passwords and emails", "Adjust message length/encoding", "Use exceptions to find errors"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Preconditions validate inputs, postconditions verify outputs.", "❌ WRONG: Encryption is security practice, not defensive coding.", "❌ WRONG: Message formatting isn't defensive coding.", "❌ WRONG: That's debugging, not defensive coding."] },
-          { id: 105, category: "Testing", question: "Which package is for Python's internal regression testing?", options: ["test", "regress test", "doctest", "assert"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 'test' package is Python's internal test suite.", "❌ WRONG: 'regress test' doesn't exist.", "❌ WRONG: 'doctest' tests docstring examples.", "❌ WRONG: 'assert' is a statement, not a package."] },
-          { id: 106, category: "Validation", question: "Which type of input validation does this code show?\n\nisValidNumber = False\nwhile not isValidNumber:\n  try:\n    pickedNumber = int(input('Pick 1-10'))\n    if pickedNumber >= 1 and pickedNumber <= 10:\n      isValidNumber = True\n  except:\n    print('Enter valid number')", options: ["Type and range check", "Type and length check", "Length and range check", "Invalid number check"], correctIndex: 0, optionExplanations: ["✅ CORRECT: int() is type check, >= 1 and <= 10 is range check.", "❌ WRONG: No length checking, only type and range.", "❌ WRONG: No length checking here.", "❌ WRONG: Too vague, specifically type and range."] },
-          { id: 107, category: "Security Testing", question: "This code checks for HSTS headers. Which vulnerability is being tested?\n\nimport requests\nfor url in urls:\n  req = requests.get(url)\n  try:\n    transport_security = req.headers['Strict-Transport-Security']\n  except:\n    print('HSTS header not set')", options: ["Man-in-the-middle", "Cross-site scripting", "Denial of service", "Code injection"], correctIndex: 0, optionExplanations: ["✅ CORRECT: HSTS prevents man-in-the-middle by enforcing HTTPS.", "❌ WRONG: XSS is script injection, not transport security.", "❌ WRONG: DoS overwhelms servers, HSTS is about encryption.", "❌ WRONG: Code injection is executing malicious code."] },
-          { id: 108, category: "Access Control", question: "Attacker took over multiple accounts. What vulnerability?", options: ["Broken access control", "Function level auth", "API mass assignment", "Privilege escalation"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Broken access control allows unauthorized account access.", "❌ WRONG: Function level is role-based restrictions.", "❌ WRONG: Mass assignment is property manipulation.", "❌ WRONG: Privilege escalation is gaining higher privileges."] },
+          { id: 101, category: "Logging", difficulty: "Easy", question: "What is the primary defense against log injection attacks?", options: ["Sanitize outbound log messages", "Do not use parameterized stored procedures", "Allow all users to write to logs", "Use API calls to log actions"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Sanitizing prevents malicious injection.", "❌ WRONG: For SQL injection, not log injection.", "❌ WRONG: Would CREATE vulnerability.", "❌ WRONG: Logging method, not security defense."] },
+          { id: 102, category: "XSS", difficulty: "Easy", question: "An attacker exploits XSS. What can they do?", options: ["Access the user's data", "Execute shell commands", "Discover other users' credentials", "Access server files"], correctIndex: 0, optionExplanations: ["✅ CORRECT: XSS runs in browser, accessing client-side data.", "❌ WRONG: XSS is client-side, can't execute server commands.", "❌ WRONG: XSS targets one user, not credential database.", "❌ WRONG: XSS runs in browser, can't access server files."] },
+          { id: 103, category: "Code Injection", difficulty: "Easy", question: "Which Python function is prone to code injection?", options: ["eval()", "type()", "print()", "append()"], correctIndex: 0, optionExplanations: ["✅ CORRECT: eval() executes strings as code.", "❌ WRONG: type() only returns object type.", "❌ WRONG: print() outputs text, doesn't execute.", "❌ WRONG: append() adds to lists, doesn't execute."] },
+          { id: 104, category: "Defensive Coding", difficulty: "Easy", question: "What are two common defensive coding techniques?", options: ["Check preconditions and postconditions", "Encrypt passwords and emails", "Adjust message length/encoding", "Use exceptions to find errors"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Preconditions validate inputs, postconditions verify outputs.", "❌ WRONG: Encryption is security practice, not defensive coding.", "❌ WRONG: Message formatting isn't defensive coding.", "❌ WRONG: That's debugging, not defensive coding."] },
+          { id: 105, category: "Testing", difficulty: "Easy", question: "Which package is for Python's internal regression testing?", options: ["test", "regress test", "doctest", "assert"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 'test' package is Python's internal test suite.", "❌ WRONG: 'regress test' doesn't exist.", "❌ WRONG: 'doctest' tests docstring examples.", "❌ WRONG: 'assert' is a statement, not a package."] },
+          { id: 106, category: "Validation", difficulty: "Medium", question: "Which type of input validation does this code show?\n\nisValidNumber = False\nwhile not isValidNumber:\n  try:\n    pickedNumber = int(input('Pick 1-10'))\n    if pickedNumber >= 1 and pickedNumber <= 10:\n      isValidNumber = True\n  except:\n    print('Enter valid number')", options: ["Type and range check", "Type and length check", "Length and range check", "Invalid number check"], correctIndex: 0, optionExplanations: ["✅ CORRECT: int() is type check, >= 1 and <= 10 is range check.", "❌ WRONG: No length checking, only type and range.", "❌ WRONG: No length checking here.", "❌ WRONG: Too vague, specifically type and range."] },
+          { id: 107, category: "Security Testing", difficulty: "Medium", question: "This code checks for HSTS headers. Which vulnerability is being tested?\n\nimport requests\nfor url in urls:\n  req = requests.get(url)\n  try:\n    transport_security = req.headers['Strict-Transport-Security']\n  except:\n    print('HSTS header not set')", options: ["Man-in-the-middle", "Cross-site scripting", "Denial of service", "Code injection"], correctIndex: 0, optionExplanations: ["✅ CORRECT: HSTS prevents man-in-the-middle by enforcing HTTPS.", "❌ WRONG: XSS is script injection, not transport security.", "❌ WRONG: DoS overwhelms servers, HSTS is about encryption.", "❌ WRONG: Code injection is executing malicious code."] },
+          { id: 108, category: "Access Control", difficulty: "Easy", question: "Attacker took over multiple accounts. What vulnerability?", options: ["Broken access control", "Function level auth", "API mass assignment", "Privilege escalation"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Broken access control allows unauthorized account access.", "❌ WRONG: Function level is role-based restrictions.", "❌ WRONG: Mass assignment is property manipulation.", "❌ WRONG: Privilege escalation is gaining higher privileges."] },
           { id: 109, category: "API Security", question: "Best way to protect API with IsAdmin field?", options: ["Resource and field-level access control", "Rate limiting", "Remove IsAdmin field", "Encrypt requests"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Field-level control restricts who can modify IsAdmin.", "❌ WRONG: Rate limiting prevents DoS, not privilege escalation.", "❌ WRONG: Removing field prevents legitimate admin creation.", "❌ WRONG: Encryption protects transit, not field access."] },
           { id: 110, category: "SQL Injection", question: "Which method is used for SQL injection?", options: ["Exploiting query parameters", "Safe query parameters", "SQL composition", "Literal parameters"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Attackers inject SQL through unsanitized parameters.", "❌ WRONG: Safe parameters PREVENT injection.", "❌ WRONG: Composition is general term.", "❌ WRONG: Literals are hardcoded, not user input."] },
           { id: 111, category: "CORS", question: "What does CORS allow users to do?", options: ["Override same origin policy for specific resources", "Connect web security models", "Prevent passing credentials", "Protect client header from exposure"], correctIndex: 0, optionExplanations: ["✅ CORRECT: CORS creates controlled exceptions to same-origin policy.", "❌ WRONG: Vague and meaningless phrase.", "❌ WRONG: CORS can ALLOW credentials with proper headers.", "❌ WRONG: CORS exposes headers, doesn't protect them."] },
@@ -1113,8 +1113,22 @@ ShowData()` }
                                  Object.keys(score.flashcards.cardScores).length;
             
             if (timeSpentSeconds > 60 && totalCompleted >= 3) {
-              const expectedTimePerQuestion = 240 * 60 / 100; // 4 hours * 60 min / 100 questions
-              const expectedTimeSpent = totalCompleted * expectedTimePerQuestion * 60; // Convert to seconds
+              // Calculate weighted time based on test percentages
+              const patternsCompleted = Object.keys(score.patterns.patternScores).length;
+              const quizCompleted = Object.keys(score.concepts.questionScores).length;
+              const flashcardsCompleted = Object.keys(score.flashcards.cardScores).length;
+              
+              // Test weights: Patterns 40%, Quiz 35%, Flashcards 25%
+              const patternsWeight = 0.40;
+              const quizWeight = 0.35;
+              const flashcardsWeight = 0.25;
+              
+              // Calculate expected time based on weighted completion
+              const patternsExpectedTime = (patternsCompleted / PATTERNS.length) * patternsWeight * 240 * 60; // seconds
+              const quizExpectedTime = (quizCompleted / MC_QUESTIONS.length) * quizWeight * 240 * 60; // seconds
+              const flashcardsExpectedTime = (flashcardsCompleted / FLASHCARDS.length) * flashcardsWeight * 240 * 60; // seconds
+              
+              const expectedTimeSpent = patternsExpectedTime + quizExpectedTime + flashcardsExpectedTime;
               const timeDiff = expectedTimeSpent - timeSpentSeconds;
               const minutesDiff = Math.floor(timeDiff / 60);
               
@@ -1138,6 +1152,7 @@ ShowData()` }
           const secs = seconds % 60;
           return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         };
+
 
         const startTimer = () => setTimerActive(true);
         const pauseTimer = () => setTimerActive(false);
@@ -1716,13 +1731,16 @@ ShowData()` }
                     ),
                     React.createElement('div', { className: "text-sm text-gray-500" }, `Card ${currentFlashcard + 1} of 30`)
                   ),
-                  React.createElement('span', { className: "inline-block mt-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm" }, "Flashcard")
+                  React.createElement('span', { className: "inline-block mt-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm" }, flashcard.category)
                 ),
                 React.createElement('div', { className: "bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg mb-4" },
                   React.createElement('p', { className: "text-gray-800 font-medium" }, flashcard.question)
                 ),
-                (!showAnswer && !score.flashcards.cardScores[flashcard.id]) && React.createElement('div', { className: "mb-4" },
-                  React.createElement('button', { onClick: () => setShowAnswer(true), className: "px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-lg text-sm" }, "Show Answer")
+                (!showAnswer && !score.flashcards.cardScores[flashcard.id]) && React.createElement('div', { className: "mb-4 space-y-2" },
+                  React.createElement('button', {
+                    onClick: () => setShowAnswer(true),
+                    className: "px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-lg text-sm"
+                  }, "Show Answer")
                 ),
                 (showAnswer || score.flashcards.cardScores[flashcard.id]) && React.createElement('div', { className: "bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4" },
                   React.createElement('p', { className: "text-sm text-blue-800 font-semibold mb-1" }, "Answer:"),
