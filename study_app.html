@@ -706,12 +706,11 @@ ShowData()` }
           if (!timerActive) return;
           
           const updateTimer = () => {
-            const currentTime = Date.now();
-            const timeSpentMs = currentTime - sessionStartTime;
-            const timeSpentSeconds = Math.floor(timeSpentMs / 1000);
-            const minutes = Math.floor(timeSpentSeconds / 60);
-            const seconds = timeSpentSeconds % 60;
-            const timeSpent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            // Calculate time remaining from the countdown timer
+            const hours = Math.floor(timeRemaining / 3600);
+            const minutes = Math.floor((timeRemaining % 3600) / 60);
+            const seconds = timeRemaining % 60;
+            const timeSpent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
             // Calculate actual questions completed successfully across all modes
             const patternsCompleted = Object.keys(score.patterns.patternScores).length;
@@ -721,7 +720,10 @@ ShowData()` }
             
             // Only show status if we have completed at least 3 questions to get a meaningful average
             let status = "";
-            if (timeSpentSeconds > 60 && totalCompleted >= 3) {
+            if (totalCompleted >= 3) {
+              // Calculate time spent so far
+              const timeSpentSeconds = 14400 - timeRemaining; // Total time minus remaining
+              
               // Weight time based on test percentage: Patterns 40%, Quiz 35%, Flashcards 25%
               const patternsWeight = 0.40; // 40% of test
               const quizWeight = 0.35;     // 35% of test  
@@ -747,7 +749,7 @@ ShowData()` }
           updateTimer(); // Update immediately
           const interval = setInterval(updateTimer, 1000); // Update every second
           return () => clearInterval(interval);
-        }, [timerActive, sessionStartTime, score]);
+        }, [timerActive, timeRemaining, score]);
 
         const formatTime = (seconds) => {
           const hours = Math.floor(seconds / 3600);
@@ -804,16 +806,28 @@ ShowData()` }
             setShowAnswer(true);
           };
 
-        const next = () => {
-          if (mode === 'patterns') setCurrentPattern(p => (p + 1) % shuffledPatterns.length);
-          else if (mode === 'concepts') setCurrentQuestion(q => (q + 1) % shuffledQuestions.length);
-          else setCurrentFlashcard(f => (f + 1) % shuffledFlashcards.length);
-          setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
-        };
+          const next = () => {
+            if (mode === 'patterns') setCurrentPattern(p => (p + 1) % shuffledPatterns.length);
+            else if (mode === 'concepts') setCurrentQuestion(q => (q + 1) % shuffledQuestions.length);
+            else setCurrentFlashcard(f => (f + 1) % shuffledFlashcards.length);
+            setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
+          };
 
-          const retry = () => {
-            if (mode === 'concepts' && feedback) setScore(prev => ({ ...prev, concepts: { correct: prev.concepts.correct - (feedback === 'correct' ? 1 : 0), total: prev.concepts.total - 1, questionScores: { ...prev.concepts.questionScores, [question.id]: undefined } } }));
-            else if (mode === 'flashcards' && feedback) setScore(prev => ({ ...prev, flashcards: { correct: prev.flashcards.correct - (feedback === 'correct' ? 1 : 0), total: prev.flashcards.total - 1, cardScores: { ...prev.flashcards.cardScores, [flashcard.id]: undefined } } }));
+          const retrySet = () => {
+            if (mode === 'patterns') {
+              setScore(prev => ({ ...prev, patterns: { correct: 0, total: 0, patternScores: {} } }));
+              setCurrentPattern(0);
+              setShuffledPatterns(shuffleArray(PATTERNS));
+              setMasteredPatterns(new Set());
+            } else if (mode === 'concepts') {
+              setScore(prev => ({ ...prev, concepts: { correct: 0, total: 0, questionScores: {} } }));
+              setCurrentQuestion(0);
+              setShuffledQuestions(shuffleArray(MC_QUESTIONS));
+            } else if (mode === 'flashcards') {
+              setScore(prev => ({ ...prev, flashcards: { correct: 0, total: 0, cardScores: {} } }));
+              setCurrentFlashcard(0);
+              setShuffledFlashcards(shuffleArray(FLASHCARDS));
+            }
             setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
           };
 
@@ -1135,7 +1149,7 @@ ShowData()` }
                       "Skip"
                     )
                   ) : React.createElement(React.Fragment, null,
-                    React.createElement('button', { onClick: retry, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Try Again"),
+                    React.createElement('button', { onClick: retrySet, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Retry Full Patterns Set"),
                     React.createElement('button', { onClick: next, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg" }, "Next →")
                   )
                 )
@@ -1197,7 +1211,7 @@ ShowData()` }
                       "Skip"
                     )
                   ) : React.createElement(React.Fragment, null,
-                    feedback !== 'correct' && React.createElement('button', { onClick: retry, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Retry"),
+                    React.createElement('button', { onClick: retrySet, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Retry Full Quiz Set"),
                     React.createElement('button', { onClick: next, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg" }, "Next →")
                   )
                 )
@@ -1242,6 +1256,7 @@ ShowData()` }
                   ) : React.createElement(React.Fragment, null,
                     React.createElement('button', { onClick: () => markFlashcard(true), className: "flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg" }, "✅ Got it right"),
                     React.createElement('button', { onClick: () => markFlashcard(false), className: "flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg" }, "❌ Got it wrong"),
+                    React.createElement('button', { onClick: retrySet, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Retry Full Cards Set"),
                     React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
                       React.createElement(SkipForward),
                       "Skip"
