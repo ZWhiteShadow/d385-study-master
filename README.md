@@ -118,6 +118,7 @@ All sources above were compiled from the comprehensive Reddit discussion:
 **[Updated 11/2023 Software Security and Testing D385](https://www.reddit.com/r/wgu_devs/comments/17quy61/updated_112023_software_security_and_testing_d385/)**
 
 ### 🤖 AI Development
+- **Prompt Engineering**: Wade Helquist
 - **Practice Test Questions**: Generated entirely using prompt engineering with Cursor AI and Claude
 - **Study Tips**: Consolidated from Reddit community wisdom and best practices
 - **App Development**: Built with React, Tailwind CSS, and modern web technologies
