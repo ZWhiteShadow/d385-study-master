@@ -16,7 +16,6 @@
     <div id="root"></div>
     
     <script type="text/babel">
-        const { useState } = React;
         
         // Simple icon components
         const Brain = () => React.createElement('div', { className: 'w-8 h-8 bg-indigo-600 rounded' });
@@ -639,6 +638,402 @@ ShowData()` }
           { id: 124, category: "Exception Messages", question: "For deserialization, what exception message should you use?", options: ["'New key does not match old key'", "'Invalid data format'", "'Deserialization failed'", "'Key mismatch error'"], correctIndex: 0, optionExplanations: ["✅ CORRECT: This is the exact message from the Reddit guide.", "❌ WRONG: Too generic, not the specific message.", "❌ WRONG: Too generic, not the specific message.", "❌ WRONG: Close but not the exact wording."] }
         ];
 
+        // Pre-Assessment detailed explanations mapping by answer option
+        // ALL CONTENT EXTRACTED DIRECTLY FROM PRE-ASSESSMENT FILES
+        const PRE_ASSESSMENT_EXPLANATIONS = {
+          // Quiz question 101 - Log Injection (from 02-EvaluatesApplicationNetworkLogs.md)
+          "q101_0": {
+            title: "Sanitize outbound log messages (CORRECT)",
+            content: "The primary defense against log injection attacks is to **sanitize outbound log messages**. Log injection is a type of security vulnerability where an attacker manipulates log messages to inject malicious code or exploit system vulnerabilities. By sanitizing outbound log messages, you ensure that any user-supplied input or potentially dangerous characters are properly escaped or removed before being included in the log.\n\nSanitizing log messages involves applying input validation and output encoding techniques to prevent the injection of malicious content. It typically involves validating the input data, such as user inputs, and sanitizing or encoding it appropriately to ensure it does not contain any harmful characters or constructs.\n\nSome common techniques for sanitizing log messages include:\n\n- **Input validation**: Validate and restrict user input to ensure it conforms to expected formats and does not contain any unauthorized or dangerous characters.\n\n- **Output encoding**: Encode the log messages in a way that prevents the interpretation of special characters or malicious constructs. For example, you can use HTML entity encoding, URL encoding, or database-specific encoding techniques, depending on the log storage and processing mechanisms.\n\nBy properly sanitizing outbound log messages, you can minimize the risk of log injection attacks and ensure that the logs remain a reliable and secure source of information for monitoring and analysis purposes."
+          },
+          "q101_1": {
+            title: "Do not use parameterized stored procedures (WRONG)",
+            content: "\"Do not use parameterized stored procedures in the database\" is not a specific defense against log injection attacks. However, using parameterized queries or stored procedures can help protect against SQL injection attacks, which are a different type of security vulnerability."
+          },
+          "q101_2": {
+            title: "Allow all users to write to logs (WRONG)",
+            content: "\"Allow all users to write to these logs\" is not a recommended approach as it can lead to unauthorized or malicious log entries, making the logs less trustworthy and potentially susceptible to manipulation."
+          },
+          "q101_3": {
+            title: "Use API calls to log actions (WRONG)",
+            content: "\"Use API calls to log actions\" is a good practice for logging actions but does not directly address log injection attacks. It focuses on the method of logging rather than the specific defense against log injection vulnerabilities."
+          },
+          // Quiz question 102 - XSS (from 04-Cross-Site-Scripting.md)
+          "q102_0": {
+            title: "Access the user's data (CORRECT)",
+            content: "With a successful cross-site scripting attack, the attacker can gain unauthorized access to the user's data, including personal information, login credentials, cookies, and any other sensitive information that the user has on the affected website. Cross-site scripting is a type of security flaw in web applications where an attacker can inject malicious scripts into web pages that are viewed by other users. These scripts are then executed by the users' web browsers, allowing the attacker to perform various actions on behalf of the victim."
+          },
+          "q102_1": {
+            title: "Execute shell commands (WRONG)",
+            content: "This option is not directly related to cross-site scripting. Executing shell commands or scripts typically involves other types of security vulnerabilities like command injection or remote code execution."
+          },
+          "q102_2": {
+            title: "Discover other users' credentials (WRONG)",
+            content: "While cross-site scripting can potentially allow an attacker to access other users' credentials if they are stored on the same vulnerable website, it's not the primary purpose of XSS attacks. The primary goal is to target individual users and steal their data."
+          },
+          "q102_3": {
+            title: "Access server files (WRONG)",
+            content: "This option is not directly related to cross-site scripting. Accessing sensitive files on the server would typically require a different type of vulnerability, such as directory traversal or server misconfigurations."
+          },
+          // Quiz question 103 - Code Injection (from 05-CodeInjectionAttack.md)
+          "q103_0": {
+            title: "eval() (CORRECT)",
+            content: "The eval() function in Python is prone to code injection attacks because it takes a string as input and interprets it as Python code. In other words, it allows dynamic execution of arbitrary Python expressions. If untrusted data from a user or an external source is passed to eval() without proper validation, an attacker can inject malicious Python code that gets executed, leading to serious security risks.\n\nA code injection attack is a type of security vulnerability where an attacker can insert and execute malicious code into a program or application. This can happen when user-supplied data is not properly validated or sanitized before being executed by the program. If an attacker can manipulate data that gets executed as code, they can potentially take control of the application, access sensitive information, or perform unauthorized actions.\n\nAs a general security best practice, it's important to avoid using eval() with untrusted data to prevent code injection vulnerabilities."
+          },
+          "q103_1": {
+            title: "type() (WRONG)",
+            content: "The type() function in Python is not directly related to code injection attacks. It is used to determine the type of an object, such as whether it's a list, dictionary, integer, etc."
+          },
+          "q103_2": {
+            title: "print() (WRONG)",
+            content: "The print() function in Python is not prone to code injection attacks. It is used to display output on the console or in files and does not execute arbitrary code."
+          },
+          "q103_3": {
+            title: "append() (WRONG)",
+            content: "The append() function is a list method in Python used to add elements to the end of a list. It is not related to code injection vulnerabilities as it deals with manipulating list data."
+          },
+          // Quiz question 104 - Defensive Coding (from 06-DefensiveCoding.md)
+          "q104_0": {
+            title: "Check preconditions and postconditions (CORRECT)",
+            content: "Functional preconditions and postconditions are common defensive coding techniques used to ensure the correctness and robustness of software.\n\n**Preconditions**: Functional preconditions are checks that are performed at the beginning of a function or method to verify that the input data or the environment's state is valid and meets the expected criteria. By checking preconditions, developers can ensure that the function can safely proceed with its execution and prevent potential issues or errors that might arise due to invalid data.\n\n**Postconditions**: Functional postconditions are checks performed at the end of a function or method to ensure that the expected outcomes or results have been achieved. Postconditions help validate that the function has executed correctly and produced the intended results. They also aid in identifying any unexpected behaviors or issues that might have occurred during the execution.\n\nBy implementing these checks in the code, developers can significantly reduce the likelihood of errors, crashes, and security vulnerabilities. By catching potential issues early on and providing meaningful feedback to users or other parts of the system, functional preconditions and postconditions contribute to the overall stability and reliability of the software."
+          },
+          "q104_1": {
+            title: "Encrypt passwords and emails (WRONG)",
+            content: "While encrypting passwords and sensitive data is an essential security practice, it is not specifically related to \"defensive coding techniques.\" Defensive coding primarily involves writing code in a way that reduces the likelihood of bugs, vulnerabilities, and unexpected behaviors."
+          },
+          "q104_2": {
+            title: "Adjust message length/encoding (WRONG)",
+            content: "This option seems to refer to data validation and handling, which can be part of defensive coding. However, it is more specific to data sanitization and security practices rather than general \"defensive coding techniques\" mentioned in the question."
+          },
+          "q104_3": {
+            title: "Use exceptions to find errors (WRONG)",
+            content: "While using exceptions in code is a useful approach to handling unexpected situations and error scenarios, it is not a primary technique for \"finding errors\" in the code. Defensive coding focuses on preventing errors from occurring in the first place or handling them gracefully when they do happen."
+          },
+          // Quiz question 105 - Testing (from 08-RegressionTesting.md)
+          "q105_0": {
+            title: "test (CORRECT)",
+            content: "In Python, the **\"test\" package** is meant for internal use by the Python interpreter for regression testing. Regression testing is the process of verifying that changes to the codebase do not unintentionally introduce new bugs or regressions. This is important for maintaining the stability and reliability of the Python language itself.\n\nThe **\"test\" package** contains a set of test cases and tools used for testing various aspects of the Python interpreter and the standard library. These tests ensure that the language and its standard library functions work as expected and continue to function correctly as changes are made to the codebase.\n\nPython uses an extensive test suite, which includes unit tests, integration tests, and more, to continuously check and validate the behavior of the language. These tests are run during the development process to catch bugs early and ensure that new changes do not break existing functionality."
+          },
+          "q105_1": {
+            title: "regress test (WRONG)",
+            content: "There is no standard Python package or module named \"regress test.\" It seems like a combination of \"regression testing,\" which is a general concept, and \"test\" package in Python."
+          },
+          "q105_2": {
+            title: "doctest (WRONG)",
+            content: "The `doctest` module is a part of Python's standard library, but it is not specifically meant for internal use by the Python interpreter. Instead, `doctest` is used for writing tests directly in the docstrings of Python functions, classes, and modules. These docstring tests serve as both documentation and test cases to verify that code examples in the documentation work as intended."
+          },
+          "q105_3": {
+            title: "assert (WRONG)",
+            content: "The `assert` statement is a core Python feature used for debugging and testing purposes, but it is not a package. It allows you to test if a given condition is `True` and raises an `AssertionError` if the condition is `False`, indicating that an assumption in the code does not hold."
+          },
+          // Quiz question 106 - Validation (from 15-InputValidation.md)
+          "q106_0": {
+            title: "Type and range check (CORRECT)",
+            content: "This code snippet performs a type check by converting the input to an integer (int(input(...))), ensuring it's a valid integer. Additionally, it performs a range check by verifying that the picked number is within the specified range of 1 to 10. The code also handles invalid inputs by catching exceptions.\n\nThe primary focus of the validation in this code is on checking both the type (integer) and the range (1 to 10) of the input."
+          },
+          "q106_1": {
+            title: "Type and length check (WRONG)",
+            content: "This is not a length check because the code converts input to integer and validates numeric range, not string length. Length checks use len() function to validate character count, which this code doesn't do."
+          },
+          "q106_2": {
+            title: "Length and range check (WRONG)",
+            content: "This is not a length check because the code converts input to integer and validates numeric range, not string length. Length checks use len() function to validate character count, which this code doesn't do."
+          },
+          "q106_3": {
+            title: "Invalid number check (WRONG)",
+            content: "This describes what the code prevents, not what it does. The code performs type and range validation, not just checking for invalid numbers."
+          },
+          // Quiz question 107 - Security Testing (from 16-PenetrationTest.md)
+          "q107_0": {
+            title: "Man-in-the-middle (CORRECT)",
+            content: "The provided code is checking for the presence of the \"Strict-Transport-Security\" (HSTS) header in the HTTP response from the websites listed in the \"websites.txt\" file. HSTS is a security feature that helps protect websites against man-in-the-middle attacks by ensuring that communication between the browser and the web server occurs over a secure HTTPS connection.\n\nThe code attempts to retrieve the HSTS header from the HTTP response headers. If the header is not set properly (indicating that HSTS is not being enforced), it prints a message indicating the vulnerability. A man-in-the-middle (MITM) attack is a type of attack where an attacker intercepts communication between two parties, and without proper HSTS implementation, an attacker could potentially perform a MITM attack by downgrading the connection from HTTPS to HTTP, leaving the user vulnerable to various security threats.\n\nTherefore, the code is checking for the vulnerability related to man-in-the-middle attacks."
+          },
+          "q107_1": {
+            title: "Cross-site scripting (WRONG)",
+            content: "Cross-site scripting (XSS) is a different type of vulnerability that involves injecting malicious scripts into web pages, not checking for HSTS headers or transport security."
+          },
+          "q107_2": {
+            title: "Denial of service (WRONG)",
+            content: "Denial of service attacks overwhelm servers with traffic, not related to checking HSTS headers or transport security mechanisms."
+          },
+          "q107_3": {
+            title: "Code injection (WRONG)",
+            content: "Code injection involves executing malicious code, not checking for security headers like HSTS in HTTP responses."
+          },
+          // Quiz question 109 - API Security (from 21-PrivilegeEscalationAPI.md)
+          "q109_0": {
+            title: "Resource and field-level access control (CORRECT)",
+            content: "The best way to ensure the API is protected against privilege escalation in this scenario is to implement resource and field-level access control. This means controlling which resources (endpoints) users have access to and which fields within those resources they can modify.\n\nBy implementing access control, you can define roles and permissions for users. This ensures that only authorized users, such as administrators, can access the endpoint to create new users, and you can restrict who can set the IsAdmin field to True. This prevents regular users from escalating their privileges by setting themselves as administrators."
+          },
+          "q109_1": {
+            title: "Rate limiting (WRONG)",
+            content: "Ensuring incoming requests are rate limited helps protect against denial of service attacks, but it doesn't directly address privilege escalation."
+          },
+          "q109_2": {
+            title: "Remove IsAdmin from endpoint (WRONG)",
+            content: "Removing IsAdmin from the endpoint is not a complete solution because it doesn't handle the cases where an administrator legitimately needs to set this field. It's essential to control access to this field instead of removing it entirely."
+          },
+          "q109_3": {
+            title: "Encrypt incoming request (WRONG)",
+            content: "Encrypting the incoming request is a good security practice to protect data in transit, but it doesn't directly prevent privilege escalation. It ensures that the data being sent is secure but doesn't control who has the privilege to set specific fields."
+          },
+          // Quiz question 110 - SQL Injection (from 22-SQL-Injection.md)
+          "q110_0": {
+            title: "Exploiting query parameters (CORRECT)",
+            content: "A SQL injection attack occurs when an attacker maliciously injects SQL (Structured Query Language) code into a vulnerable SQL query, manipulating the query's behavior and potentially gaining unauthorized access to the database or altering its contents. Exploiting query parameters is a common method used in SQL injection attacks.\n\nWhen the input from query parameters is not properly sanitized or validated, attackers can inject SQL commands as input, causing unexpected and often dangerous actions to occur in the database. This can lead to data leakage, unauthorized access, data modification, and other security vulnerabilities.\n\nIt's crucial to properly validate and sanitize user input when constructing SQL queries to prevent SQL injection attacks. Parameterized queries or prepared statements are common techniques used to mitigate SQL injection risks by separating user input from the query structure, making it much more difficult for attackers to inject malicious SQL code."
+          },
+          "q110_1": {
+            title: "Safe query parameters (WRONG)",
+            content: "Passing safe query parameters is a good practice to prevent SQL injection by properly handling and sanitizing user input, but it's not the method used for an actual SQL injection attack."
+          },
+          "q110_2": {
+            title: "SQL composition (WRONG)",
+            content: "Using SQL composition, while it may sound related, is not a specific method used to describe an SQL injection attack. It's important to avoid dynamically composing SQL queries with untrusted user input."
+          },
+          "q110_3": {
+            title: "Literal parameters (WRONG)",
+            content: "Utilizing literal parameters doesn't directly relate to SQL injection attacks. In SQL, literal parameters are used to represent constant values directly in a query. The issue in SQL injection is not with literal parameters but with improperly handled dynamic input that can be manipulated by attackers."
+          },
+          // Quiz question 111 - CORS (from 27-Cross-Origin-Sharing.md)
+          "q111_0": {
+            title: "Override same origin policy for specific resources (CORRECT)",
+            content: "Cross-Origin Resource Sharing (CORS) is a web security feature that allows web pages from one domain to make requests for resources (such as scripts, stylesheets, and data) from a different domain. This capability, provided by CORS, allows certain resources to bypass the same-origin policy, which restricts web pages from making requests to a different domain for security reasons.\n\nThe same-origin policy prevents web pages from making requests to domains other than the one from which the web page originated, to mitigate potential security risks. However, there are valid scenarios where a web page hosted on one domain needs to request resources from a different domain (cross-origin requests), such as loading data from a third-party API.\n\nCORS allows users to override the same-origin policy for specific resources by defining rules on the server-side to specify which domains are allowed to access the resources. This helps protect against unauthorized access while still enabling legitimate cross-origin requests."
+          },
+          "q111_1": {
+            title: "Connect web security models (WRONG)",
+            content: "This option does not accurately describe the purpose of CORS. CORS is a security feature that deals specifically with cross-origin requests and does not directly connect web security models."
+          },
+          "q111_2": {
+            title: "Prevent passing credentials (WRONG)",
+            content: "CORS does not primarily prevent the passing of credentials. Instead, it can control how credentials (such as cookies and HTTP authentication) are included in cross-origin requests."
+          },
+          "q111_3": {
+            title: "Protect client header from exposure (WRONG)",
+            content: "This option does not accurately describe the purpose of CORS. CORS is focused on controlling cross-origin requests, not specifically protecting client headers from exposure."
+          },
+          // Quiz question 112 - Authentication (from 28-Protocol-Tokens.md)
+          "q112_0": {
+            title: "MSAL (CORRECT)",
+            content: "The MSAL (Microsoft Authentication Library) is designed to handle authentication and authorization scenarios, primarily for Microsoft services and applications. It supports acquiring tokens for various Microsoft APIs, such as Microsoft Graph, Azure AD, and more.\n\nOne of the key features of MSAL is its ability to cache tokens after they have been acquired. This caching mechanism helps improve performance and reduce the need to reauthenticate for subsequent requests. Caching tokens allows applications to use the token without going through the full authentication process every time, as long as the token is still valid."
+          },
+          "q112_1": {
+            title: "Auth0 (WRONG)",
+            content: "Auth0 is a popular identity management platform that supports authentication and authorization for various applications and services. While Auth0 provides token-based authentication, the specific behavior of token caching may depend on the configuration and usage within the application, and it's not universally tied to Auth0 as a core feature."
+          },
+          "q112_2": {
+            title: "LDAP (WRONG)",
+            content: "LDAP (Lightweight Directory Access Protocol) is a protocol used for accessing and managing directory information services, such as user authentication and directory services. It is not primarily focused on token-based authentication or caching tokens."
+          },
+          "q112_3": {
+            title: "ACL (WRONG)",
+            content: "ACL (Access Control List) is a method used for defining permissions and access control for resources. It is a concept related to managing access to resources, but it does not specifically involve token caching."
+          },
+          // Quiz question 113 - HTTP Status (from 29-GET-API.md)
+          "q113_0": {
+            title: "403 (CORRECT)",
+            content: "HTTP status code 403 means 'Forbidden'. This status code is returned by the server when the request is understood, but the server refuses to authorize it. This could be due to insufficient permissions or other access restrictions. If the server returns a 403 status code, it indicates that the client (your code) does not have the necessary permissions to access the resource at the given URL.\n\nGiven the code snippet provided and assuming that the URL 'https://website.com/' corresponds to a resource that the client (your code) does not have permission to access, the correct status code is 403 (FORBIDDEN)."
+          },
+          "q113_1": {
+            title: "200 (WRONG)",
+            content: "HTTP status code 200 means 'OK'. This status code is returned when the request has been successfully processed by the server, and the server is returning the expected content. This would indicate that the request was successful without any access issues."
+          },
+          "q113_2": {
+            title: "401 (WRONG)",
+            content: "HTTP status code 401 means 'Unauthorized'. This status code is typically used when the client (your code) needs to provide authentication credentials, such as a username and password, to access the resource. If the server returns a 401 status code, it means that the client's request lacks valid authentication credentials."
+          },
+          "q113_3": {
+            title: "400 (WRONG)",
+            content: "HTTP status code 400 means 'Bad Request'. This status code is returned when the server cannot understand the request due to client error, such as malformed syntax or missing required parameters. If the server returns a 400 status code, it means the client's request was improperly formed."
+          },
+          // Quiz question 114 - HTTP Status (from 30-URL-Checker.md)
+          "q114_0": {
+            title: "404 - Not found (CORRECT)",
+            content: "In the provided code snippet, the user sends a GET request to the URL 'https://api.github.com/invalid'. This URL suggests that the user is attempting to access a resource that is invalid or not found. The code then uses the requests.get method to send the request and checks if the response was successful using the raise_for_status() method.\n\nThe raise_for_status() method raises an exception if the HTTP status code in the response indicates an error (non-2xx status codes). Since the URL contains the word 'invalid,' it's likely that the server will return a 404 status code, which means 'Not found.' This status code indicates that the requested resource does not exist on the server.\n\nTherefore, the user is most likely to be presented with a 404 response code, indicating that the requested resource could not be found."
+          },
+          "q114_1": {
+            title: "200 - OK (WRONG)",
+            content: "This status code indicates that the request was successful. Given that the URL contains 'invalid,' it's unlikely that a 200 status code would be returned."
+          },
+          "q114_2": {
+            title: "400 - Bad request (WRONG)",
+            content: "This status code indicates that the request was malformed or could not be understood by the server. The URL itself is not malformed; it simply points to a resource that is likely not found."
+          },
+          "q114_3": {
+            title: "401 - Unauthorized (WRONG)",
+            content: "This status code indicates that the request requires authentication, and the user is not authorized to access the resource. While authentication could be a possibility, the more common scenario based on the URL is that the resource is not found, leading to a 404 response."
+          },
+          // Quiz question 115 - HTTP Response (from 31-ServerResponse.md)
+          "q115_0": {
+            title: "response.content (CORRECT)",
+            content: "The `response.content` method in a HTTP response object (often returned by HTTP client libraries like the `requests` library in Python) returns the raw binary content of the response. This content includes the data sent by the server as a response to the request.\n\nFor receiving information about the server's response and its content in binary form, the correct option is `response.content`."
+          },
+          "q115_1": {
+            title: "response.history (WRONG)",
+            content: "This attribute of a response object contains a list of response objects that were generated in handling the redirections. It's particularly useful when a series of redirects are followed, but it doesn't return the main response content."
+          },
+          "q115_2": {
+            title: "response.status_code (WRONG)",
+            content: "This attribute of a response object contains the HTTP status code returned by the server. It's used to check whether the request was successful (e.g., 200 for 'OK'), informational, or an error (e.g., 404 for 'Not Found'), but it doesn't return the response content."
+          },
+          "q115_3": {
+            title: "response.get (WRONG)",
+            content: "This is not a standard method in the `response` object. The `requests` library in Python does provide a `.get()` method to send a GET request, but it's used on the request side, not on the response side. It's used like `requests.get(url)` to send a GET request to the specified URL."
+          },
+          // Quiz question 116 - Assertions (from 11-AssertionStatements.py)
+          "q116_0": {
+            title: "AssertionError: No admin found (CORRECT)",
+            content: "The function `authorizeAdmin(usr)` has two assertion statements:\n1. `assert isinstance(usr, list) and usr != [], 'No user found'` - This passes because `['user']` is a list and not empty\n2. `assert 'admin' in usr, 'No admin found.'` - This fails because 'admin' is not in the list `['user']`\n\nWhen the second assertion fails, it raises an `AssertionError` with the message 'No admin found.'"
+          },
+          "q116_1": {
+            title: "AssertionError: No user found (WRONG)",
+            content: "This would occur if the first assertion failed, but `['user']` is a valid list and not empty, so the first assertion passes."
+          },
+          "q116_2": {
+            title: "Authorized User (WRONG)",
+            content: "This string doesn't appear anywhere in the code. The function only prints 'You are granted full access' if both assertions pass."
+          },
+          "q116_3": {
+            title: "You are granted full access (WRONG)",
+            content: "This would only be printed if both assertions pass, but the second assertion fails because 'admin' is not in the list `['user']`."
+          },
+          // Quiz question 117 - Status Codes (general knowledge)
+          "q117_0": {
+            title: "OK - Your request was successful (CORRECT)",
+            content: "HTTP status code 200 means 'OK' and indicates that the request was successful. This is the standard success response for most HTTP requests."
+          },
+          "q117_1": {
+            title: "Created - Resource was created (WRONG)",
+            content: "This describes HTTP status code 201, not 200. Status code 201 is returned when a new resource has been successfully created."
+          },
+          "q117_2": {
+            title: "Bad Request - Request is wrong (WRONG)",
+            content: "This describes HTTP status code 400, not 200. Status code 400 indicates that the server cannot understand the request due to malformed syntax."
+          },
+          "q117_3": {
+            title: "Not Found - Resource doesn't exist (WRONG)",
+            content: "This describes HTTP status code 404, not 200. Status code 404 indicates that the requested resource could not be found on the server."
+          },
+          // Quiz question 118 - Status Codes (general knowledge)
+          "q118_0": {
+            title: "Unauthorized - Requires additional permissions (CORRECT)",
+            content: "HTTP status code 401 means 'Unauthorized' and indicates that the request requires authentication. The client must provide valid authentication credentials to access the resource."
+          },
+          "q118_1": {
+            title: "Forbidden - Server refuses (WRONG)",
+            content: "This describes HTTP status code 403, not 401. Status code 403 indicates that the server understands the request but refuses to authorize it."
+          },
+          "q118_2": {
+            title: "Bad Request - Malformed (WRONG)",
+            content: "This describes HTTP status code 400, not 401. Status code 400 indicates that the server cannot understand the request due to malformed syntax."
+          },
+          "q118_3": {
+            title: "Not Found - Resource doesn't exist (WRONG)",
+            content: "This describes HTTP status code 404, not 401. Status code 404 indicates that the requested resource could not be found on the server."
+          },
+          // Quiz question 119 - Status Codes (general knowledge)
+          "q119_0": {
+            title: "Forbidden - Server refuses (CORRECT)",
+            content: "HTTP status code 403 means 'Forbidden' and indicates that the server understands the request but refuses to authorize it. The client does not have permission to access the resource."
+          },
+          "q119_1": {
+            title: "Unauthorized - Requires authentication (WRONG)",
+            content: "This describes HTTP status code 401, not 403. Status code 401 indicates that the request requires authentication."
+          },
+          "q119_2": {
+            title: "Bad Request - Malformed (WRONG)",
+            content: "This describes HTTP status code 400, not 403. Status code 400 indicates that the server cannot understand the request due to malformed syntax."
+          },
+          "q119_3": {
+            title: "Not Found - Resource doesn't exist (WRONG)",
+            content: "This describes HTTP status code 404, not 403. Status code 404 indicates that the requested resource could not be found on the server."
+          },
+          // Quiz question 120 - Status Codes (general knowledge)
+          "q120_0": {
+            title: "Not Found - Resource doesn't exist (CORRECT)",
+            content: "HTTP status code 404 means 'Not Found' and indicates that the requested resource could not be found on the server."
+          },
+          "q120_1": {
+            title: "OK - Request successful (WRONG)",
+            content: "This describes HTTP status code 200, not 404. Status code 200 indicates that the request was successful."
+          },
+          "q120_2": {
+            title: "Bad Request - Malformed (WRONG)",
+            content: "This describes HTTP status code 400, not 404. Status code 400 indicates that the server cannot understand the request due to malformed syntax."
+          },
+          "q120_3": {
+            title: "Unauthorized - Requires authentication (WRONG)",
+            content: "This describes HTTP status code 401, not 404. Status code 401 indicates that the request requires authentication."
+          },
+          // Quiz question 121 - Data Validation Length (from 18-DataValidationLength.py)
+          "q121_0": {
+            title: "Length check (CORRECT)",
+            content: "This code performs a length check by using `len(password) >= 8` to validate that the password is at least 8 characters long. The `len()` function returns the number of characters in the string, and the comparison checks if it meets the minimum length requirement."
+          },
+          "q121_1": {
+            title: "Type check (WRONG)",
+            content: "This code doesn't check the data type of the input. It only checks the length of the string, not whether it's a string, integer, or other type."
+          },
+          "q121_2": {
+            title: "Range check (WRONG)",
+            content: "This code doesn't check if a numeric value is within a specific range. It checks the length of a string, not a numeric range."
+          },
+          "q121_3": {
+            title: "Format check (WRONG)",
+            content: "This code doesn't check the format of the input (like email format, phone number format, etc.). It only checks the length of the string."
+          },
+          // Quiz question 122 - Data Validation Range (from 19-DataValidationRange.py)
+          "q122_0": {
+            title: "Range check (CORRECT)",
+            content: "This code performs a range check by using `num in r` where `r = range(1,10)` to validate that the input number is within the range of 1 to 10 (inclusive). The `range()` function creates a sequence of numbers, and the `in` operator checks if the input value falls within that range."
+          },
+          "q122_1": {
+            title: "Type check (WRONG)",
+            content: "This code doesn't check the data type of the input. It only checks if the numeric value is within a specific range, not the type of the data."
+          },
+          "q122_2": {
+            title: "Length check (WRONG)",
+            content: "This code doesn't check the length of a string. It checks if a numeric value is within a specific range, not the length of the input."
+          },
+          "q122_3": {
+            title: "Format check (WRONG)",
+            content: "This code doesn't check the format of the input (like email format, phone number format, etc.). It only checks if the numeric value is within a specific range."
+          },
+          // Quiz question 123 - Data Validation Numeric (from 17-DataValidationNumeric.py)
+          "q123_0": {
+            title: "Type check (CORRECT)",
+            content: "This code performs a type check by using `int(zipCode)` to validate that the input can be converted to an integer. If the conversion fails, it raises a `ValueError` exception, which is caught to handle non-numeric input. The `int()` function attempts to convert the string to an integer, effectively checking if the input is numeric."
+          },
+          "q123_1": {
+            title: "Length check (WRONG)",
+            content: "This code doesn't check the length of the input. It only checks if the input can be converted to an integer, not how many characters it contains."
+          },
+          "q123_2": {
+            title: "Range check (WRONG)",
+            content: "This code doesn't check if the numeric value is within a specific range. It only checks if the input can be converted to an integer, not if it falls within a particular range of values."
+          },
+          "q123_3": {
+            title: "Format check (WRONG)",
+            content: "This code doesn't check the format of the input (like email format, phone number format, etc.). It only checks if the input can be converted to an integer."
+          },
+          // Quiz question 124 - Data Validation Numeric (from 17-DataValidationNumeric.py)
+          "q124_0": {
+            title: "Type check (CORRECT)",
+            content: "This code performs a type check by using `int(zipCode)` to validate that the input can be converted to an integer. If the conversion fails, it raises a `ValueError` exception, which is caught to handle non-numeric input. The `int()` function attempts to convert the string to an integer, effectively checking if the input is numeric."
+          },
+          "q124_1": {
+            title: "Length check (WRONG)",
+            content: "This code doesn't check the length of the input. It only checks if the input can be converted to an integer, not how many characters it contains."
+          },
+          "q124_2": {
+            title: "Range check (WRONG)",
+            content: "This code doesn't check if the numeric value is within a specific range. It only checks if the input can be converted to an integer, not if it falls within a particular range of values."
+          },
+          "q124_3": {
+            title: "Format check (WRONG)",
+            content: "This code doesn't check the format of the input (like email format, phone number format, etc.). It only checks if the input can be converted to an integer."
+          }
+        };
+
         // Shuffle function
         const shuffleArray = (array) => {
           const shuffled = [...array];
@@ -649,7 +1044,11 @@ ShowData()` }
           return shuffled;
         };
 
-        function D385StudyApp() {
+        // React hooks
+        const { useState, useEffect } = React;
+
+        // React component
+        const D385StudyApp = () => {
           const [mode, setMode] = useState('patterns');
           const [currentPattern, setCurrentPattern] = useState(0);
           const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -664,92 +1063,74 @@ ShowData()` }
           const [showStudyTips, setShowStudyTips] = useState(false);
           const [showTimer, setShowTimer] = useState(false);
           const [showMenu, setShowMenu] = useState(false);
+          const [showDetailedExplanation, setShowDetailedExplanation] = useState({});
           const [timeRemaining, setTimeRemaining] = useState(14400); // 4 hours in seconds
           const [timerActive, setTimerActive] = useState(true); // Start timer by default
           const [showQuestionTimer, setShowQuestionTimer] = useState(true); // Show question timer by default
           const [sessionStartTime, setSessionStartTime] = useState(Date.now());
           const [feedback, setFeedback] = useState(null);
           const [timerDisplay, setTimerDisplay] = useState({ timeSpent: "00:00", status: "" });
-          const [score, setScore] = useState({ patterns: { correct: 0, total: 0, patternScores: {} }, concepts: { correct: 0, total: 0, questionScores: {} }, flashcards: { correct: 0, total: 0, cardScores: {} } });
+          const [score, setScore] = useState({ patterns: { correct: 0, total: 0, patternScores: {} }, concepts: { correct: 0, total: 0, questionScores: {}, selectedOptions: {} }, flashcards: { correct: 0, total: 0, cardScores: {} } });
           const [masteredPatterns, setMasteredPatterns] = useState(new Set());
           const [shuffledPatterns, setShuffledPatterns] = useState(() => shuffleArray(PATTERNS));
           const [shuffledQuestions, setShuffledQuestions] = useState(() => shuffleArray(MC_QUESTIONS));
           const [shuffledFlashcards, setShuffledFlashcards] = useState(() => shuffleArray(FLASHCARDS));
 
         // Timer effect
-        React.useEffect(() => {
-          let interval = null;
-          if (timerActive && timeRemaining > 0) {
+        useEffect(() => {
+          let interval;
+          if (timerActive) {
             interval = setInterval(() => {
-              setTimeRemaining(time => time - 1);
+              setTimeRemaining(prev => {
+                if (prev <= 0) {
+                  setTimerActive(false);
+                  return 0;
+                }
+                return prev - 1;
+              });
             }, 1000);
-          } else if (timeRemaining === 0) {
-            setTimerActive(false);
-            alert('⏰ Time\'s up! Great job studying!');
           }
           return () => clearInterval(interval);
-        }, [timerActive, timeRemaining]);
+        }, [timerActive]);
 
-        // Close menu when clicking outside
-        React.useEffect(() => {
-          const handleClickOutside = (event) => {
-            if (showMenu && !event.target.closest('.menu-container')) {
-              setShowMenu(false);
-            }
-          };
-          document.addEventListener('mousedown', handleClickOutside);
-          return () => document.removeEventListener('mousedown', handleClickOutside);
-        }, [showMenu]);
-
-        // Update timer display every second
-        React.useEffect(() => {
-          if (!timerActive) return;
+        // Update timer display
+        useEffect(() => {
+          const timeSpent = Math.floor((Date.now() - sessionStartTime) / 1000);
+          const hours = Math.floor(timeSpent / 3600);
+          const minutes = Math.floor((timeSpent % 3600) / 60);
+          const seconds = timeSpent % 60;
+          const timeSpentStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
           
-          const updateTimer = () => {
-            // Calculate time remaining from the countdown timer
-            const hours = Math.floor(timeRemaining / 3600);
-            const minutes = Math.floor((timeRemaining % 3600) / 60);
-            const seconds = timeRemaining % 60;
-            const timeSpent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          setTimerDisplay(prev => ({ ...prev, timeSpent: timeSpentStr }));
+        }, [sessionStartTime, timeRemaining]);
+
+        // Update status calculation
+        useEffect(() => {
+          const getOverallProgress = () => {
+            const timeSpentSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
+            const totalCompleted = Object.keys(score.patterns.patternScores).length + 
+                                 Object.keys(score.concepts.questionScores).length + 
+                                 Object.keys(score.flashcards.cardScores).length;
             
-            // Calculate actual questions completed successfully across all modes
-            const patternsCompleted = Object.keys(score.patterns.patternScores).length;
-            const conceptsCompleted = Object.keys(score.concepts.questionScores).length;
-            const flashcardsCompleted = Object.keys(score.flashcards.cardScores).length;
-            const totalCompleted = patternsCompleted + conceptsCompleted + flashcardsCompleted;
-            
-            // Only show status if we have completed at least 3 questions to get a meaningful average
-            let status = "";
-            if (totalCompleted >= 3) {
-              // Calculate time spent so far
-              const timeSpentSeconds = 14400 - timeRemaining; // Total time minus remaining
+            if (timeSpentSeconds > 60 && totalCompleted >= 3) {
+              const expectedTimePerQuestion = 240 * 60 / 100; // 4 hours * 60 min / 100 questions
+              const expectedTimeSpent = totalCompleted * expectedTimePerQuestion * 60; // Convert to seconds
+              const timeDiff = expectedTimeSpent - timeSpentSeconds;
+              const minutesDiff = Math.floor(timeDiff / 60);
               
-              // Weight time based on test percentage: Patterns 40%, Quiz 35%, Flashcards 25%
-              const patternsWeight = 0.40; // 40% of test
-              const quizWeight = 0.35;     // 35% of test  
-              const flashcardsWeight = 0.25; // 25% of test
-              
-              const totalTime = 240 * 60; // 240 minutes in seconds
-              const expectedTimeForPatterns = patternsCompleted * (totalTime * patternsWeight / 14);
-              const expectedTimeForQuiz = conceptsCompleted * (totalTime * quizWeight / 20);
-              const expectedTimeForFlashcards = flashcardsCompleted * (totalTime * flashcardsWeight / 31);
-              const expectedTimeForCompleted = expectedTimeForPatterns + expectedTimeForQuiz + expectedTimeForFlashcards;
-              
-              const timeDiff = timeSpentSeconds - expectedTimeForCompleted;
-              if (timeDiff > 0) {
-                status = `-${Math.floor(timeDiff / 60)} Min Behind`;
+              if (minutesDiff > 0) {
+                return `+${minutesDiff} Min Ahead`;
+              } else if (minutesDiff < 0) {
+                return `${minutesDiff} Min Behind`;
               } else {
-                status = `+${Math.floor(Math.abs(timeDiff) / 60)} Min Ahead`;
+                return "On Track";
               }
             }
-            
-            setTimerDisplay({ timeSpent, status });
+            return "";
           };
           
-          updateTimer(); // Update immediately
-          const interval = setInterval(updateTimer, 1000); // Update every second
-          return () => clearInterval(interval);
-        }, [timerActive, timeRemaining, score]);
+          setTimerDisplay(prev => ({ ...prev, status: getOverallProgress() }));
+        }, [score, sessionStartTime]);
 
         const formatTime = (seconds) => {
           const hours = Math.floor(seconds / 3600);
@@ -758,71 +1139,99 @@ ShowData()` }
           return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         };
 
-
-        const startTimer = () => {
+        const startTimer = () => setTimerActive(true);
+        const pauseTimer = () => setTimerActive(false);
+        const resetTimer = () => {
+          setTimeRemaining(14400);
+          setSessionStartTime(Date.now());
           setTimerActive(true);
         };
 
-        const pauseTimer = () => {
-          setTimerActive(false);
+        const updateStatus = () => {
+          // This will be called when questions are completed
         };
 
-        const resetTimer = () => {
-          setTimerActive(false);
-          setTimeRemaining(14400); // Reset to 4 hours
-        };
-
+        // Get current items
         const pattern = shuffledPatterns[currentPattern];
-          const question = shuffledQuestions[currentQuestion];
-          const flashcard = shuffledFlashcards[currentFlashcard];
+        const question = shuffledQuestions[currentQuestion];
+        const flashcard = shuffledFlashcards[currentFlashcard];
 
-          const getSimilarity = () => {
-            const user = userAnswer.toLowerCase().trim();
-            const correct = pattern.answer.toLowerCase().trim();
-            const distance = [...user].reduce((acc, char, i) => acc + (char !== correct[i] ? 1 : 0), Math.abs(user.length - correct.length));
-            const maxLength = Math.max(user.length, correct.length);
-            return maxLength === 0 ? 100 : Math.round((1 - distance / maxLength) * 100);
-          };
+        const checkPattern = () => {
+          const isCorrect = userAnswer.toLowerCase().trim() === pattern.answer.toLowerCase().trim();
+          setScore(prev => ({ ...prev, patterns: { correct: prev.patterns.correct + (isCorrect ? 1 : 0), total: prev.patterns.total + 1, patternScores: { ...prev.patterns.patternScores, [pattern.id]: isCorrect ? 'correct' : 'incorrect' } } }));
+          setFeedback(isCorrect ? 'correct' : 'incorrect');
+          setShowAnswer(true);
+          updateStatus(); // Update status only when question is completed
+        };
 
-          const checkPattern = () => {
-            const isCorrect = userAnswer.trim().toLowerCase().replace(/\s+/g, ' ') === pattern.answer.trim().toLowerCase().replace(/\s+/g, ' ');
-            const similarity = getSimilarity();
-            setScore(prev => ({ ...prev, patterns: { correct: prev.patterns.correct + (isCorrect ? 1 : 0), total: prev.patterns.total + 1, patternScores: { ...prev.patterns.patternScores, [pattern.id]: Math.max(prev.patterns.patternScores[pattern.id] || 0, similarity) } } }));
-            setFeedback(isCorrect ? 'correct' : similarity >= 70 ? 'partial' : 'incorrect');
-            setShowAnswer(true);
-            if (isCorrect) setMasteredPatterns(prev => new Set([...prev, pattern.id]));
-          };
+        const checkConcept = () => {
+          const isCorrect = selectedOption === question.correctIndex;
+          setScore(prev => ({ ...prev, concepts: { correct: prev.concepts.correct + (isCorrect ? 1 : 0), total: prev.concepts.total + 1, questionScores: { ...prev.concepts.questionScores, [question.id]: isCorrect ? 'correct' : 'incorrect' }, selectedOptions: { ...prev.concepts.selectedOptions, [question.id]: selectedOption } } }));
+          setFeedback(isCorrect ? 'correct' : 'incorrect');
+          setShowAnswer(true);
+          updateStatus(); // Update status only when question is completed
+        };
 
-          const checkConcept = () => {
-            const isCorrect = selectedOption === question.correctIndex;
-            setScore(prev => ({ ...prev, concepts: { correct: prev.concepts.correct + (isCorrect ? 1 : 0), total: prev.concepts.total + 1, questionScores: { ...prev.concepts.questionScores, [question.id]: isCorrect ? 'correct' : 'incorrect' } } }));
-            setFeedback(isCorrect ? 'correct' : 'incorrect');
-            setShowAnswer(true);
-          };
+        const markFlashcard = (isCorrect) => {
+          setScore(prev => ({ ...prev, flashcards: { correct: prev.flashcards.correct + (isCorrect ? 1 : 0), total: prev.flashcards.total + 1, cardScores: { ...prev.flashcards.cardScores, [flashcard.id]: isCorrect ? 'correct' : 'incorrect' } } }));
+          setFeedback(isCorrect ? 'correct' : 'incorrect');
+          setShowAnswer(true);
+          updateStatus(); // Update status only when question is completed
+        };
 
-          const markFlashcard = (isCorrect) => {
-            setScore(prev => ({ ...prev, flashcards: { correct: prev.flashcards.correct + (isCorrect ? 1 : 0), total: prev.flashcards.total + 1, cardScores: { ...prev.flashcards.cardScores, [flashcard.id]: isCorrect ? 'correct' : 'incorrect' } } }));
-            setFeedback(isCorrect ? 'correct' : 'incorrect');
-            setShowAnswer(true);
-          };
+        const next = () => {
+          if (mode === 'patterns') {
+            setCurrentPattern(prev => (prev + 1) % shuffledPatterns.length);
+          } else if (mode === 'concepts') {
+            setCurrentQuestion(prev => (prev + 1) % shuffledQuestions.length);
+          } else if (mode === 'flashcards') {
+            setCurrentFlashcard(prev => (prev + 1) % shuffledFlashcards.length);
+          }
+          setUserAnswer('');
+          setSelectedOption(null);
+          setShowAnswer(false);
+          setShowHint(false);
+          setShowJSEquiv(false);
+          setShowMistakes(false);
+          setShowOriginal(false);
+          setFeedback(null);
+        };
 
-          const next = () => {
-            if (mode === 'patterns') setCurrentPattern(p => (p + 1) % shuffledPatterns.length);
-            else if (mode === 'concepts') setCurrentQuestion(q => (q + 1) % shuffledQuestions.length);
-            else setCurrentFlashcard(f => (f + 1) % shuffledFlashcards.length);
-            setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
-          };
+        const jump = (index) => {
+          if (mode === 'patterns') {
+            setCurrentPattern(index);
+          } else if (mode === 'concepts') {
+            setCurrentQuestion(index);
+          } else if (mode === 'flashcards') {
+            setCurrentFlashcard(index);
+          }
+          setUserAnswer('');
+          setSelectedOption(null);
+          setShowAnswer(false);
+          setShowHint(false);
+          setShowJSEquiv(false);
+          setShowMistakes(false);
+          setShowOriginal(false);
+          setFeedback(null);
+        };
 
-          const retrySet = () => {
-            if (mode === 'patterns') {
-              setScore(prev => ({ ...prev, patterns: { correct: 0, total: 0, patternScores: {} } }));
-              setCurrentPattern(0);
-              setShuffledPatterns(shuffleArray(PATTERNS));
-              setMasteredPatterns(new Set());
-            } else if (mode === 'concepts') {
-              setScore(prev => ({ ...prev, concepts: { correct: 0, total: 0, questionScores: {} } }));
-              setCurrentQuestion(0);
-              setShuffledQuestions(shuffleArray(MC_QUESTIONS));
+        const toggleDetailedExplanation = (key) => {
+          setShowDetailedExplanation(prev => ({
+            ...prev,
+            [key]: !prev[key]
+          }));
+        };
+
+        const retrySet = () => {
+          if (mode === 'patterns') {
+            setScore(prev => ({ ...prev, patterns: { correct: 0, total: 0, patternScores: {} } }));
+            setCurrentPattern(0);
+            setShuffledPatterns(shuffleArray(PATTERNS));
+            setMasteredPatterns(new Set());
+          } else if (mode === 'concepts') {
+            setScore(prev => ({ ...prev, concepts: { correct: 0, total: 0, questionScores: {}, selectedOptions: {} } }));
+            setCurrentQuestion(0);
+            setShuffledQuestions(shuffleArray(MC_QUESTIONS));
             } else if (mode === 'flashcards') {
               setScore(prev => ({ ...prev, flashcards: { correct: 0, total: 0, cardScores: {} } }));
               setCurrentFlashcard(0);
@@ -831,10 +1240,11 @@ ShowData()` }
             setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
           };
 
+
           const switchMode = m => { setMode(m); setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null); };
           
           const reset = () => { 
-            setScore({ patterns: { correct: 0, total: 0, patternScores: {} }, concepts: { correct: 0, total: 0, questionScores: {} }, flashcards: { correct: 0, total: 0, cardScores: {} } }); 
+            setScore({ patterns: { correct: 0, total: 0, patternScores: {} }, concepts: { correct: 0, total: 0, questionScores: {}, selectedOptions: {} }, flashcards: { correct: 0, total: 0, cardScores: {} } }); 
             setMasteredPatterns(new Set()); 
             setCurrentPattern(0); 
             setCurrentQuestion(0); 
@@ -852,20 +1262,29 @@ ShowData()` }
             setFeedback(null); 
           };
           
-        const jump = idx => {
-          if (mode === 'patterns') setCurrentPattern(idx);
-          else if (mode === 'concepts') setCurrentQuestion(idx);
-          else setCurrentFlashcard(idx);
-          setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
+
+        const getSimilarity = () => {
+          if (!userAnswer || !pattern.answer) return 0;
+          const answer = pattern.answer.toLowerCase();
+          const user = userAnswer.toLowerCase();
+          let matches = 0;
+          const words = answer.split(' ');
+          const userWords = user.split(' ');
+          for (const word of words) {
+            if (userWords.some(uw => uw.includes(word) || word.includes(uw))) {
+              matches++;
+            }
+          }
+          return Math.round((matches / words.length) * 100);
         };
 
-          const conceptCorrect = Object.values(score.concepts.questionScores).filter(s => s === 'correct').length;
-          const conceptIncorrect = Object.values(score.concepts.questionScores).filter(s => s === 'incorrect').length;
-          const flashcardCorrect = Object.values(score.flashcards.cardScores).filter(s => s === 'correct').length;
-          const flashcardIncorrect = Object.values(score.flashcards.cardScores).filter(s => s === 'incorrect').length;
+        const conceptCorrect = Object.values(score.concepts.questionScores).filter(s => s === 'correct').length;
+        const conceptIncorrect = Object.values(score.concepts.questionScores).filter(s => s === 'incorrect').length;
+        const flashcardCorrect = Object.values(score.flashcards.cardScores).filter(s => s === 'correct').length;
+        const flashcardIncorrect = Object.values(score.flashcards.cardScores).filter(s => s === 'incorrect').length;
 
-          return React.createElement('div', { className: "min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" },
-            React.createElement('div', { className: "max-w-5xl mx-auto" },
+        return React.createElement('div', { className: "min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" },
+          React.createElement('div', { className: "max-w-5xl mx-auto" },
               React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6 mb-4" },
                 React.createElement('div', { className: "flex justify-between items-center mb-4" },
                   React.createElement('div', null,
@@ -1058,20 +1477,22 @@ ShowData()` }
               mode === 'patterns' ? React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
                 React.createElement('div', { className: "flex justify-between items-start mb-4" },
                   React.createElement('div', null,
-                    React.createElement('div', { className: "flex justify-between items-center" },
-                      React.createElement('div', { className: "text-sm text-gray-500" }, `Pattern ${currentPattern + 1} of 14`),
-                      timerActive && showQuestionTimer && React.createElement('div', { className: "flex items-center gap-2 text-sm font-mono" },
-                        React.createElement('span', { className: "text-gray-600" }, timerDisplay.timeSpent),
-                        React.createElement('span', { className: `${timerDisplay.status.includes('Behind') ? 'text-red-600' : 'text-green-600'}` }, timerDisplay.status),
-                        React.createElement('button', { 
-                          onClick: () => setShowQuestionTimer(false), 
-                          className: "text-gray-400 hover:text-gray-600 text-xs" 
-                        }, "✕")
+                    React.createElement('div', { className: "mb-2" },
+                      React.createElement('div', { className: "flex items-center gap-2 mb-2" },
+                        timerActive && showQuestionTimer && React.createElement('div', { className: "flex items-center gap-2 text-sm font-mono min-w-[120px]" },
+                          React.createElement('span', { className: "text-gray-600" }, formatTime(timeRemaining)),
+                          React.createElement('span', { className: `${timerDisplay.status.includes('Behind') ? 'text-red-600' : 'text-green-600'}` }, timerDisplay.status),
+                          React.createElement('button', { 
+                            onClick: () => setShowQuestionTimer(false), 
+                            className: "text-gray-400 hover:text-gray-600 text-xs" 
+                          }, "✕")
+                        ),
+                        timerActive && !showQuestionTimer && React.createElement('button', { 
+                          onClick: () => setShowQuestionTimer(true), 
+                          className: "text-xs text-gray-500 hover:text-gray-700" 
+                        }, "Show Timer")
                       ),
-                      timerActive && !showQuestionTimer && React.createElement('button', { 
-                        onClick: () => setShowQuestionTimer(true), 
-                        className: "text-xs text-gray-500 hover:text-gray-700" 
-                      }, "Show Timer")
+                      React.createElement('div', { className: "text-sm text-gray-500" }, `Pattern ${currentPattern + 1} of 14`)
                     ),
                     React.createElement('h2', { className: "text-2xl font-bold text-gray-800" }, pattern.name),
                     React.createElement('div', { className: "flex gap-2 mt-2" },
@@ -1153,94 +1574,157 @@ ShowData()` }
                     React.createElement('button', { onClick: next, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg" }, "Next →")
                   )
                 )
-              ) : mode === 'concepts' ? React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
+              ) : mode === 'concepts' ? (question ? React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
                 React.createElement('div', { className: "mb-4" },
-                  React.createElement('div', { className: "text-sm text-gray-500 flex items-center gap-2" },
-                    React.createElement('span', null, `Question ${currentQuestion + 1} of 20`),
-                    timerActive && showQuestionTimer && React.createElement('div', { className: "flex items-center gap-2 text-sm font-mono" },
-                      React.createElement('span', { className: "text-gray-600" }, timerDisplay.timeSpent),
-                      React.createElement('span', { className: `${timerDisplay.status.includes('Behind') ? 'text-red-600' : 'text-green-600'}` }, timerDisplay.status),
-                      React.createElement('button', { 
-                        onClick: () => setShowQuestionTimer(false), 
-                        className: "text-gray-400 hover:text-gray-600 text-xs" 
-                      }, "✕")
+                  React.createElement('div', { className: "mb-2" },
+                    React.createElement('div', { className: "flex items-center gap-2 mb-2" },
+                      timerActive && showQuestionTimer && React.createElement('div', { className: "flex items-center gap-2 text-sm font-mono min-w-[120px]" },
+                        React.createElement('span', { className: "text-gray-600" }, formatTime(timeRemaining)),
+                        React.createElement('span', { className: `${timerDisplay.status.includes('Behind') ? 'text-red-600' : 'text-green-600'}` }, timerDisplay.status),
+                        React.createElement('button', { 
+                          onClick: () => setShowQuestionTimer(false), 
+                          className: "text-gray-400 hover:text-gray-600 text-xs" 
+                        }, "✕")
+                      ),
+                      timerActive && !showQuestionTimer && React.createElement('button', { 
+                        onClick: () => setShowQuestionTimer(true), 
+                        className: "text-xs text-gray-500 hover:text-gray-700" 
+                      }, "Show Timer")
                     ),
-                    timerActive && !showQuestionTimer && React.createElement('button', { 
-                      onClick: () => setShowQuestionTimer(true), 
-                      className: "text-xs text-gray-500 hover:text-gray-700" 
-                    }, "Show Timer")
+                    React.createElement('div', { className: "text-sm text-gray-500" }, `Question ${currentQuestion + 1} of 20`)
                   ),
                   React.createElement('span', { className: "inline-block mt-1 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm" }, question.category)
                 ),
                 React.createElement('div', { className: "bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-4" },
                   React.createElement('p', { className: "text-gray-800 font-medium" }, question.question)
                 ),
-                React.createElement('div', { className: "space-y-3 mb-4" }, question.options.map((opt, idx) => 
-                  React.createElement('button', { 
-                    key: idx, 
-                    onClick: () => !showAnswer && setSelectedOption(idx), 
-                    disabled: showAnswer, 
-                    className: `w-full text-left p-4 rounded-lg border-2 ${showAnswer ? (idx === question.correctIndex ? 'border-green-500 bg-green-50' : idx === selectedOption ? 'border-red-500 bg-red-50' : 'border-gray-200') : selectedOption === idx ? 'border-purple-500 bg-purple-50' : 'border-gray-200 hover:border-gray-300'}`
-                  },
-                    React.createElement('div', { className: "flex gap-3" },
-                      React.createElement('div', { className: `w-6 h-6 rounded-full border-2 flex items-center justify-center ${showAnswer && idx === question.correctIndex ? 'bg-green-500' : showAnswer && idx === selectedOption ? 'bg-red-500' : selectedOption === idx ? 'bg-purple-500' : 'border-gray-300'}` },
-                        showAnswer && idx === question.correctIndex && React.createElement(CheckCircle),
-                        showAnswer && idx === selectedOption && idx !== question.correctIndex && React.createElement(XCircle)
-                      ),
-                      React.createElement('span', { className: "text-gray-800" }, opt)
+                React.createElement('div', { className: "space-y-3 mb-4" }, question.options.map((opt, idx) => {
+                  const currentSelected = selectedOption !== null ? selectedOption : (score.concepts.selectedOptions && score.concepts.selectedOptions[question.id]);
+                  const isAnswered = score.concepts.questionScores[question.id];
+                  const explanationKey = `q${question.id}_${idx}`;
+                  const hasExplanation = PRE_ASSESSMENT_EXPLANATIONS[explanationKey];
+                  console.log('Quiz dropdown debug:', { questionId: question.id, optionIndex: idx, explanationKey, hasExplanation, allKeys: Object.keys(PRE_ASSESSMENT_EXPLANATIONS) });
+                  
+                  return React.createElement('div', { key: idx, className: "space-y-2" },
+                    React.createElement('button', { 
+                      onClick: () => !showAnswer && !isAnswered && setSelectedOption(idx), 
+                      disabled: showAnswer || isAnswered, 
+                      className: `w-full text-left p-4 rounded-lg border-2 ${(showAnswer || isAnswered) ? (idx === question.correctIndex ? 'border-green-500 bg-green-50' : idx === currentSelected ? 'border-red-500 bg-red-50' : 'border-gray-200') : currentSelected === idx ? 'border-purple-500 bg-purple-50' : 'border-gray-200 hover:border-gray-300'}`
+                    },
+                      React.createElement('div', { className: "flex gap-3" },
+                        React.createElement('div', { className: `w-6 h-6 rounded-full border-2 flex items-center justify-center ${(showAnswer || isAnswered) && idx === question.correctIndex ? 'bg-green-500' : (showAnswer || isAnswered) && idx === currentSelected ? 'bg-red-500' : currentSelected === idx ? 'bg-purple-500' : 'border-gray-300'}` },
+                          (showAnswer || isAnswered) && idx === question.correctIndex && React.createElement(CheckCircle),
+                          (showAnswer || isAnswered) && idx === currentSelected && idx !== question.correctIndex && React.createElement(XCircle)
+                        ),
+                        React.createElement('span', { className: "text-gray-800 flex-1" }, opt)
+                      )
                     )
-                  )
-                )),
-                showAnswer && selectedOption !== null && React.createElement('div', { className: "bg-gray-50 p-4 rounded-lg mb-4 space-y-3" },
-                  React.createElement('div', { className: `p-3 rounded-lg ${selectedOption === question.correctIndex ? 'bg-green-100' : 'bg-red-100'}` },
-                    React.createElement('div', { className: "font-semibold text-sm mb-1" }, "Your Choice:"),
-                    React.createElement('p', { className: "text-sm" }, question.optionExplanations[selectedOption])
-                  ),
-                  selectedOption !== question.correctIndex && question.optionExplanations.map((exp, idx) => {
-                    if (idx === selectedOption || idx === question.correctIndex) return null;
-                    return React.createElement('div', { key: idx, className: "p-3 bg-gray-100 rounded-lg" },
-                      React.createElement('p', { className: "text-sm text-gray-700" }, exp)
+                  );
+                })),
+                (showAnswer || score.concepts.questionScores[question.id]) && (selectedOption !== null || (score.concepts.selectedOptions && score.concepts.selectedOptions[question.id] !== undefined)) && React.createElement('div', { className: "bg-gray-50 p-4 rounded-lg mb-4 space-y-3" },
+                  (() => {
+                    const currentSelected = selectedOption !== null ? selectedOption : (score.concepts.selectedOptions && score.concepts.selectedOptions[question.id]);
+                    const explanationKey = `q${question.id}_${currentSelected}`;
+                    const hasExplanation = PRE_ASSESSMENT_EXPLANATIONS[explanationKey];
+                    return React.createElement('div', { className: `p-3 rounded-lg ${currentSelected === question.correctIndex ? 'bg-green-100' : 'bg-red-100'}` },
+                      React.createElement('div', { className: "font-semibold text-sm mb-1" }, "Your Choice:"),
+                      React.createElement('div', { className: "flex items-center justify-between" },
+                        React.createElement('p', { className: "text-sm flex-1" }, question.optionExplanations[currentSelected]),
+                        React.createElement('button', {
+                          onClick: (e) => { 
+                            e.stopPropagation(); 
+                            console.log('Clicked More button:', explanationKey, 'Current state:', showDetailedExplanation[explanationKey]);
+                            toggleDetailedExplanation(explanationKey); 
+                            console.log('After toggle:', showDetailedExplanation[explanationKey]);
+                          },
+                          className: "text-blue-600 hover:text-blue-800 text-sm font-medium px-2 py-1 rounded hover:bg-blue-50 border border-blue-300 ml-2"
+                        }, showDetailedExplanation[explanationKey] ? "▼ Less" : "▶ More")
+                      ),
+                      showDetailedExplanation[explanationKey] && React.createElement('div', { className: "mt-3 p-4 bg-blue-50 border-l-4 border-blue-200 rounded-r-lg" },
+                        React.createElement('h4', { className: "font-semibold text-blue-800 mb-2" }, hasExplanation ? PRE_ASSESSMENT_EXPLANATIONS[explanationKey].title : "No detailed explanation available"),
+                        React.createElement('div', { 
+                          className: "text-sm text-gray-700 prose prose-sm max-w-none",
+                          dangerouslySetInnerHTML: { __html: hasExplanation ? PRE_ASSESSMENT_EXPLANATIONS[explanationKey].content.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`(.*?)`/g, '<code class="bg-gray-200 px-1 rounded">$1</code>') : "This explanation is not yet available." }
+                        })
+                      )
                     );
-                  })
+                  })(),
+                  (() => {
+                    const currentSelected = selectedOption !== null ? selectedOption : (score.concepts.selectedOptions && score.concepts.selectedOptions[question.id]);
+                    return question.optionExplanations.map((exp, idx) => {
+                      if (idx === currentSelected) return null; // Don't show the selected answer again
+                      const explanationKey = `q${question.id}_${idx}`;
+                      const hasExplanation = PRE_ASSESSMENT_EXPLANATIONS[explanationKey];
+                      return React.createElement('div', { key: idx, className: `p-3 rounded-lg ${idx === question.correctIndex ? 'bg-green-50 border border-green-200' : 'bg-gray-100'}` },
+                        React.createElement('div', { className: "flex items-center justify-between" },
+                          React.createElement('div', { className: "flex-1" },
+                            idx === question.correctIndex && React.createElement('div', { className: "font-semibold text-sm mb-1 text-green-700" }, "Correct Answer:"),
+                            React.createElement('p', { className: "text-sm text-gray-700" }, exp)
+                          ),
+                          React.createElement('button', {
+                            onClick: (e) => { 
+                              e.stopPropagation(); 
+                              console.log('Clicked More button:', explanationKey, 'Current state:', showDetailedExplanation[explanationKey]);
+                              toggleDetailedExplanation(explanationKey); 
+                              console.log('After toggle:', showDetailedExplanation[explanationKey]);
+                            },
+                            className: "text-blue-600 hover:text-blue-800 text-sm font-medium px-2 py-1 rounded hover:bg-blue-50 border border-blue-300 ml-2"
+                          }, showDetailedExplanation[explanationKey] ? "▼ Less" : "▶ More")
+                        ),
+                        showDetailedExplanation[explanationKey] && React.createElement('div', { className: "mt-3 p-4 bg-blue-50 border-l-4 border-blue-200 rounded-r-lg" },
+                          React.createElement('h4', { className: "font-semibold text-blue-800 mb-2" }, hasExplanation ? PRE_ASSESSMENT_EXPLANATIONS[explanationKey].title : "No detailed explanation available"),
+                          React.createElement('div', { 
+                            className: "text-sm text-gray-700 prose prose-sm max-w-none",
+                            dangerouslySetInnerHTML: { __html: hasExplanation ? PRE_ASSESSMENT_EXPLANATIONS[explanationKey].content.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/`(.*?)`/g, '<code class="bg-gray-200 px-1 rounded">$1</code>') : "This explanation is not yet available." }
+                          })
+                        )
+                      );
+                    });
+                  })()
                 ),
                 React.createElement('div', { className: "flex gap-3" },
-                  !showAnswer ? React.createElement(React.Fragment, null,
+                  !showAnswer && !score.concepts.questionScores[question.id] ? React.createElement(React.Fragment, null,
                     React.createElement('button', { onClick: checkConcept, disabled: selectedOption === null, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 text-white font-semibold py-3 rounded-lg" }, "Check"),
                     React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
                       React.createElement(SkipForward),
                       "Skip"
                     )
                   ) : React.createElement(React.Fragment, null,
+                    score.concepts.questionScores[question.id] ? React.createElement('div', { className: "flex-1 bg-gray-100 text-gray-600 font-semibold py-3 rounded-lg text-center" }, "✅ Already Answered") : null,
                     React.createElement('button', { onClick: retrySet, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Retry Full Quiz Set"),
                     React.createElement('button', { onClick: next, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg" }, "Next →")
                   )
                 )
-              ) : React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
+              ) : React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6 text-center" },
+                React.createElement('p', { className: "text-gray-500" }, "Loading quiz questions...")
+              )) : React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
                 React.createElement('div', { className: "mb-4" },
-                  React.createElement('div', { className: "text-sm text-gray-500 flex items-center gap-2" },
-                    React.createElement('span', null, `Card ${currentFlashcard + 1} of 31`),
-                    timerActive && showQuestionTimer && React.createElement('div', { className: "flex items-center gap-2 text-sm font-mono" },
-                      React.createElement('span', { className: "text-gray-600" }, timerDisplay.timeSpent),
-                      React.createElement('span', { className: `${timerDisplay.status.includes('Behind') ? 'text-red-600' : 'text-green-600'}` }, timerDisplay.status),
-                      React.createElement('button', { 
-                        onClick: () => setShowQuestionTimer(false), 
-                        className: "text-gray-400 hover:text-gray-600 text-xs" 
-                      }, "✕")
+                  React.createElement('div', { className: "mb-2" },
+                    React.createElement('div', { className: "flex items-center gap-2 mb-2" },
+                      timerActive && showQuestionTimer && React.createElement('div', { className: "flex items-center gap-2 text-sm font-mono min-w-[120px]" },
+                        React.createElement('span', { className: "text-gray-600" }, formatTime(timeRemaining)),
+                        React.createElement('span', { className: `${timerDisplay.status.includes('Behind') ? 'text-red-600' : 'text-green-600'}` }, timerDisplay.status),
+                        React.createElement('button', { 
+                          onClick: () => setShowQuestionTimer(false), 
+                          className: "text-gray-400 hover:text-gray-600 text-xs" 
+                        }, "✕")
+                      ),
+                      timerActive && !showQuestionTimer && React.createElement('button', { 
+                        onClick: () => setShowQuestionTimer(true), 
+                        className: "text-xs text-gray-500 hover:text-gray-700" 
+                      }, "Show Timer")
                     ),
-                    timerActive && !showQuestionTimer && React.createElement('button', { 
-                      onClick: () => setShowQuestionTimer(true), 
-                      className: "text-xs text-gray-500 hover:text-gray-700" 
-                    }, "Show Timer")
+                    React.createElement('div', { className: "text-sm text-gray-500" }, `Card ${currentFlashcard + 1} of 31`)
                   ),
                   React.createElement('span', { className: "inline-block mt-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm" }, "Flashcard")
                 ),
                 React.createElement('div', { className: "bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg mb-4" },
                   React.createElement('p', { className: "text-gray-800 font-medium" }, flashcard.question)
                 ),
-                !showAnswer && React.createElement('div', { className: "mb-4" },
+                (!showAnswer && !score.flashcards.cardScores[flashcard.id]) && React.createElement('div', { className: "mb-4" },
                   React.createElement('button', { onClick: () => setShowAnswer(true), className: "px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-lg text-sm" }, "Show Answer")
                 ),
-                showAnswer && React.createElement('div', { className: "bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4" },
+                (showAnswer || score.flashcards.cardScores[flashcard.id]) && React.createElement('div', { className: "bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4" },
                   React.createElement('p', { className: "text-sm text-blue-800 font-semibold mb-1" }, "Answer:"),
                   React.createElement('p', { className: "text-gray-800" }, flashcard.answer)
                 ),
@@ -1248,19 +1732,22 @@ ShowData()` }
                   feedback === 'correct' ? React.createElement('span', { className: "text-green-800 font-semibold" }, "✅ Correct!") : React.createElement('span', { className: "text-red-800 font-semibold" }, "❌ Incorrect")
                 ),
                 React.createElement('div', { className: "flex gap-3" },
-                  !showAnswer ? React.createElement(React.Fragment, null,
+                  !showAnswer && !score.flashcards.cardScores[flashcard.id] ? React.createElement(React.Fragment, null,
+                    React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
+                      React.createElement(SkipForward),
+                      "Skip"
+                    )
+                  ) : showAnswer && !score.flashcards.cardScores[flashcard.id] ? React.createElement(React.Fragment, null,
+                    React.createElement('button', { onClick: () => markFlashcard(true), className: "flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg" }, "✅ Got it right"),
+                    React.createElement('button', { onClick: () => markFlashcard(false), className: "flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg" }, "❌ Got it wrong"),
                     React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
                       React.createElement(SkipForward),
                       "Skip"
                     )
                   ) : React.createElement(React.Fragment, null,
-                    React.createElement('button', { onClick: () => markFlashcard(true), className: "flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg" }, "✅ Got it right"),
-                    React.createElement('button', { onClick: () => markFlashcard(false), className: "flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg" }, "❌ Got it wrong"),
+                    score.flashcards.cardScores[flashcard.id] ? React.createElement('div', { className: "flex-1 bg-gray-100 text-gray-600 font-semibold py-3 rounded-lg text-center" }, "✅ Already Answered") : null,
                     React.createElement('button', { onClick: retrySet, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Retry Full Cards Set"),
-                    React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
-                      React.createElement(SkipForward),
-                      "Skip"
-                    )
+                    React.createElement('button', { onClick: next, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg" }, "Next →")
                   )
                 )
               ),
@@ -1331,7 +1818,7 @@ ShowData()` }
               )
             )
           );
-        }
+        };
 
         // Render the app
         const root = ReactDOM.createRoot(document.getElementById('root'));
