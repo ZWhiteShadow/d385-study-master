@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D385 Study Master</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .lucide { width: 1em; height: 1em; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+        
+        // Simple icon components
+        const Brain = () => React.createElement('div', { className: 'w-8 h-8 bg-indigo-600 rounded' });
+        const RotateCcw = () => React.createElement('div', { className: 'w-4 h-4 bg-gray-600 rounded' });
+        const FileCode = () => React.createElement('div', { className: 'w-5 h-5 bg-blue-600 rounded' });
+        const HelpCircle = () => React.createElement('div', { className: 'w-5 h-5 bg-purple-600 rounded' });
+        const Lightbulb = () => React.createElement('div', { className: 'w-4 h-4 bg-yellow-600 rounded' });
+        const Code = () => React.createElement('div', { className: 'w-4 h-4 bg-green-600 rounded' });
+        const AlertCircle = () => React.createElement('div', { className: 'w-4 h-4 bg-orange-600 rounded' });
+        const BookOpen = () => React.createElement('div', { className: 'w-4 h-4 bg-purple-600 rounded' });
+        const Trophy = () => React.createElement('div', { className: 'w-8 h-8 bg-yellow-500 rounded' });
+        const SkipForward = () => React.createElement('div', { className: 'w-4 h-4 bg-gray-600 rounded' });
+        const CheckCircle = () => React.createElement('div', { className: 'w-4 h-4 bg-green-500 rounded-full' });
+        const XCircle = () => React.createElement('div', { className: 'w-4 h-4 bg-red-500 rounded-full' });
+
+        const PATTERNS = [
+          { id: 1, name: "Logging Error", category: "Logging", difficulty: "Easy", problem: "Log a division by zero error with the exception message", hint: "Use logging.error() with str(e)", answer: "logging.error('The exception that occurred is: ' + str(e))", commonMistakes: ["Forgetting str(e)", "Wrong quote style"], jsEquivalent: "console.error('The exception that occurred is: ' + e.message)", explanation: "Logs error messages to track exceptions.", originalQuestion: `The purpose of this lab is to introduce students to the process of creating, accessing, and generating log files using code. Use the template provided in order to write code that outputs log information with the basic configuration of level name and message, based on the information in the template.
+
+When you divide a number by zero, write an error message to the log.
+
+For Example, if the input is:
+9
+0
+
+The output to the console will be the following:
+ERROR: The exception that occurred is: division by zero
+
+Alternatively, if the input is:
+10
+2
+
+The output to the console will be the following:
+5.0
+
+Alternatively, if the input is:
+0
+20
+
+The output to the console will be the following:
+0.0
+
+import logging
+import sys
+
+# Define a function to handle division by zero error and log it while printing the output to the screen.
+def divideByZeroError(dividend, divisor):
+    # Configure the logging module to output messages to sys.stdout with a specific format.
+    logging.basicConfig(stream=sys.stdout,format='%(levelname)s:%(message)s')
+    
+    try:
+        # Attempt division to get the quotient.
+        quotient = dividend/divisor
+        print (quotient)
+        
+    except Exception as e:
+        # If an exception occurs during division, log the error using the logging module, including the exception message (str(e)).
+        # YOUR CODE HERE
+
+if __name__ == '__main__': 
+    # Get the values for dividend and divisor from user input.
+    dividend = int(input())
+    divisor = int(input())
+    
+    # Call the divideByZeroError function with the provided input values to handle any potential division errors.
+    divideByZeroError(dividend,divisor)` },
+          { id: 2, name: "Check Null", category: "Defensive Coding", difficulty: "Medium", problem: "Check if x is None, print message, return y. Then check if y is None with elif", hint: "Use 'if x is None:' then 'elif y is None:', NOT 'else'!", answer: `if x is None:\n    print("x is a null value")\n    return y\nelif y is None:\n    print("y is a null value")\n    return x\nelse:\n    return x * y`, commonMistakes: ["Using 'else' instead of 'elif'", "Using == instead of 'is'"], jsEquivalent: "if (x === null) { return y; } else if (y === null) { return x; }", explanation: "CRITICAL: Use ELIF not ELSE!", originalQuestion: `Check a Null Setting Using Assertions
+For this lab you will use unit testing to check a null setting using assertions. Use the commented template code provided to do the following:
+Use the assertIsNone() function from Python's unittest library to verify whether an input value is "None" or "not" using a test case. A Boolean value should be returned by this function based upon the assert condition that the two parameter inputs are received. .
+The assertIsNone() function will return true if the input value is equal to "None", and false if it is not. In the multiply_numbers function, test for all cases of a null value. Return the not-null value for each condition with a print statement of the null value.
+For example, the output to the console from the source code multiply_numbers(5, None) will be the following output:
+y is a null value
+5 is not None
+
+# unit test case
+import unittest
+
+def multiply_numbers(x, y):
+    #add your code here
+    return x * y
+   # add your code here
+   
+   
+class TestForNone(unittest.TestCase):
+        
+    def test_when_a_is_null(self):
+        try:
+            self.assertIsNone(multiply_numbers(5, None))
+        except AssertionError as msg:
+            print(msg)
+
+if __name__ == '__main__':  
+    unittest.main()` },
+          { id: 3, name: "Template Class", category: "Security", difficulty: "Medium", problem: "Create a safe string template and substitute the name variable", hint: "Use Template class from string module", answer: `name_template = Template("Hello, my name is $name.")\ngreeting = name_template.substitute(name=name)\nprint(greeting)`, commonMistakes: ["Using f-strings instead", "Wrong variable syntax"], jsEquivalent: "`Hello, my name is ${name}`", explanation: "Prevents template injection attacks", originalQuestion: `Secure Code with Template Class
+An attacker was able to get access to sensitive information. Fix the templated code provided below to make it more secure.
+Sample Input:
+Jane Doe
+jane_doe@email.com
+
+If the code is not fixed properly, the output to the console will be:
+The secret is 'you've just exposed your secret_key'
+
+Alternatively, when the code is fixed properly the output to the console should be:
+Hello, my name is Jane Doe.
+
+Hint: Python objects can access internal attributes, including a dictionary of global variables. You can eliminate such vulnerabilities by avoiding invalidated user inputs. Create a string template object to create simplified syntax for output specification and then map that object with the keyword argument. Be sure to use the Template class which is a safer method to create a simple template string.
+
+from string import Template
+
+CONFIG = {
+    "API_KEY": "'you've just exposed your secret_key'"
+}
+
+class User:
+    name = ""
+    email = ""
+
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+    def __str__(self):
+        return self.name
+        
+if __name__ == '__main__':
+    name = input()
+    email = input()
+    
+    user = User(name, email)
+    
+    # FIXME:  Here is where you want to use the template class
+    print(f"The secret is {user.__init__.__globals__['CONFIG']['API_KEY']}")` },
+          { id: 4, name: "Rate Limiting", category: "Security", difficulty: "Hard", problem: "Calculate bucket value for rate limiting", hint: "bucket = self.bucket + time_passed * (rate / per)", answer: "bucket = self.bucket + time_passed * (self.rate / self.per)", commonMistakes: ["Forgetting self.", "Wrong formula"], jsEquivalent: "bucket = this.bucket + timePassed * (this.rate / this.per)", explanation: "Token bucket algorithm", originalQuestion: `Rate Limiting
+
+With rate limiting, a unique IP address is restricted from making too many requests in a fixed period of time.
+
+The code snippet below implements rate limiting using a "Token Bucket." Each time a message is received: the bucket is checked for tokens. If the bucket has 1 or more tokens, the algorithm removes one token and sends the message. If no tokens remain in the bucket, the algorithm drops the message.
+
+Complete ***line #18*** to finish the *limit()* function and ensure that the API only allows ***5 messages*** per every ***10 seconds***.
+
+See commented lines for detailed instructions.
+
+When correct, this code should produce no output.
+
+The output to the console will be the following:
+(Your program produced no output)
+
+import time
+    
+class Limiter:
+  def __init__(self, rate, per):
+    self.rate = rate
+    self.per = per
+    self.bucket = rate
+    self.last_check = time.time()
+
+  def limit(self, callback_fn):
+      current = time.time()
+      time_passed = current - self.last_check
+      self.last_check = current
+      
+      # Finish line 18 by writing an expression that determines the value of the bucket
+      # Use the following variables in your expression: time_passed, self.bucket, self.rate, and self.per 
+      bucket = # Insert your expression here
+      
+      if (bucket > self.rate):
+          self.bucket = self.rate
+      if (bucket < 1):
+          pass
+      else:
+          callback_fn()
+          self.bucket = bucket - 1` },
+          { id: 5, name: "Assert Temperature", category: "Testing", difficulty: "Easy", problem: "Assert temperature is >= 0 with message", hint: "assert condition, 'message'", answer: `assert Temperature >= 0, "Colder than zero degrees Celsius!"`, commonMistakes: ["Using > instead of >="], jsEquivalent: "if (temperature < 0) throw new Error(...)", explanation: "Assertions validate preconditions", originalQuestion: `Assertions can be an excellent tool if you're looking for a way to increase the effectiveness of your debugging and testing processes. In the following lab, you will demonstrate the basics of using assert statements, including how to write logical statements and when to use assertion statements in your code.
+
+Using the templated code provided, write an assertion statement where noted in the template code. The assertion statement needs to determine whether an integer input is below freezing using the phrase: "Colder than zero degrees Celsius!".
+
+For example if the input is
+-5
+
+The output to the console for your assertion statement will be the following:
+Colder than zero degrees Celsius!
+
+If the input is greater than zero degrees Celsius (*note: this code is already provided*):
+5
+
+The output to the console in Fahrenheit will be the following:
+41
+
+def CelciusToFahrenheit(Temperature):
+    #insert assert statement for, "Colder than zero degrees Celsius!"
+    # YOUR CODE HERE
+    return ((Temperature*9)/5)+32
+
+if __name__ == '__main__':  
+    Temperature = int(input())
+    try:
+        print(CelciusToFahrenheit(Temperature))
+    except AssertionError as msg:
+        print(msg)
+
+***should it be '>' or '≥'***` },
+          { id: 6, name: "Check Numeric & Null", category: "Validation", difficulty: "Easy", problem: "Return True if wg_int is integer, and True if wg_string is not None", hint: "Use isinstance() and 'is not None'", answer: `return isinstance(wg_int, int)\n\nreturn wg_string is not None`, commonMistakes: ["Using == instead of 'is'"], jsEquivalent: "typeof wg_int === 'number'", explanation: "Type and null checking", originalQuestion: `Check Data to Verify Values/Null
+
+External data quality can affect downstream systems, reporting, and metrics and cause vulnerabilities in our systems. Using the templated code provided, write one method to check if a string is not null and a separate method to check if a string contains all numbers.
+
+Your first variable will be a string and contain a simple sentence, such as "I like dogs." Your second variable will be an integer and will contain a few numbers, such as 12345.
+
+Complete the functions in the code template.
+
+For example, if the variables in the templated code are:
+I like dogs.
+12345
+
+The output to the console will be the following:
+True
+True
+
+Alternatively, if the variable values in the template code are changed to:
+None
+12345
+
+The output to the console will be the following:
+False
+True
+
+Alternatively, if the variable values in the template code are changed to:
+None
+"I love dogs"
+
+The output to the console will be the following:
+False
+False
+
+# verify we only have digits
+def check_numeric_value(wg_int):
+    #return true if numeric value is an integer, else return false.  
+    #Hint: use isinstance function
+    # YOUR CODE HERE
+
+# verify if the string is null
+def check_null_string (wg_string):
+    # check if wg_string is not null return true else return false
+    # YOUR CODE HERE
+       
+if __name__ == '__main__':  
+    wg_string = "I like dogs." # use keyword None to test
+    wg_int = 12345
+    
+    print(check_null_string (wg_string))
+    print(check_numeric_value(wg_int))` },
+          { id: 7, name: "SHA3-256 Hashing", category: "Cryptography", difficulty: "Medium", problem: "Hash password using SHA3-256 and return hexdigest", hint: "Use hashlib.sha3_256(), update(), hexdigest()", answer: `d = hashlib.sha3_256()\nd.update(enc_pwd)\nhash = d.hexdigest()`, commonMistakes: ["Using sha256 instead of sha3_256"], jsEquivalent: "crypto.createHash('sha256')", explanation: "Secure one-way hashing", originalQuestion: `Hashing (Hashlib)
+Nearly everything is done online where users can sign-up using a username and password. Malicious hackers can steal your password and access your bank account or any personal information. Passwords are stored using encryption or hashing. Both methods provide valuable capabilities; however, symmetric encryption is a reversible operation and based on the use of an encryption key. Anyone possessing the key can decrypt an encrypted value to obtain the original value.
+The hashing operation is not reversible.
+Using a broken or weak cryptographic hash function can leave data vulnerable and should not be used in security related code.
+The template code shows a function for hashing passwords, but it is using a weak and insecure hashing algorithm. Fix the code to ensure that the hashing matches the below sample inputs and outputs to prevent tampering. Be sure to analyze each line of code to ensure your hashing algorithm is secure.
+Hint: use hex instead of binary.
+For example, if the input is:
+Password
+
+The output to the console will be the following:
+545e50bcc34933b23852a89857e05d6a524b2101e79858d6f65c99a36be4e862
+
+Alternatively, if the input is:
+Love3Python
+
+The output to the console will be the following:
+c9e1c3bc7cf1f2c1b01296085d57acd66f90921dcc55c08a0bd6744b19aecb8c
+
+import hashlib
+
+def hash_password(pwd):
+    # encode password string to bytes
+    enc_pwd = pwd.encode()
+    
+    # call the sha256(...) function returns a hash object
+    d = hashlib.sha256(enc_pwd)
+    
+    # generate binary hash of password string in hexidecimal
+    hash = d.digest()
+    
+    return hash
+    
+if __name__ == '__main__':
+    pwd = input()
+    
+    print(hash_password(pwd))` },
+          { id: 8, name: "Deserialization", category: "Security", difficulty: "Hard", problem: "Generate new key, check if matches, return deserialized data", hint: "new_key = generate_key(serialized_data)", answer: `new_key = generate_key(serialized_data)\nif key == new_key:\n    return deserialize(serialized_data)\nelse:\n    raise Exception('New key does not match old key')`, commonMistakes: ["Not generating new key"], jsEquivalent: "if (key === newKey) { return deserialize(data); }", explanation: "Validates data integrity", originalQuestion: `To protect against remote code execution, it is important to validate incoming data for deserialization . One way to ensure the integrity of incoming data is to validate it using generated digest keys.
+
+Using the provided template code, complete the function to validate incoming serialized data. For the purpose of this lab, you have access to the generate_key() and deserialize() functions.
+
+*Your function should return the result of deserialize() if it passes validation, otherwise it should raise an Exception*
+
+If the code is not fixed properly, the output to the console will be:
+Error: New key does not match old key
+
+Alternatively, when the code is fixed properly, the output to the console will be:
+(Your program produced no output)
+
+from generate_key import generate_key
+from deserialize import deserialize 
+from serialize import serialize
+
+def safe_deserialize(key, serialized_data):
+    new_key = '' # replace the empty string with a newly generated key
+    
+    try:
+        if key == new_key:
+            return # return deserialized data when validation passes
+        else:
+            raise Exception('New key does not match old key')
+    except Exception as error:
+        print('Error:', error)
+        
+    return False
+
+# Example usage
+grades = {'Alice': 89, 'Bob': 72, 'Charles': 87}
+serialized_data = serialize(grades)
+deserialized_data = safe_deserialize(generate_key(serialized_data), serialized_data)` },
+          { id: 9, name: "Numeric Validation", category: "Validation", difficulty: "Easy", problem: "Check if zipCode is an integer", hint: "Try int(zipCode)", answer: `zip_check = int(zipCode)`, commonMistakes: ["Not assigning to variable"], jsEquivalent: "parseInt(zipCode, 10)", explanation: "Type validation by conversion", originalQuestion: `Verify Data is Valid (Numeric)
+It is important to ensure that user input is valid before acceptance to verify that the data received is of the expected data type.
+Using the provided template code, validate that the zip code input by the user is an integer data type.
+For example, if an integer input is:
+12345
+
+The output to the console will be the following:
+Your zip code is 12345.
+
+Alternatively, if a non-integer value input is:
+abcdefg
+
+The output to the console will be the following:
+Please use numeric digits for the zip code.
+
+#check if the zipcode input is numeric
+if __name__ == '__main__': 
+    zipCode = input()
+    try:
+        #check that zip code is an integer value
+        # YOUR CODE HERE
+        print(f'Your zip code is {zipCode}.')
+
+    except:
+        print('Please use numeric digits for the zip code.')` },
+          { id: 10, name: "Length Validation", category: "Validation", difficulty: "Easy", problem: "Check if password length is >= 8", hint: "Use len() function", answer: `if len(password) >= 8:\n    print("Your password is long enough.")\nelse:\n    print("Your password is too short.")`, commonMistakes: ["Using > instead of >="], jsEquivalent: "if (password.length >= 8) { ... }", explanation: "Validates minimum password length", originalQuestion: `Verify Data is Valid (Length)
+You are being asked to check that the user input is valid before accepting it. As part of this process, you will validate that the data received is of the expected length.
+Using the provided template code, validate that the length of a password meets length requirements. Create a conditional statement that checks if the length of a password input is greater than or equal to 8 characters. Output the correct statement depending on the length of the user's password.
+For example, if the input input of appropriate character length is:
+12345678
+
+The output to the console will be the following:
+Your password is long enough.
+
+Alternatively, if the input of inappropriate character length is:
+1234
+
+The output to the console will be the following:
+Your password is too short.
+
+#check if the length of the password is at least 8 characters
+if __name__ == '__main__': 
+    password = input()
+    
+    #write an if / else statement to evaluate passwords length
+    # YOUR CODE HERE` },
+          { id: 11, name: "Range Validation", category: "Validation", difficulty: "Medium", problem: "Check if num is in range 1-10", hint: "Use 'num in r' where r = range(1,11)", answer: `if num in r:\n    print("The number input is in the range from 1 and 10.")\nelse:\n    print("The number input is not in the range from 1 and 10.")`, commonMistakes: ["Using range(1,10)"], jsEquivalent: "if (num >= 1 && num <= 10) { ... }", explanation: "Range checking", originalQuestion: `Verify Data is Valid (range)
+You are being asked to validate that a numeric input is within a pre-defined range.
+Using the provided template code, create an input validation check to ensure an input value is within the range of values from 1 to 10, inclusive. Use the range() function to check the input variable's value against the defined range. The code should output a message of "The number input is in the range from 1 and 10." or "The number input is not in the range from 1 and 10." depending on the numeric value of the variable.
+For example, if the input within range is:
+8
+
+The output to the console will be the following:
+The number input is in the range from 1 and 10.
+
+Alternatively, if the input out of range is:
+15
+
+The output to the console will be the following:
+The number input is not in the range from 1 and 10.
+
+#check if the input range is between 1 and 10 for the range validation check
+if __name__ == '__main__': 
+    r = range(1,10)
+    num = int(input())
+    
+    # create conditional statement for range check here
+    # YOUR CODE HERE` },
+          { id: 12, name: "AES Encryption", category: "Cryptography", difficulty: "Easy", problem: "Encrypt plain_text using the cipher object", hint: "encrypted_text = cipher.encrypt(plain_text)", answer: `encrypted_text = cipher.encrypt(plain_text)`, commonMistakes: ["Wrong method name"], jsEquivalent: "cipher.update(plainText)", explanation: "AES encryption", originalQuestion: `AES Encryption
+DOS attacks on network traffic are on the rise. In this lab, use AES encryption to ensure your TCP is not vulnerable.
+Using the provided template code, fix the encrypt function which should pass the plain_text to be encrypted. Use line 15 in the templated code to encrypt the variable input cipher.
+For example, if the input is:
+This is a secret message.
+
+The output to the console should be the following:
+Enter message: AAAAAAAAAAAAAAAAAAAAEMGL1m8afoCe3ddRA+oFr+O1jtpvSXaU25KjSg/6V6PktYKfb190gdvI108D+gSr8PDN63RTZNPXz9dDRvoSqeXwl59xX2SA39uSDDLhHrm3/JCffRpklt3OklZG5BK55PSE2jJuf5rNnJ5RRuhXufL2kdpoGnqWzc+WRQOnI6L+5sPWbxp2083ZlFAD/Ven8uaQ3ntfOafW1YQCD/pXq7fmhtxuX2PT09mEUQfuEuTD/YrMPFNk09+chEcF+xK+t/iGzG9bcJaQ6J9LFakeubf0w8x5WWWWypyaRxX6Fq3yu7fXdUk3ms2clgIV7BS48uHD0nlJZJLZ2dkkYI9xzJE=
+
+import hashlib
+from Crypto.Cipher import AES
+from base64 import b64encode, b64decode
+import os
+
+class AESCipher(object):
+    def __init__(self, key):
+        self.block_size = AES.block_size
+        self.key = hashlib.sha256(key.encode()).digest()
+
+    def encrypt(self, plain_text):
+        plain_text = self.__pad(plain_text)
+        counter = self.block_size.to_bytes(self.block_size, "big")
+        cipher = AES.new(self.key, AES.MODE_CTR, counter=lambda: counter)
+        #FIX ME:  encrypted_text = ?
+        return b64encode(counter + encrypted_text).decode("utf-8")
+
+    def __pad(self, plain_text):
+        number_of_bytes_to_pad = self.block_size - len(plain_text) % self.block_size
+        ascii_string = chr(number_of_bytes_to_pad)
+        padding_str = number_of_bytes_to_pad * ascii_string
+        padded_plain_text = plain_text + padding_str
+        return padded_plain_text
+
+if __name__ == '__main__':
+    msg = input("Enter message: ")
+    cipher = AESCipher(msg)
+    #Test the message size
+    msg = msg*10
+    
+    print(cipher.encrypt(msg))` },
+          { id: 13, name: "Least Privilege", category: "Security", difficulty: "Hard", problem: "Set admin permissions (RWX) if result is True, else set read-only", hint: "stat.S_IRWXU for admin", answer: `if result:\n    os.chmod(filename, stat.S_IRWXU)\nelse:\n    os.chmod(filename, stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)`, commonMistakes: ["Wrong permission flags"], jsEquivalent: "fs.chmod with 0o700 vs 0o444", explanation: "Principle of least privilege", originalQuestion: `Least Privilege Permission Levels
+
+Using the template code provided, fix the code that is vulnerable to least privilege. You will need to change the permission level appropriately for each level of users as follows:
+
+- Admin should have permission to Read, Write, and Execute
+- Users should have permission to Read
+
+You will need to fix the grant permission method.
+
+For example, if an Admin input is:
+my_dict.txt
+Reagan
+
+The output to the console will be the following:
+Exists the path: True
+Access to read the file: True
+Access to write the file: True
+Check if path can be executed: True
+
+Alternatively, if a User input is:
+my_dict.txt
+Doe
+
+The output to the console will be the following:
+Exists the path: True
+Access to read the file: True
+Access to write the file: False
+Check if path can be executed: False
+
+my_dict.txt contains a dictionary list of authorized admin users and their username:
+ * Caius : ccharlton329
+ * Peyton : pstott885
+ * Reagan : rebradshaw835
+ * Ryley : rbarber894
+ * Tyrese : tmayo945
+
+Admins can write to the output_file.txt file:
+ * I have write privilege.
+
+import os
+import stat
+
+def admin(filename, admin):
+    return admin
+    
+def user(filename, user):
+    return user    
+    
+def grant_permission(name_list, filename):
+    # FIXME
+    # YOUR CODE HERE
+    check_permission(filename)
+
+def check_permission(filename):
+    # Check if file path exists
+    path1 = os.access(filename, os.F_OK)
+    print("The path exists:", path1)
+    # Check if User has Read Access
+    path2 = os.access(filename, os.R_OK)
+    print("Access to read the file:", path2)
+    # Check if User has Write Access
+    path3 = os.access(filename, os.W_OK)
+    print("Access to write the file:", path3)
+    # Check if User has Execute Permission
+    path4 = os.access(filename, os.X_OK)
+    print("Check if path can be executed:", path4)
+
+    if os.access(filename, os.R_OK):
+        # open txt file as file
+        with open(filename) as file:
+            file.read()
+    else:		
+        # in case can't access the file	
+        print("Cannot access the file")
+
+    with open("output_file.txt", 'w') as f:
+        if os.access(filename, os.W_OK):
+            f.write("I have write privilege.\n")
+    
+if __name__ == '__main__':
+    filename = input()
+    name = input()
+    k = []
+    result = False
+
+    with open(filename) as f:
+        for line in f:
+            fields = line.split()
+            k.append(fields[0])
+            
+        for lineNum in range(len(k)):
+            if name in k[lineNum]:
+                result = True
+                name_result = name
+                
+        if result:
+            admin(filename, name)
+        else:
+            user(filename, name)
+
+    grant_permission(k, filename)` },
+          { id: 14, name: "Broken Authorization", category: "Security", difficulty: "Medium", problem: "Only show data if GetUserID() equals ownerID", hint: "Add check inside ShowData() function", answer: `if(GetUserID() == ownerID):\n    print("This is the user data")`, commonMistakes: ["Putting check outside function"], jsEquivalent: "if (getUserID() === ownerID) { ... }", explanation: "Fixes broken authorization", originalQuestion: `Broken Object Level Authorization
+When all resources for a certain user are requested, information such as a userID might be passed on to the server as part of the request.
+ <https://website.com/get_users_search_history?userID=4567>
+
+If the userID of User A is changed to that of User B, it should not be possible to view User A's search history. If User A's search history is still accessible, this issue is due to Broken Object Level Authorization.
+Using the provided template code, address the Broken Object Level Authorization issue by fixing the code.
+Hint: Start by checking if the currently logged-in user has permission to access those objects that need to be done. Our requirement in this example is to check whether the userID provided in the GET parameter matches the userID supplied in the owner parameter for the object.
+Currently, the output to the console output from the authorization code is the following:
+You are not allowed to view this data
+Redirecting to homepage
+This is the user data
+
+Once you have fixed the code, the output to the console the expected output from the authorization code will be the following:
+You are not allowed to view this data
+Redirecting to homepage
+
+#Simulated auhorization code
+
+ownerID = 4567
+
+def ShowData():
+    # YOUR CODE HERE
+    print("This is the user data")
+def Redirect():
+    print("Redirecting to homepage")
+def GetUserID():
+    return 1234
+
+if(not GetUserID() == ownerID):  # this is just a simulation, this line is typically !$_GET['userID'] === object.ownerID
+    print( "You are not allowed to view this data")
+    Redirect()
+
+ShowData()` }
+        ];
+
+        const FLASHCARDS = [
+          { id: 201, question: "What is LDAP?", answer: "commonly used to handle directory services such as user authentication, authorization, and directory management" },
+          { id: 202, question: "What is ACL?", answer: "a list of permissions associated with a network resource or object that specifies which users or systems are allowed or denied access to that resource" },
+          { id: 203, question: "What is a GET Request?", answer: "used to retrieve data from a specified resource on a web server. It is one of the most common HTTP methods and is used to request data without modifying or affecting the server's state" },
+          { id: 204, question: "What does response.history provide?", answer: "provides a list of Response objects that represent the intermediate responses encountered while following redirects" },
+          { id: 205, question: "What is Denial of Service?", answer: "an attempt to overload a website or network, with the aim of degrading its performance or even making it completely inaccessible" },
+          { id: 206, question: "What is API Mass Assignment?", answer: "an application allows users to update multiple fields or attributes of an object via an API endpoint without proper validation or restrictions" },
+          { id: 207, question: "What is Man in the Middle Interception?", answer: "criminal puts themselves between client and server, done via creating an unsecure wifi network, finding entry into an insecure network via packet sniffer, creaking fake websites, or manipulating IP protocols" },
+          { id: 208, question: "What is Man in the Middle Decryption?", answer: "Use of data capture tools to transmit any login info or web activity back to the criminal to be decrypted" },
+          { id: 209, question: "What is Cross Site Scripting prevention?", answer: "Validate and Sanitize all user inputs" },
+          { id: 210, question: "What is Code Injection prevention?", answer: "input validation" },
+          { id: 211, question: "What is Man in the Middle prevention?", answer: "HTTPS, up to date certificates, authenticate users/devices, avoid open wifi networks" },
+          { id: 212, question: "What is Broken Access Control prevention?", answer: "Implement strong authentication and authorization, Role-Based Access Control" },
+          { id: 213, question: "What is Broken Function Level Authorization prevention?", answer: "Role Based Access Control, Server Side Authorization Checks" },
+          { id: 214, question: "What is field-level access control?", answer: "regulates access to specific fields or attributes within a resource, rather than the resource as a whole" },
+          { id: 215, question: "What is resource-level access control?", answer: "governs which users or entities can access specific resources within a system, application, or service" },
+          { id: 216, question: "What is ACAO client.url?", answer: "Access Control Allow Origin (ACAO) - client request to (server) www.client.url , what does server send back?" },
+          { id: 217, question: "What is XSS Example/Explanation?", answer: "Attacker inserts malicious script (generally through input fields or url parameters not properly sanitized) that is executed by other users who visit the site" },
+          { id: 218, question: "What is 200 OK?", answer: "Your request was successful!" },
+          { id: 219, question: "What is 201 Created?", answer: "The request was accepted, and the resource was created" },
+          { id: 220, question: "What is 400 - Bad Request?", answer: "indicates that the server could not understand or process the request due to invalid syntax or bad formatting" },
+          { id: 221, question: "What is 401 - Unauthorized?", answer: "indicates that the request lacks valid authentication credentials" },
+          { id: 222, question: "What is 403 - Forbidden?", answer: "indicates that the server understands the request but refuses to authorize it" },
+          { id: 223, question: "What is 404 - Not Found?", answer: "indicates that the server could not find the requested resource" },
+          { id: 224, question: "What is 405 Method Not Allowed?", answer: "The endpoint doesn't allow for that specific HTTP method" },
+          { id: 225, question: "What is 500 Internal Server Error?", answer: "Your request wasn't expected and probably broke something on the server side" },
+          { id: 226, question: "What is response.status_code?", answer: "represents the HTTP status code returned by the server in response to a request" },
+          { id: 227, question: "What is rate limited requests?", answer: "refers to a request that is constrained by a rate limit imposed by a server or API to control the frequency of requests from a client" },
+          { id: 228, question: "What is Privilege Escalation?", answer: "occurs when an attacker gains elevated access rights or permissions beyond those originally granted to them" },
+          { id: 229, question: "What is Authentication?", answer: "refers to giving a user permissions to access a particular resource. Since, everyone can't be allowed to access data from every URL, one would require authentication primarily" },
+          { id: 230, question: "What is 403 - The user can reach the site but not access further?", answer: "more permission needed. Headers and Cookies provide necessary data that is validated for requests" }
+        ];
+
+        const MC_QUESTIONS = [
+          { id: 101, category: "Logging", question: "What is the primary defense against log injection attacks?", options: ["Sanitize outbound log messages", "Do not use parameterized stored procedures", "Allow all users to write to logs", "Use API calls to log actions"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Sanitizing prevents malicious injection.", "❌ WRONG: For SQL injection, not log injection.", "❌ WRONG: Would CREATE vulnerability.", "❌ WRONG: Logging method, not security defense."] },
+          { id: 102, category: "XSS", question: "An attacker exploits XSS. What can they do?", options: ["Access the user's data", "Execute shell commands", "Discover other users' credentials", "Access server files"], correctIndex: 0, optionExplanations: ["✅ CORRECT: XSS runs in browser, accessing client-side data.", "❌ WRONG: XSS is client-side, can't execute server commands.", "❌ WRONG: XSS targets one user, not credential database.", "❌ WRONG: XSS runs in browser, can't access server files."] },
+          { id: 103, category: "Code Injection", question: "Which Python function is prone to code injection?", options: ["eval()", "type()", "print()", "append()"], correctIndex: 0, optionExplanations: ["✅ CORRECT: eval() executes strings as code.", "❌ WRONG: type() only returns object type.", "❌ WRONG: print() outputs text, doesn't execute.", "❌ WRONG: append() adds to lists, doesn't execute."] },
+          { id: 104, category: "Defensive Coding", question: "What are two common defensive coding techniques?", options: ["Check preconditions and postconditions", "Encrypt passwords and emails", "Adjust message length/encoding", "Use exceptions to find errors"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Preconditions validate inputs, postconditions verify outputs.", "❌ WRONG: Encryption is security practice, not defensive coding.", "❌ WRONG: Message formatting isn't defensive coding.", "❌ WRONG: That's debugging, not defensive coding."] },
+          { id: 105, category: "Testing", question: "Which package is for Python's internal regression testing?", options: ["test", "regress test", "doctest", "assert"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 'test' package is Python's internal test suite.", "❌ WRONG: 'regress test' doesn't exist.", "❌ WRONG: 'doctest' tests docstring examples.", "❌ WRONG: 'assert' is a statement, not a package."] },
+          { id: 106, category: "Validation", question: "Which type of input validation does this code show?\n\nisValidNumber = False\nwhile not isValidNumber:\n  try:\n    pickedNumber = int(input('Pick 1-10'))\n    if pickedNumber >= 1 and pickedNumber <= 10:\n      isValidNumber = True\n  except:\n    print('Enter valid number')", options: ["Type and range check", "Type and length check", "Length and range check", "Invalid number check"], correctIndex: 0, optionExplanations: ["✅ CORRECT: int() is type check, >= 1 and <= 10 is range check.", "❌ WRONG: No length checking, only type and range.", "❌ WRONG: No length checking here.", "❌ WRONG: Too vague, specifically type and range."] },
+          { id: 107, category: "Security Testing", question: "This code checks for HSTS headers. Which vulnerability is being tested?\n\nimport requests\nfor url in urls:\n  req = requests.get(url)\n  try:\n    transport_security = req.headers['Strict-Transport-Security']\n  except:\n    print('HSTS header not set')", options: ["Man-in-the-middle", "Cross-site scripting", "Denial of service", "Code injection"], correctIndex: 0, optionExplanations: ["✅ CORRECT: HSTS prevents man-in-the-middle by enforcing HTTPS.", "❌ WRONG: XSS is script injection, not transport security.", "❌ WRONG: DoS overwhelms servers, HSTS is about encryption.", "❌ WRONG: Code injection is executing malicious code."] },
+          { id: 108, category: "Access Control", question: "Attacker took over multiple accounts. What vulnerability?", options: ["Broken access control", "Function level auth", "API mass assignment", "Privilege escalation"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Broken access control allows unauthorized account access.", "❌ WRONG: Function level is role-based restrictions.", "❌ WRONG: Mass assignment is property manipulation.", "❌ WRONG: Privilege escalation is gaining higher privileges."] },
+          { id: 109, category: "API Security", question: "Best way to protect API with IsAdmin field?", options: ["Resource and field-level access control", "Rate limiting", "Remove IsAdmin field", "Encrypt requests"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Field-level control restricts who can modify IsAdmin.", "❌ WRONG: Rate limiting prevents DoS, not privilege escalation.", "❌ WRONG: Removing field prevents legitimate admin creation.", "❌ WRONG: Encryption protects transit, not field access."] },
+          { id: 110, category: "SQL Injection", question: "Which method is used for SQL injection?", options: ["Exploiting query parameters", "Safe query parameters", "SQL composition", "Literal parameters"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Attackers inject SQL through unsanitized parameters.", "❌ WRONG: Safe parameters PREVENT injection.", "❌ WRONG: Composition is general term.", "❌ WRONG: Literals are hardcoded, not user input."] },
+          { id: 111, category: "CORS", question: "What does CORS allow users to do?", options: ["Override same origin policy for specific resources", "Connect web security models", "Prevent passing credentials", "Protect client header from exposure"], correctIndex: 0, optionExplanations: ["✅ CORRECT: CORS creates controlled exceptions to same-origin policy.", "❌ WRONG: Vague and meaningless phrase.", "❌ WRONG: CORS can ALLOW credentials with proper headers.", "❌ WRONG: CORS exposes headers, doesn't protect them."] },
+          { id: 112, category: "Authentication", question: "Which protocol caches tokens after acquisition?", options: ["MSAL", "Auth0", "LDAP", "ACL"], correctIndex: 0, optionExplanations: ["✅ CORRECT: MSAL automatically caches tokens for performance.", "❌ WRONG: Auth0 is a service, not a protocol with built-in caching.", "❌ WRONG: LDAP uses bind operations, not tokens.", "❌ WRONG: ACL defines permissions, doesn't deal with tokens."] },
+          { id: 113, category: "HTTP Status", question: "import requests\nurl = 'https://website.com/'\nresult = requests.get(url)\n\nWhich status code will the server return?", options: ["403", "200", "401", "400"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 403 Forbidden - no auth headers sent, access denied.", "❌ WRONG: 200 OK means success with access granted.", "❌ WRONG: 401 means auth required but missing/invalid.", "❌ WRONG: 400 means malformed request syntax."] },
+          { id: 114, category: "HTTP Status", question: "url = 'https://api.github.com/invalid'\nrequest_response = requests.get(url)\nrequest_response.raise_for_status()\n\nWhich response code?", options: ["404 - Not found", "200 - OK", "400 - Bad request", "401 - Unauthorized"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 404 - '/invalid' endpoint doesn't exist.", "❌ WRONG: 200 OK means resource found successfully.", "❌ WRONG: 400 means malformed syntax, not missing resource.", "❌ WRONG: 401 means auth required, not missing endpoint."] },
+          { id: 115, category: "HTTP Response", question: "Which response method returns information about the server's response to console?", options: ["response.content", "response.history", "response.status_code", "response.get"], correctIndex: 0, optionExplanations: ["✅ CORRECT: response.content returns raw response body as bytes.", "❌ WRONG: response.history contains redirect responses.", "❌ WRONG: response.status_code returns only the numeric code.", "❌ WRONG: response.get doesn't exist, requests.get() sends requests."] },
+          { id: 116, category: "Assertions", question: "def authorizeAdmin(usr):\n  assert isinstance(usr, list) and usr != [], 'No user found'\n  assert 'admin' in usr, 'No admin found.'\n  print('You are granted full access')\n\nauthorizeAdmin(['user'])\n\nWhat is the response?", options: ["AssertionError: No admin found", "AssertionError: No user found", "Authorized User", "You are granted full access"], correctIndex: 0, optionExplanations: ["✅ CORRECT: First assert passes, second fails - 'admin' not in ['user'].", "❌ WRONG: First assert passes (IS a list, NOT empty).", "❌ WRONG: This string doesn't appear in the code.", "❌ WRONG: Only prints if BOTH assertions pass."] },
+          { id: 117, category: "Status Codes", question: "What does HTTP status code 200 mean?", options: ["OK - Your request was successful", "Created - Resource was created", "Bad Request - Request is wrong", "Not Found - Resource doesn't exist"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 200 OK is standard success response.", "❌ WRONG: 'Resource created' is 201 Created.", "❌ WRONG: 'Bad Request' is 400.", "❌ WRONG: 'Resource doesn't exist' is 404."] },
+          { id: 118, category: "Status Codes", question: "What does HTTP status code 401 mean?", options: ["Unauthorized - Requires additional permissions", "Forbidden - Server refuses", "Bad Request - Malformed", "Not Found - Resource doesn't exist"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 401 means authentication needed (missing/invalid credentials).", "❌ WRONG: 'Server refuses' is 403 Forbidden.", "❌ WRONG: 'Malformed request' is 400.", "❌ WRONG: 'Resource doesn't exist' is 404."] },
+          { id: 119, category: "Status Codes", question: "What does HTTP status code 403 mean?", options: ["Forbidden - Server refuses to authorize", "Unauthorized - Requires authentication", "Bad Request - Malformed", "Not Found - Resource doesn't exist"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 403 means authenticated but lacking permissions.", "❌ WRONG: 'Requires authentication' is 401.", "❌ WRONG: 'Malformed request' is 400.", "❌ WRONG: 'Resource doesn't exist' is 404."] },
+          { id: 120, category: "Status Codes", question: "What does HTTP status code 404 mean?", options: ["Not Found - Resource doesn't exist", "Forbidden - Server refuses", "Bad Request - Malformed", "Internal Server Error"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 404 means URL/resource doesn't exist.", "❌ WRONG: 'Server refuses' is 403.", "❌ WRONG: 'Malformed request' is 400.", "❌ WRONG: 'Internal Server Error' is 500."] },
+          { id: 121, category: "Attack Identification", question: "This code allows users to update any field. What attack is this?\n\nclass User:\n  def update(self, data):\n    for key, value in data.items():\n      setattr(self, key, value)", options: ["API Mass Assignment", "SQL Injection", "XSS", "Code Injection"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Mass assignment allows updating any field without validation.", "❌ WRONG: SQL injection targets database queries.", "❌ WRONG: XSS injects scripts into web pages.", "❌ WRONG: Code injection executes malicious code."] },
+          { id: 122, category: "Attack Identification", question: "This code executes user input as Python code. What attack?\n\nuser_input = input('Enter command:')\neval(user_input)", options: ["Code Injection", "SQL Injection", "XSS", "Broken Access Control"], correctIndex: 0, optionExplanations: ["✅ CORRECT: eval() executes user input as code - code injection.", "❌ WRONG: SQL injection targets database queries.", "❌ WRONG: XSS injects scripts into web pages.", "❌ WRONG: Broken access control is about permissions."] },
+          { id: 123, category: "Variable Variations", question: "In the OA, instead of 'x' and 'y', you might see 'z' and 'w'. What should you do?", options: ["Use the new variable names in your answer", "Ignore the new names and use x,y", "Ask the proctor for clarification", "Skip the question"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Always use the exact variable names given in the problem.", "❌ WRONG: The test changes variable names to test understanding.", "❌ WRONG: Proctors can't help with content questions.", "❌ WRONG: Don't skip - adapt to the given variables."] },
+          { id: 124, category: "Exception Messages", question: "For deserialization, what exception message should you use?", options: ["'New key does not match old key'", "'Invalid data format'", "'Deserialization failed'", "'Key mismatch error'"], correctIndex: 0, optionExplanations: ["✅ CORRECT: This is the exact message from the Reddit guide.", "❌ WRONG: Too generic, not the specific message.", "❌ WRONG: Too generic, not the specific message.", "❌ WRONG: Close but not the exact wording."] }
+        ];
+
+        // Shuffle function
+        const shuffleArray = (array) => {
+          const shuffled = [...array];
+          for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+          }
+          return shuffled;
+        };
+
+        function D385StudyApp() {
+          const [mode, setMode] = useState('patterns');
+          const [currentPattern, setCurrentPattern] = useState(0);
+          const [currentQuestion, setCurrentQuestion] = useState(0);
+          const [currentFlashcard, setCurrentFlashcard] = useState(0);
+          const [userAnswer, setUserAnswer] = useState('');
+          const [selectedOption, setSelectedOption] = useState(null);
+          const [showAnswer, setShowAnswer] = useState(false);
+          const [showHint, setShowHint] = useState(false);
+          const [showJSEquiv, setShowJSEquiv] = useState(false);
+          const [showMistakes, setShowMistakes] = useState(false);
+          const [showOriginal, setShowOriginal] = useState(false);
+          const [showStudyTips, setShowStudyTips] = useState(false);
+          const [showTimer, setShowTimer] = useState(false);
+          const [showMenu, setShowMenu] = useState(false);
+          const [timeRemaining, setTimeRemaining] = useState(14400); // 4 hours in seconds
+          const [timerActive, setTimerActive] = useState(true); // Start timer by default
+          const [showQuestionTimer, setShowQuestionTimer] = useState(true); // Show question timer by default
+          const [sessionStartTime, setSessionStartTime] = useState(Date.now());
+          const [feedback, setFeedback] = useState(null);
+          const [timerDisplay, setTimerDisplay] = useState({ timeSpent: "00:00", status: "" });
+          const [score, setScore] = useState({ patterns: { correct: 0, total: 0, patternScores: {} }, concepts: { correct: 0, total: 0, questionScores: {} }, flashcards: { correct: 0, total: 0, cardScores: {} } });
+          const [masteredPatterns, setMasteredPatterns] = useState(new Set());
+          const [shuffledPatterns, setShuffledPatterns] = useState(() => shuffleArray(PATTERNS));
+          const [shuffledQuestions, setShuffledQuestions] = useState(() => shuffleArray(MC_QUESTIONS));
+          const [shuffledFlashcards, setShuffledFlashcards] = useState(() => shuffleArray(FLASHCARDS));
+
+        // Timer effect
+        React.useEffect(() => {
+          let interval = null;
+          if (timerActive && timeRemaining > 0) {
+            interval = setInterval(() => {
+              setTimeRemaining(time => time - 1);
+            }, 1000);
+          } else if (timeRemaining === 0) {
+            setTimerActive(false);
+            alert('⏰ Time\'s up! Great job studying!');
+          }
+          return () => clearInterval(interval);
+        }, [timerActive, timeRemaining]);
+
+        // Close menu when clicking outside
+        React.useEffect(() => {
+          const handleClickOutside = (event) => {
+            if (showMenu && !event.target.closest('.menu-container')) {
+              setShowMenu(false);
+            }
+          };
+          document.addEventListener('mousedown', handleClickOutside);
+          return () => document.removeEventListener('mousedown', handleClickOutside);
+        }, [showMenu]);
+
+        // Update timer display every second
+        React.useEffect(() => {
+          if (!timerActive) return;
+          
+          const updateTimer = () => {
+            const currentTime = Date.now();
+            const timeSpentMs = currentTime - sessionStartTime;
+            const timeSpentSeconds = Math.floor(timeSpentMs / 1000);
+            const minutes = Math.floor(timeSpentSeconds / 60);
+            const seconds = timeSpentSeconds % 60;
+            const timeSpent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Calculate actual questions completed successfully across all modes
+            const patternsCompleted = Object.keys(score.patterns.patternScores).length;
+            const conceptsCompleted = Object.keys(score.concepts.questionScores).length;
+            const flashcardsCompleted = Object.keys(score.flashcards.cardScores).length;
+            const totalCompleted = patternsCompleted + conceptsCompleted + flashcardsCompleted;
+            
+            // Only show status if we have completed at least 3 questions to get a meaningful average
+            let status = "";
+            if (timeSpentSeconds > 60 && totalCompleted >= 3) {
+              // Weight time based on test percentage: Patterns 40%, Quiz 35%, Flashcards 25%
+              const patternsWeight = 0.40; // 40% of test
+              const quizWeight = 0.35;     // 35% of test  
+              const flashcardsWeight = 0.25; // 25% of test
+              
+              const totalTime = 240 * 60; // 240 minutes in seconds
+              const expectedTimeForPatterns = patternsCompleted * (totalTime * patternsWeight / 14);
+              const expectedTimeForQuiz = conceptsCompleted * (totalTime * quizWeight / 20);
+              const expectedTimeForFlashcards = flashcardsCompleted * (totalTime * flashcardsWeight / 31);
+              const expectedTimeForCompleted = expectedTimeForPatterns + expectedTimeForQuiz + expectedTimeForFlashcards;
+              
+              const timeDiff = timeSpentSeconds - expectedTimeForCompleted;
+              if (timeDiff > 0) {
+                status = `-${Math.floor(timeDiff / 60)} Min Behind`;
+              } else {
+                status = `+${Math.floor(Math.abs(timeDiff) / 60)} Min Ahead`;
+              }
+            }
+            
+            setTimerDisplay({ timeSpent, status });
+          };
+          
+          updateTimer(); // Update immediately
+          const interval = setInterval(updateTimer, 1000); // Update every second
+          return () => clearInterval(interval);
+        }, [timerActive, sessionStartTime, score]);
+
+        const formatTime = (seconds) => {
+          const hours = Math.floor(seconds / 3600);
+          const minutes = Math.floor((seconds % 3600) / 60);
+          const secs = seconds % 60;
+          return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        };
+
+
+        const startTimer = () => {
+          setTimerActive(true);
+        };
+
+        const pauseTimer = () => {
+          setTimerActive(false);
+        };
+
+        const resetTimer = () => {
+          setTimerActive(false);
+          setTimeRemaining(14400); // Reset to 4 hours
+        };
+
+        const pattern = shuffledPatterns[currentPattern];
+          const question = shuffledQuestions[currentQuestion];
+          const flashcard = shuffledFlashcards[currentFlashcard];
+
+          const getSimilarity = () => {
+            const user = userAnswer.toLowerCase().trim();
+            const correct = pattern.answer.toLowerCase().trim();
+            const distance = [...user].reduce((acc, char, i) => acc + (char !== correct[i] ? 1 : 0), Math.abs(user.length - correct.length));
+            const maxLength = Math.max(user.length, correct.length);
+            return maxLength === 0 ? 100 : Math.round((1 - distance / maxLength) * 100);
+          };
+
+          const checkPattern = () => {
+            const isCorrect = userAnswer.trim().toLowerCase().replace(/\s+/g, ' ') === pattern.answer.trim().toLowerCase().replace(/\s+/g, ' ');
+            const similarity = getSimilarity();
+            setScore(prev => ({ ...prev, patterns: { correct: prev.patterns.correct + (isCorrect ? 1 : 0), total: prev.patterns.total + 1, patternScores: { ...prev.patterns.patternScores, [pattern.id]: Math.max(prev.patterns.patternScores[pattern.id] || 0, similarity) } } }));
+            setFeedback(isCorrect ? 'correct' : similarity >= 70 ? 'partial' : 'incorrect');
+            setShowAnswer(true);
+            if (isCorrect) setMasteredPatterns(prev => new Set([...prev, pattern.id]));
+          };
+
+          const checkConcept = () => {
+            const isCorrect = selectedOption === question.correctIndex;
+            setScore(prev => ({ ...prev, concepts: { correct: prev.concepts.correct + (isCorrect ? 1 : 0), total: prev.concepts.total + 1, questionScores: { ...prev.concepts.questionScores, [question.id]: isCorrect ? 'correct' : 'incorrect' } } }));
+            setFeedback(isCorrect ? 'correct' : 'incorrect');
+            setShowAnswer(true);
+          };
+
+          const markFlashcard = (isCorrect) => {
+            setScore(prev => ({ ...prev, flashcards: { correct: prev.flashcards.correct + (isCorrect ? 1 : 0), total: prev.flashcards.total + 1, cardScores: { ...prev.flashcards.cardScores, [flashcard.id]: isCorrect ? 'correct' : 'incorrect' } } }));
+            setFeedback(isCorrect ? 'correct' : 'incorrect');
+            setShowAnswer(true);
+          };
+
+        const next = () => {
+          if (mode === 'patterns') setCurrentPattern(p => (p + 1) % shuffledPatterns.length);
+          else if (mode === 'concepts') setCurrentQuestion(q => (q + 1) % shuffledQuestions.length);
+          else setCurrentFlashcard(f => (f + 1) % shuffledFlashcards.length);
+          setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
+        };
+
+          const retry = () => {
+            if (mode === 'concepts' && feedback) setScore(prev => ({ ...prev, concepts: { correct: prev.concepts.correct - (feedback === 'correct' ? 1 : 0), total: prev.concepts.total - 1, questionScores: { ...prev.concepts.questionScores, [question.id]: undefined } } }));
+            else if (mode === 'flashcards' && feedback) setScore(prev => ({ ...prev, flashcards: { correct: prev.flashcards.correct - (feedback === 'correct' ? 1 : 0), total: prev.flashcards.total - 1, cardScores: { ...prev.flashcards.cardScores, [flashcard.id]: undefined } } }));
+            setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
+          };
+
+          const switchMode = m => { setMode(m); setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null); };
+          
+          const reset = () => { 
+            setScore({ patterns: { correct: 0, total: 0, patternScores: {} }, concepts: { correct: 0, total: 0, questionScores: {} }, flashcards: { correct: 0, total: 0, cardScores: {} } }); 
+            setMasteredPatterns(new Set()); 
+            setCurrentPattern(0); 
+            setCurrentQuestion(0); 
+            setCurrentFlashcard(0);
+            setShuffledPatterns(shuffleArray(PATTERNS));
+            setShuffledQuestions(shuffleArray(MC_QUESTIONS));
+            setShuffledFlashcards(shuffleArray(FLASHCARDS));
+            setUserAnswer(''); 
+            setSelectedOption(null); 
+            setShowAnswer(false); 
+            setShowHint(false); 
+            setShowJSEquiv(false); 
+            setShowMistakes(false); 
+            setShowOriginal(false); 
+            setFeedback(null); 
+          };
+          
+        const jump = idx => {
+          if (mode === 'patterns') setCurrentPattern(idx);
+          else if (mode === 'concepts') setCurrentQuestion(idx);
+          else setCurrentFlashcard(idx);
+          setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
+        };
+
+          const conceptCorrect = Object.values(score.concepts.questionScores).filter(s => s === 'correct').length;
+          const conceptIncorrect = Object.values(score.concepts.questionScores).filter(s => s === 'incorrect').length;
+          const flashcardCorrect = Object.values(score.flashcards.cardScores).filter(s => s === 'correct').length;
+          const flashcardIncorrect = Object.values(score.flashcards.cardScores).filter(s => s === 'incorrect').length;
+
+          return React.createElement('div', { className: "min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" },
+            React.createElement('div', { className: "max-w-5xl mx-auto" },
+              React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6 mb-4" },
+                React.createElement('div', { className: "flex justify-between items-center mb-4" },
+                  React.createElement('div', null,
+                    React.createElement('h1', { className: "text-3xl font-bold text-indigo-900 flex items-center gap-2" },
+                      React.createElement(Brain),
+                      "D385 Study Master"
+                    ),
+                    React.createElement('p', { className: "text-gray-600 mt-1" }, "Complete Exam Preparation")
+                  ),
+                  React.createElement('div', { className: "relative menu-container" },
+                    React.createElement('button', { 
+                      onClick: () => setShowMenu(!showMenu), 
+                      className: "flex items-center gap-2 px-4 py-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-800 rounded-lg" 
+                    },
+                      React.createElement('div', { className: "w-4 h-4" }, "⚙️"),
+                      "Menu"
+                    ),
+            showMenu && React.createElement('div', { className: "absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10" },
+              React.createElement('div', { className: "flex justify-between items-center p-2 border-b border-gray-100" },
+                React.createElement('span', { className: "text-sm font-medium text-gray-700" }, "Menu"),
+                React.createElement('button', { 
+                  onClick: () => setShowMenu(false), 
+                  className: "text-gray-400 hover:text-gray-600 text-lg leading-none" 
+                }, "×")
+              ),
+              React.createElement('div', { className: "py-1" },
+                        React.createElement('button', { 
+                          onClick: () => { setShowStudyTips(!showStudyTips); setShowMenu(false); }, 
+                          className: "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-800 flex items-center gap-2" 
+                        },
+                          React.createElement('div', { className: "w-4 h-4" }, "🧠"),
+                          "Study Tips"
+                        ),
+                        React.createElement('button', { 
+                          onClick: () => { reset(); setShowMenu(false); }, 
+                          className: "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2" 
+                        },
+                          React.createElement(RotateCcw, { className: "w-4 h-4" }),
+                          "Reset All"
+                        ),
+                        React.createElement('button', { 
+                          onClick: () => { setShowTimer(!showTimer); setShowMenu(false); }, 
+                          className: "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-800 flex items-center gap-2" 
+                        },
+                          React.createElement('div', { className: "w-4 h-4" }, "⏱️"),
+                          "Timer"
+                        )
+                      )
+                    )
+                  )
+                ),
+            showStudyTips && React.createElement('div', { className: "bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4" },
+              React.createElement('div', { className: "flex justify-between items-center mb-3" },
+                React.createElement('h3', { className: "text-lg font-bold text-yellow-800 flex items-center gap-2" },
+                  React.createElement(Brain),
+                  "🎓 Reddit Study Wisdom - D385 Best Practices"
+                ),
+                React.createElement('button', { 
+                  onClick: () => setShowStudyTips(false), 
+                  className: "text-black hover:text-gray-600 text-lg leading-none" 
+                }, "×")
+              ),
+                  React.createElement('div', { className: "grid md:grid-cols-2 gap-4" },
+                    React.createElement('div', null,
+                      React.createElement('h4', { className: "font-semibold text-yellow-700 mb-2" }, "📚 Study Strategy"),
+                      React.createElement('ul', { className: "text-sm text-yellow-600 space-y-1" },
+                        React.createElement('li', null, "• Focus on patterns first - they're 40% of the exam"),
+                        React.createElement('li', null, "• Practice coding by hand, not just reading"),
+                        React.createElement('li', null, "• Time yourself - 2 hours total, 1.5 min per question"),
+                        React.createElement('li', null, "• Use the OA format: patterns → quiz → flashcards"),
+                        React.createElement('li', null, "• Don't overthink - trust your first instinct")
+                      )
+                    ),
+                    React.createElement('div', null,
+                      React.createElement('h4', { className: "font-semibold text-yellow-700 mb-2" }, "⚡ Exam Day Tips"),
+                      React.createElement('ul', { className: "text-sm text-yellow-600 space-y-1" },
+                        React.createElement('li', null, "• Read error messages carefully - they give hints"),
+                        React.createElement('li', null, "• Use exact variable names from the problem"),
+                        React.createElement('li', null, "• Check for typos in function names"),
+                        React.createElement('li', null, "• Remember: elif not else for null checks"),
+                        React.createElement('li', null, "• Use str(e) for logging exceptions")
+                      )
+                    ),
+                    React.createElement('div', null,
+                      React.createElement('h4', { className: "font-semibold text-yellow-700 mb-2" }, "🔧 Common Patterns"),
+                      React.createElement('ul', { className: "text-sm text-yellow-600 space-y-1" },
+                        React.createElement('li', null, "• Template class prevents injection attacks"),
+                        React.createElement('li', null, "• SHA3-256 for hashing, not SHA256"),
+                        React.createElement('li', null, "• Range(1,11) for 1-10 validation"),
+                        React.createElement('li', null, "• stat.S_IRWXU for admin permissions"),
+                        React.createElement('li', null, "• generate_key() for deserialization validation")
+                      )
+                    ),
+                    React.createElement('div', null,
+                      React.createElement('h4', { className: "font-semibold text-yellow-700 mb-2" }, "🚨 Critical Mistakes"),
+                      React.createElement('ul', { className: "text-sm text-yellow-600 space-y-1" },
+                        React.createElement('li', null, "• Using 'else' instead of 'elif' for null checks"),
+                        React.createElement('li', null, "• Forgetting str(e) in logging.error()"),
+                        React.createElement('li', null, "• Using f-strings instead of Template class"),
+                        React.createElement('li', null, "• Wrong permission flags in os.chmod()"),
+                        React.createElement('li', null, "• Not generating new key in deserialization")
+                      )
+                    )
+                  )
+                ),
+            showTimer && React.createElement('div', { className: "bg-green-50 border border-green-200 rounded-lg p-4 mb-4" },
+              React.createElement('div', { className: "flex justify-between items-center mb-3" },
+                React.createElement('h3', { className: "text-lg font-bold text-green-800 flex items-center gap-2" },
+                  React.createElement('div', { className: "w-5 h-5" }, "⏱️"),
+                  "Study Timer"
+                ),
+                React.createElement('button', { 
+                  onClick: () => setShowTimer(false), 
+                  className: "text-black hover:text-gray-600 text-lg leading-none" 
+                }, "×")
+              ),
+                  React.createElement('div', { className: "flex items-center justify-between" },
+                    React.createElement('div', { className: "text-center" },
+                      React.createElement('div', { className: "text-3xl font-mono font-bold text-green-600 mb-2" }, formatTime(timeRemaining)),
+                      React.createElement('div', { className: "text-sm text-green-600" }, 
+                        timeRemaining > 3600 ? "Time remaining" : 
+                        timeRemaining > 0 ? "Less than 1 hour left!" : "Time's up!"
+                      )
+                    ),
+                    React.createElement('div', { className: "flex gap-2" },
+                      !timerActive ? React.createElement('button', { 
+                        onClick: startTimer, 
+                        className: "px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold" 
+                      }, "▶️ Start") : React.createElement('button', { 
+                        onClick: pauseTimer, 
+                        className: "px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg font-semibold" 
+                      }, "⏸️ Pause"),
+                      React.createElement('button', { 
+                        onClick: resetTimer, 
+                        className: "px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold" 
+                      }, "🔄 Reset")
+                    )
+                  ),
+                  React.createElement('div', { className: "mt-3 text-xs text-green-600" },
+                    "💡 Tip: 4 hours total = 3.6 minutes per question. Focus on patterns first!"
+                  )
+                ),
+                React.createElement('div', { className: "flex gap-2 mb-4" },
+                  React.createElement('button', { 
+                    onClick: () => switchMode('patterns'), 
+                    className: `flex-1 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 ${mode === 'patterns' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700'}`
+                  },
+                    React.createElement(FileCode),
+                    "Patterns (14)"
+                  ),
+                  React.createElement('button', { 
+                    onClick: () => switchMode('concepts'), 
+                    className: `flex-1 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 ${mode === 'concepts' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700'}`
+                  },
+                    React.createElement(HelpCircle),
+                    "Quiz (20)"
+                  ),
+                  React.createElement('button', { 
+                    onClick: () => switchMode('flashcards'), 
+                    className: `flex-1 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 ${mode === 'flashcards' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700'}`
+                  },
+                    React.createElement(BookOpen),
+                    "Cards (31)"
+                  )
+                ),
+                React.createElement('div', { className: "grid grid-cols-3 gap-3" },
+                  React.createElement('div', { className: "bg-indigo-50 p-3 rounded-lg" },
+                    React.createElement('div', { className: "text-sm text-gray-600" }, "Patterns"),
+                    React.createElement('div', { className: "text-2xl font-bold text-indigo-600" }, `${masteredPatterns.size}/14`)
+                  ),
+                  React.createElement('div', { className: "bg-purple-50 p-3 rounded-lg" },
+                    React.createElement('div', { className: "text-sm text-gray-600" }, "Quiz"),
+                    React.createElement('div', { className: "text-2xl font-bold text-purple-600" }, `${conceptCorrect}/20`)
+                  ),
+                  React.createElement('div', { className: "bg-green-50 p-3 rounded-lg" },
+                    React.createElement('div', { className: "text-sm text-gray-600" }, "Cards"),
+                    React.createElement('div', { className: "text-2xl font-bold text-green-600" }, `${flashcardCorrect}/31`)
+                  )
+                )
+              ),
+              mode === 'patterns' ? React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
+                React.createElement('div', { className: "flex justify-between items-start mb-4" },
+                  React.createElement('div', null,
+                    React.createElement('div', { className: "flex justify-between items-center" },
+                      React.createElement('div', { className: "text-sm text-gray-500" }, `Pattern ${currentPattern + 1} of 14`),
+                      timerActive && showQuestionTimer && React.createElement('div', { className: "flex items-center gap-2 text-sm font-mono" },
+                        React.createElement('span', { className: "text-gray-600" }, timerDisplay.timeSpent),
+                        React.createElement('span', { className: `${timerDisplay.status.includes('Behind') ? 'text-red-600' : 'text-green-600'}` }, timerDisplay.status),
+                        React.createElement('button', { 
+                          onClick: () => setShowQuestionTimer(false), 
+                          className: "text-gray-400 hover:text-gray-600 text-xs" 
+                        }, "✕")
+                      ),
+                      timerActive && !showQuestionTimer && React.createElement('button', { 
+                        onClick: () => setShowQuestionTimer(true), 
+                        className: "text-xs text-gray-500 hover:text-gray-700" 
+                      }, "Show Timer")
+                    ),
+                    React.createElement('h2', { className: "text-2xl font-bold text-gray-800" }, pattern.name),
+                    React.createElement('div', { className: "flex gap-2 mt-2" },
+                      React.createElement('span', { className: "px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm" }, pattern.category),
+                      React.createElement('span', { className: `px-3 py-1 rounded-full text-sm ${pattern.difficulty === 'Easy' ? 'bg-green-100 text-green-700' : pattern.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'}` }, pattern.difficulty)
+                    )
+                  ),
+                  masteredPatterns.has(pattern.id) && React.createElement(Trophy)
+                ),
+                React.createElement('div', { className: "bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4" },
+                  React.createElement('p', { className: "text-gray-800 font-medium" }, pattern.problem)
+                ),
+                React.createElement('div', { className: "flex flex-wrap gap-2 mb-4" },
+                  React.createElement('button', { onClick: () => setShowHint(!showHint), className: "px-3 py-1.5 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 rounded-lg text-sm flex items-center gap-1" },
+                    React.createElement(Lightbulb),
+                    showHint ? 'Hide' : 'Show', " Hint"
+                  ),
+                  React.createElement('button', { onClick: () => setShowJSEquiv(!showJSEquiv), className: "px-3 py-1.5 bg-green-100 hover:bg-green-200 text-green-800 rounded-lg text-sm flex items-center gap-1" },
+                    React.createElement(Code),
+                    showJSEquiv ? 'Hide' : 'Show', " JS/Java"
+                  ),
+                  React.createElement('button', { onClick: () => setShowMistakes(!showMistakes), className: "px-3 py-1.5 bg-orange-100 hover:bg-orange-200 text-orange-800 rounded-lg text-sm flex items-center gap-1" },
+                    React.createElement(AlertCircle),
+                    showMistakes ? 'Hide' : 'Show', " Mistakes"
+                  ),
+                  React.createElement('button', { onClick: () => setShowOriginal(!showOriginal), className: "px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-lg text-sm flex items-center gap-1" },
+                    React.createElement(BookOpen),
+                    showOriginal ? 'Hide' : 'Show', " Original Question"
+                  )
+                ),
+                showHint && React.createElement('div', { className: "bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-4 rounded-r-lg" },
+                  React.createElement('p', { className: "text-sm text-yellow-800" }, `💡 ${pattern.hint}`)
+                ),
+                showJSEquiv && React.createElement('div', { className: "bg-green-50 border-l-4 border-green-400 p-3 mb-4 rounded-r-lg" },
+                  React.createElement('p', { className: "text-sm text-green-800 font-semibold" }, "JS/Java:"),
+                  React.createElement('code', { className: "block text-xs bg-green-900 text-green-100 p-2 rounded mt-1" }, pattern.jsEquivalent)
+                ),
+                showMistakes && React.createElement('div', { className: "bg-orange-50 border-l-4 border-orange-400 p-3 mb-4 rounded-r-lg" },
+                  React.createElement('p', { className: "text-sm text-orange-800 font-semibold mb-1" }, "⚠️ Common Mistakes:"),
+                  React.createElement('ul', { className: "text-sm text-orange-700 list-disc list-inside" }, pattern.commonMistakes.map((m, i) => React.createElement('li', { key: i }, m)))
+                ),
+                showOriginal && React.createElement('div', { className: "bg-purple-50 border-l-4 border-purple-400 p-2 mb-3 rounded-r-lg" },
+                  React.createElement('p', { className: "text-xs text-purple-800 font-semibold mb-1" }, "📄 Original Exam Question:"),
+                  React.createElement('div', { className: "bg-white border border-purple-200 rounded p-2 h-32 overflow-y-auto" },
+                    React.createElement('pre', { className: "text-xs whitespace-pre-wrap font-mono text-gray-700 flex" },
+                      React.createElement('div', { className: "text-gray-400 pr-2 select-none flex-shrink-0" }, 
+                        Array.from({ length: Math.max(pattern.originalQuestion.split('\n').length, 50) }, (_, i) => 
+                          React.createElement('div', { key: i, className: "leading-tight h-[1.2em]" }, i + 1)
+                        )
+                      ),
+                      React.createElement('div', { className: "flex-1 leading-tight" }, pattern.originalQuestion)
+                    )
+                  )
+                ),
+                React.createElement('textarea', { 
+                  value: userAnswer, 
+                  onChange: e => setUserAnswer(e.target.value), 
+                  placeholder: "Type your Python code...", 
+                  className: "w-full p-3 border-2 rounded-lg font-mono text-sm mb-4", 
+                  rows: 6, 
+                  disabled: showAnswer 
+                }),
+                feedback && React.createElement('div', { className: `p-4 rounded-lg mb-4 ${feedback === 'correct' ? 'bg-green-50' : 'bg-red-50'}` },
+                  feedback === 'correct' ? React.createElement('span', { className: "text-green-800 font-semibold" }, "✅ Perfect!") : React.createElement('span', { className: "text-red-800 font-semibold" }, `❌ ${getSimilarity()}% Match`)
+                ),
+                showAnswer && React.createElement('div', { className: "bg-gray-50 p-4 rounded-lg mb-4" },
+                  React.createElement('pre', { className: "bg-gray-800 text-green-400 p-3 rounded text-sm overflow-x-auto whitespace-pre-wrap" }, pattern.answer),
+                  React.createElement('p', { className: "text-sm text-gray-600 mt-2" }, pattern.explanation)
+                ),
+                React.createElement('div', { className: "flex gap-3" },
+                  !showAnswer ? React.createElement(React.Fragment, null,
+                    React.createElement('button', { onClick: checkPattern, disabled: !userAnswer.trim(), className: "flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 text-white font-semibold py-3 rounded-lg" }, "Check"),
+                    React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
+                      React.createElement(SkipForward),
+                      "Skip"
+                    )
+                  ) : React.createElement(React.Fragment, null,
+                    React.createElement('button', { onClick: retry, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Try Again"),
+                    React.createElement('button', { onClick: next, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg" }, "Next →")
+                  )
+                )
+              ) : mode === 'concepts' ? React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
+                React.createElement('div', { className: "mb-4" },
+                  React.createElement('div', { className: "text-sm text-gray-500 flex items-center gap-2" },
+                    React.createElement('span', null, `Question ${currentQuestion + 1} of 20`),
+                    timerActive && showQuestionTimer && React.createElement('div', { className: "flex items-center gap-2 text-sm font-mono" },
+                      React.createElement('span', { className: "text-gray-600" }, timerDisplay.timeSpent),
+                      React.createElement('span', { className: `${timerDisplay.status.includes('Behind') ? 'text-red-600' : 'text-green-600'}` }, timerDisplay.status),
+                      React.createElement('button', { 
+                        onClick: () => setShowQuestionTimer(false), 
+                        className: "text-gray-400 hover:text-gray-600 text-xs" 
+                      }, "✕")
+                    ),
+                    timerActive && !showQuestionTimer && React.createElement('button', { 
+                      onClick: () => setShowQuestionTimer(true), 
+                      className: "text-xs text-gray-500 hover:text-gray-700" 
+                    }, "Show Timer")
+                  ),
+                  React.createElement('span', { className: "inline-block mt-1 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm" }, question.category)
+                ),
+                React.createElement('div', { className: "bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-4" },
+                  React.createElement('p', { className: "text-gray-800 font-medium" }, question.question)
+                ),
+                React.createElement('div', { className: "space-y-3 mb-4" }, question.options.map((opt, idx) => 
+                  React.createElement('button', { 
+                    key: idx, 
+                    onClick: () => !showAnswer && setSelectedOption(idx), 
+                    disabled: showAnswer, 
+                    className: `w-full text-left p-4 rounded-lg border-2 ${showAnswer ? (idx === question.correctIndex ? 'border-green-500 bg-green-50' : idx === selectedOption ? 'border-red-500 bg-red-50' : 'border-gray-200') : selectedOption === idx ? 'border-purple-500 bg-purple-50' : 'border-gray-200 hover:border-gray-300'}`
+                  },
+                    React.createElement('div', { className: "flex gap-3" },
+                      React.createElement('div', { className: `w-6 h-6 rounded-full border-2 flex items-center justify-center ${showAnswer && idx === question.correctIndex ? 'bg-green-500' : showAnswer && idx === selectedOption ? 'bg-red-500' : selectedOption === idx ? 'bg-purple-500' : 'border-gray-300'}` },
+                        showAnswer && idx === question.correctIndex && React.createElement(CheckCircle),
+                        showAnswer && idx === selectedOption && idx !== question.correctIndex && React.createElement(XCircle)
+                      ),
+                      React.createElement('span', { className: "text-gray-800" }, opt)
+                    )
+                  )
+                )),
+                showAnswer && selectedOption !== null && React.createElement('div', { className: "bg-gray-50 p-4 rounded-lg mb-4 space-y-3" },
+                  React.createElement('div', { className: `p-3 rounded-lg ${selectedOption === question.correctIndex ? 'bg-green-100' : 'bg-red-100'}` },
+                    React.createElement('div', { className: "font-semibold text-sm mb-1" }, "Your Choice:"),
+                    React.createElement('p', { className: "text-sm" }, question.optionExplanations[selectedOption])
+                  ),
+                  selectedOption !== question.correctIndex && question.optionExplanations.map((exp, idx) => {
+                    if (idx === selectedOption || idx === question.correctIndex) return null;
+                    return React.createElement('div', { key: idx, className: "p-3 bg-gray-100 rounded-lg" },
+                      React.createElement('p', { className: "text-sm text-gray-700" }, exp)
+                    );
+                  })
+                ),
+                React.createElement('div', { className: "flex gap-3" },
+                  !showAnswer ? React.createElement(React.Fragment, null,
+                    React.createElement('button', { onClick: checkConcept, disabled: selectedOption === null, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 text-white font-semibold py-3 rounded-lg" }, "Check"),
+                    React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
+                      React.createElement(SkipForward),
+                      "Skip"
+                    )
+                  ) : React.createElement(React.Fragment, null,
+                    feedback !== 'correct' && React.createElement('button', { onClick: retry, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Retry"),
+                    React.createElement('button', { onClick: next, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg" }, "Next →")
+                  )
+                )
+              ) : React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
+                React.createElement('div', { className: "mb-4" },
+                  React.createElement('div', { className: "text-sm text-gray-500 flex items-center gap-2" },
+                    React.createElement('span', null, `Card ${currentFlashcard + 1} of 31`),
+                    timerActive && showQuestionTimer && React.createElement('div', { className: "flex items-center gap-2 text-sm font-mono" },
+                      React.createElement('span', { className: "text-gray-600" }, timerDisplay.timeSpent),
+                      React.createElement('span', { className: `${timerDisplay.status.includes('Behind') ? 'text-red-600' : 'text-green-600'}` }, timerDisplay.status),
+                      React.createElement('button', { 
+                        onClick: () => setShowQuestionTimer(false), 
+                        className: "text-gray-400 hover:text-gray-600 text-xs" 
+                      }, "✕")
+                    ),
+                    timerActive && !showQuestionTimer && React.createElement('button', { 
+                      onClick: () => setShowQuestionTimer(true), 
+                      className: "text-xs text-gray-500 hover:text-gray-700" 
+                    }, "Show Timer")
+                  ),
+                  React.createElement('span', { className: "inline-block mt-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm" }, "Flashcard")
+                ),
+                React.createElement('div', { className: "bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg mb-4" },
+                  React.createElement('p', { className: "text-gray-800 font-medium" }, flashcard.question)
+                ),
+                !showAnswer && React.createElement('div', { className: "mb-4" },
+                  React.createElement('button', { onClick: () => setShowAnswer(true), className: "px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-lg text-sm" }, "Show Answer")
+                ),
+                showAnswer && React.createElement('div', { className: "bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4" },
+                  React.createElement('p', { className: "text-sm text-blue-800 font-semibold mb-1" }, "Answer:"),
+                  React.createElement('p', { className: "text-gray-800" }, flashcard.answer)
+                ),
+                feedback && React.createElement('div', { className: `p-4 rounded-lg mb-4 ${feedback === 'correct' ? 'bg-green-50' : 'bg-red-50'}` },
+                  feedback === 'correct' ? React.createElement('span', { className: "text-green-800 font-semibold" }, "✅ Correct!") : React.createElement('span', { className: "text-red-800 font-semibold" }, "❌ Incorrect")
+                ),
+                React.createElement('div', { className: "flex gap-3" },
+                  !showAnswer ? React.createElement(React.Fragment, null,
+                    React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
+                      React.createElement(SkipForward),
+                      "Skip"
+                    )
+                  ) : React.createElement(React.Fragment, null,
+                    React.createElement('button', { onClick: () => markFlashcard(true), className: "flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg" }, "✅ Got it right"),
+                    React.createElement('button', { onClick: () => markFlashcard(false), className: "flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg" }, "❌ Got it wrong"),
+                    React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
+                      React.createElement(SkipForward),
+                      "Skip"
+                    )
+                  )
+                )
+              ),
+              React.createElement('div', { className: "mt-4 bg-white rounded-lg shadow-lg p-4" },
+                React.createElement('div', { className: "text-sm font-semibold text-gray-600 mb-2" }, "Progress:"),
+                React.createElement('div', { className: "flex flex-wrap gap-2" }, mode === 'patterns' ? shuffledPatterns.map((p, idx) => { 
+                  const sc = score.patterns.patternScores[p.id] || 0; 
+                  return React.createElement('button', { 
+                    key: p.id, 
+                    onClick: () => jump(idx), 
+                    className: `w-10 h-10 rounded flex items-center justify-center text-xs font-bold ${sc === 100 ? 'bg-green-500 text-white' : sc >= 90 ? 'bg-yellow-500 text-white' : sc > 0 ? 'bg-red-500 text-white' : idx === currentPattern ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-600'}`
+                  }, idx + 1); 
+                }) : mode === 'concepts' ? shuffledQuestions.map((q, idx) => { 
+                  const st = score.concepts.questionScores[q.id]; 
+                  return React.createElement('button', { 
+                    key: q.id, 
+                    onClick: () => jump(idx), 
+                    className: `w-10 h-10 rounded flex items-center justify-center text-xs font-bold ${st === 'correct' ? 'bg-green-500 text-white' : st === 'incorrect' ? 'bg-red-500 text-white' : idx === currentQuestion ? 'bg-purple-500 text-white' : 'bg-gray-200 text-gray-600'}`
+                  }, idx + 1); 
+                }) : shuffledFlashcards.map((f, idx) => { 
+                  const st = score.flashcards.cardScores[f.id]; 
+                  return React.createElement('button', { 
+                    key: f.id, 
+                    onClick: () => jump(idx), 
+                    className: `w-10 h-10 rounded flex items-center justify-center text-xs font-bold ${st === 'correct' ? 'bg-green-500 text-white' : st === 'incorrect' ? 'bg-red-500 text-white' : idx === currentFlashcard ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-600'}`
+                  }, idx + 1); 
+                })),
+                React.createElement('div', { className: "mt-3 flex gap-4 text-xs text-gray-600" }, mode === 'patterns' ? React.createElement(React.Fragment, null,
+                  React.createElement('div', { className: "flex items-center gap-1" },
+                    React.createElement('div', { className: "w-4 h-4 bg-green-500 rounded" }),
+                    React.createElement('span', null, "100% Perfect")
+                  ),
+                  React.createElement('div', { className: "flex items-center gap-1" },
+                    React.createElement('div', { className: "w-4 h-4 bg-yellow-500 rounded" }),
+                    React.createElement('span', null, "90-99% Close")
+                  ),
+                  React.createElement('div', { className: "flex items-center gap-1" },
+                    React.createElement('div', { className: "w-4 h-4 bg-red-500 rounded" }),
+                    React.createElement('span', null, "<90% Needs Work")
+                  )
+                ) : mode === 'concepts' ? React.createElement(React.Fragment, null,
+                  React.createElement('div', { className: "flex items-center gap-1" },
+                    React.createElement('div', { className: "w-4 h-4 bg-green-500 rounded" }),
+                    React.createElement('span', null, `✓ Correct (${conceptCorrect})`)
+                  ),
+                  React.createElement('div', { className: "flex items-center gap-1" },
+                    React.createElement('div', { className: "w-4 h-4 bg-red-500 rounded" }),
+                    React.createElement('span', null, `✗ Incorrect (${conceptIncorrect})`)
+                  ),
+                  React.createElement('div', { className: "flex items-center gap-1" },
+                    React.createElement('div', { className: "w-4 h-4 bg-gray-200 rounded" }),
+                    React.createElement('span', null, "Not Attempted")
+                  )
+                ) : React.createElement(React.Fragment, null,
+                  React.createElement('div', { className: "flex items-center gap-1" },
+                    React.createElement('div', { className: "w-4 h-4 bg-green-500 rounded" }),
+                    React.createElement('span', null, `✓ Correct (${flashcardCorrect})`)
+                  ),
+                  React.createElement('div', { className: "flex items-center gap-1" },
+                    React.createElement('div', { className: "w-4 h-4 bg-red-500 rounded" }),
+                    React.createElement('span', null, `✗ Incorrect (${flashcardIncorrect})`)
+                  ),
+                  React.createElement('div', { className: "flex items-center gap-1" },
+                    React.createElement('div', { className: "w-4 h-4 bg-gray-200 rounded" }),
+                    React.createElement('span', null, "Not Attempted")
+                  )
+                ))
+              )
+            )
+          );
+        }
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(D385StudyApp));
+    </script>
+</body>
+</html>
