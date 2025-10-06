@@ -8,14 +8,14 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 
 ### 📚 Three Study Modes
 - **Patterns (14)**: Interactive coding patterns with hints, explanations, and original questions
-- **Quiz (20)**: Multiple choice questions with detailed explanations
-- **Flashcards (31)**: Self-paced flashcard review system
+- **Quiz (24)**: Multiple choice questions with detailed explanations
+- **Flashcards (30)**: Self-paced flashcard review system
 
 ### ⏱️ Smart Timer
 - **4-hour countdown timer** matching the actual exam duration
 - **Weighted time tracking** based on test distribution:
   - Patterns: 40% of test time (~6.86 min each)
-  - Quiz: 35% of test time (~4.2 min each)
+  - Quiz: 35% of test time (~3.5 min each)
   - Flashcards: 25% of test time (~1.94 min each)
 - **Progress indicators** showing if you're ahead or behind schedule
 
@@ -79,9 +79,9 @@ Based on Reddit community feedback and exam analysis:
 | Section     | Questions | Time Allocation | Weight  |
 |-------------|-----------|-----------------|---------|
 | Patterns    |    14     |   96 minutes    |  40%    |
-| Quiz        |    20     |   84 minutes    |  35%    |
-| Flashcards  |    31     |   60 minutes    |  25%    |
-| **Total**   |  **65**   | **240 minutes** | **100%**|
+| Quiz        |    24     |   84 minutes    |  35%    |
+| Flashcards  |    30     |   60 minutes    |  25%    |
+| **Total**   |  **68**   | **240 minutes** | **100%**|
 
 ## 🎯 Study Strategy
 
