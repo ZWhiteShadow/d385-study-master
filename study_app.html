@@ -892,13 +892,22 @@ ShowData()` }
                           React.createElement(RotateCcw, { className: "w-4 h-4" }),
                           "Reset All"
                         ),
-                        React.createElement('button', { 
-                          onClick: () => { setShowTimer(!showTimer); setShowMenu(false); }, 
-                          className: "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-800 flex items-center gap-2" 
-                        },
-                          React.createElement('div', { className: "w-4 h-4" }, "⏱️"),
-                          "Timer"
-                        )
+                React.createElement('button', { 
+                  onClick: () => { setShowTimer(!showTimer); setShowMenu(false); }, 
+                  className: "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-800 flex items-center gap-2" 
+                },
+                  React.createElement('div', { className: "w-4 h-4" }, "⏱️"),
+                  "Timer"
+                ),
+                React.createElement('a', { 
+                  href: "https://github.com/ZWhiteShadow/d385-study-master/blob/main/README.md", 
+                  target: "_blank", 
+                  rel: "noopener noreferrer",
+                  className: "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-800 flex items-center gap-2" 
+                },
+                  React.createElement('div', { className: "w-4 h-4" }, "📖"),
+                  "README"
+                )
                       )
                     )
                   )
