@@ -74,12 +74,12 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 
 Based on Reddit community feedback and exam analysis:
 
-| Section | Questions | Time Allocation | Weight |
-|---------|-----------|----------------|--------|
-| Patterns | 14 | 96 minutes | 40% |
-| Quiz | 20 | 84 minutes | 35% |
-| Flashcards | 31 | 60 minutes | 25% |
-| **Total** | **65** | **240 minutes** | **100%** |
+| Section     | Questions | Time Allocation | Weight  |
+|-------------|-----------|-----------------|---------|
+| Patterns    |    14     |   96 minutes    |  40%    |
+| Quiz        |    20     |   84 minutes    |  35%    |
+| Flashcards  |    31     |   60 minutes    |  25%    |
+| **Total**   |  **65**   | **240 minutes** | **100%**|
 
 ## 🎯 Study Strategy
 
@@ -103,14 +103,26 @@ This project is open source and available under the MIT License.
 
 ## 🙏 Acknowledgments
 
+### 📚 Primary Sources
+This study app was created using content and insights from the following sources:
+
+- **[D385 Assessments - Notion](https://glass-diadem-acc.notion.site/D385-Assessments-3261412dc25f4bce829d34341f33e8b3)** - Comprehensive assessment materials and patterns
+- **[D385 Pre-Assessment Flashcards](https://quizlet.com/813493586/d385-pre-assessment-all-correct-flash-cards/)** - Pre-assessment question bank
+- **[D385 Flashcards](https://quizlet.com/902866897/d385-flash-cards/)** - Core concept flashcards
+- **[D385 Malicious Attacks & Response Codes](https://quizlet.com/932321419/wgu-d385-malicious-attacks-and-response-codes-flash-cards/)** - Security-focused flashcards
+
+### 🎯 Original Reddit Thread
+All sources above were compiled from the comprehensive Reddit discussion:
+**[Updated 11/2023 Software Security and Testing D385](https://www.reddit.com/r/wgu_devs/comments/17quy61/updated_112023_software_security_and_testing_d385/)**
+
+### 🤖 AI Development
+- **Practice Test Questions**: Generated entirely using prompt engineering with Cursor AI and Claude
+- **Study Tips**: Consolidated from Reddit community wisdom and best practices
+- **App Development**: Built with React, Tailwind CSS, and modern web technologies
+
+### 👥 Community
 - WGU D385 course materials
 - Reddit community study tips and insights
-- WGU Software Engineering students for feedback
-
-## 📞 Support
-
-If you find this helpful for your D385 studies, please give it a ⭐ star!
-
----
+- WGU Software Engineering students for feedback and testing
 
 **Good luck with your D385 exam! 🍀**
