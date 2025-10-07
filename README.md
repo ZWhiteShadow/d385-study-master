@@ -1,6 +1,6 @@
 # D385 Study Master 🎓
 
-**[🚀 Try the Live App](https://zwhiteshadow.github.io/d385-study-master/study_app.html)**
+**[🚀 Try the Live App]g
 
 A comprehensive study application for WGU's D385 Software Engineering Capstone course, featuring interactive patterns, quiz questions, and flashcards to help you master the material.
 
@@ -8,8 +8,17 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 
 ### 📚 Three Study Modes
 - **Patterns (14)**: Interactive coding patterns with hints, explanations, and original questions
+  - **Learning Mode**: Side-by-side code editor with real-time similarity feedback
+  - Uses Levenshtein distance algorithm for accurate code comparison
+  - Smart indentation and whitespace detection
+  - "I'm Ready" button appears at 100% to test your knowledge
 - **Quiz (24)**: Multiple choice questions with detailed explanations
+  - Difficulty levels: Easy, Medium, Hard
+  - Category tags for organized studying
+  - Detailed explanations for all answer options
 - **Flashcards (30)**: Self-paced flashcard review system
+  - Difficulty levels and category tags
+  - Covers HTTP status codes, attacks, prevention, and more
 
 ### ⏱️ Smart Timer
 - **4-hour countdown timer** matching the actual exam duration
@@ -47,7 +56,14 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 ### Patterns Mode
 - Practice coding patterns with hints and explanations
 - Click "Show Original Question" to see full test questions
-- Get immediate feedback on your answers
+- Get immediate feedback with Levenshtein distance similarity scoring
+- **Learning Mode**: 
+  - Toggle side-by-side comparison with correct answer
+  - Real-time percentage match as you type
+  - Color-coded feedback (Green 90%+, Yellow 70-89%, Orange 50-69%, Red <50%)
+  - Indentation warning: Detects when you use wrong number of spaces (PEP 8 recommends 4)
+  - Trailing whitespace detection: Alerts you to extra spaces at line ends
+  - "I'm Ready - Test Me!" button appears when you reach 100% match
 
 ### Quiz Mode
 - Answer multiple choice questions

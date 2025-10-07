@@ -620,22 +620,22 @@ ShowData()` }
           { id: 106, category: "Validation", difficulty: "Medium", question: "Which type of input validation does this code show?\n\nisValidNumber = False\nwhile not isValidNumber:\n  try:\n    pickedNumber = int(input('Pick 1-10'))\n    if pickedNumber >= 1 and pickedNumber <= 10:\n      isValidNumber = True\n  except:\n    print('Enter valid number')", options: ["Type and range check", "Type and length check", "Length and range check", "Invalid number check"], correctIndex: 0, optionExplanations: ["✅ CORRECT: int() is type check, >= 1 and <= 10 is range check.", "❌ WRONG: No length checking, only type and range.", "❌ WRONG: No length checking here.", "❌ WRONG: Too vague, specifically type and range."] },
           { id: 107, category: "Security Testing", difficulty: "Medium", question: "This code checks for HSTS headers. Which vulnerability is being tested?\n\nimport requests\nfor url in urls:\n  req = requests.get(url)\n  try:\n    transport_security = req.headers['Strict-Transport-Security']\n  except:\n    print('HSTS header not set')", options: ["Man-in-the-middle", "Cross-site scripting", "Denial of service", "Code injection"], correctIndex: 0, optionExplanations: ["✅ CORRECT: HSTS prevents man-in-the-middle by enforcing HTTPS.", "❌ WRONG: XSS is script injection, not transport security.", "❌ WRONG: DoS overwhelms servers, HSTS is about encryption.", "❌ WRONG: Code injection is executing malicious code."] },
           { id: 108, category: "Access Control", difficulty: "Easy", question: "Attacker took over multiple accounts. What vulnerability?", options: ["Broken access control", "Function level auth", "API mass assignment", "Privilege escalation"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Broken access control allows unauthorized account access.", "❌ WRONG: Function level is role-based restrictions.", "❌ WRONG: Mass assignment is property manipulation.", "❌ WRONG: Privilege escalation is gaining higher privileges."] },
-          { id: 109, category: "API Security", question: "Best way to protect API with IsAdmin field?", options: ["Resource and field-level access control", "Rate limiting", "Remove IsAdmin field", "Encrypt requests"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Field-level control restricts who can modify IsAdmin.", "❌ WRONG: Rate limiting prevents DoS, not privilege escalation.", "❌ WRONG: Removing field prevents legitimate admin creation.", "❌ WRONG: Encryption protects transit, not field access."] },
-          { id: 110, category: "SQL Injection", question: "Which method is used for SQL injection?", options: ["Exploiting query parameters", "Safe query parameters", "SQL composition", "Literal parameters"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Attackers inject SQL through unsanitized parameters.", "❌ WRONG: Safe parameters PREVENT injection.", "❌ WRONG: Composition is general term.", "❌ WRONG: Literals are hardcoded, not user input."] },
-          { id: 111, category: "CORS", question: "What does CORS allow users to do?", options: ["Override same origin policy for specific resources", "Connect web security models", "Prevent passing credentials", "Protect client header from exposure"], correctIndex: 0, optionExplanations: ["✅ CORRECT: CORS creates controlled exceptions to same-origin policy.", "❌ WRONG: Vague and meaningless phrase.", "❌ WRONG: CORS can ALLOW credentials with proper headers.", "❌ WRONG: CORS exposes headers, doesn't protect them."] },
-          { id: 112, category: "Authentication", question: "Which protocol caches tokens after acquisition?", options: ["MSAL", "Auth0", "LDAP", "ACL"], correctIndex: 0, optionExplanations: ["✅ CORRECT: MSAL automatically caches tokens for performance.", "❌ WRONG: Auth0 is a service, not a protocol with built-in caching.", "❌ WRONG: LDAP uses bind operations, not tokens.", "❌ WRONG: ACL defines permissions, doesn't deal with tokens."] },
-          { id: 113, category: "HTTP Status", question: "import requests\nurl = 'https://website.com/'\nresult = requests.get(url)\n\nWhich status code will the server return?", options: ["403", "200", "401", "400"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 403 Forbidden - no auth headers sent, access denied.", "❌ WRONG: 200 OK means success with access granted.", "❌ WRONG: 401 means auth required but missing/invalid.", "❌ WRONG: 400 means malformed request syntax."] },
-          { id: 114, category: "HTTP Status", question: "url = 'https://api.github.com/invalid'\nrequest_response = requests.get(url)\nrequest_response.raise_for_status()\n\nWhich response code?", options: ["404 - Not found", "200 - OK", "400 - Bad request", "401 - Unauthorized"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 404 - '/invalid' endpoint doesn't exist.", "❌ WRONG: 200 OK means resource found successfully.", "❌ WRONG: 400 means malformed syntax, not missing resource.", "❌ WRONG: 401 means auth required, not missing endpoint."] },
-          { id: 115, category: "HTTP Response", question: "Which response method returns information about the server's response to console?", options: ["response.content", "response.history", "response.status_code", "response.get"], correctIndex: 0, optionExplanations: ["✅ CORRECT: response.content returns raw response body as bytes.", "❌ WRONG: response.history contains redirect responses.", "❌ WRONG: response.status_code returns only the numeric code.", "❌ WRONG: response.get doesn't exist, requests.get() sends requests."] },
-          { id: 116, category: "Assertions", question: "def authorizeAdmin(usr):\n  assert isinstance(usr, list) and usr != [], 'No user found'\n  assert 'admin' in usr, 'No admin found.'\n  print('You are granted full access')\n\nauthorizeAdmin(['user'])\n\nWhat is the response?", options: ["AssertionError: No admin found", "AssertionError: No user found", "Authorized User", "You are granted full access"], correctIndex: 0, optionExplanations: ["✅ CORRECT: First assert passes, second fails - 'admin' not in ['user'].", "❌ WRONG: First assert passes (IS a list, NOT empty).", "❌ WRONG: This string doesn't appear in the code.", "❌ WRONG: Only prints if BOTH assertions pass."] },
-          { id: 117, category: "Status Codes", question: "What does HTTP status code 200 mean?", options: ["OK - Your request was successful", "Created - Resource was created", "Bad Request - Request is wrong", "Not Found - Resource doesn't exist"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 200 OK is standard success response.", "❌ WRONG: 'Resource created' is 201 Created.", "❌ WRONG: 'Bad Request' is 400.", "❌ WRONG: 'Resource doesn't exist' is 404."] },
-          { id: 118, category: "Status Codes", question: "What does HTTP status code 401 mean?", options: ["Unauthorized - Requires additional permissions", "Forbidden - Server refuses", "Bad Request - Malformed", "Not Found - Resource doesn't exist"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 401 means authentication needed (missing/invalid credentials).", "❌ WRONG: 'Server refuses' is 403 Forbidden.", "❌ WRONG: 'Malformed request' is 400.", "❌ WRONG: 'Resource doesn't exist' is 404."] },
-          { id: 119, category: "Status Codes", question: "What does HTTP status code 403 mean?", options: ["Forbidden - Server refuses to authorize", "Unauthorized - Requires authentication", "Bad Request - Malformed", "Not Found - Resource doesn't exist"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 403 means authenticated but lacking permissions.", "❌ WRONG: 'Requires authentication' is 401.", "❌ WRONG: 'Malformed request' is 400.", "❌ WRONG: 'Resource doesn't exist' is 404."] },
-          { id: 120, category: "Status Codes", question: "What does HTTP status code 404 mean?", options: ["Not Found - Resource doesn't exist", "Forbidden - Server refuses", "Bad Request - Malformed", "Internal Server Error"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 404 means URL/resource doesn't exist.", "❌ WRONG: 'Server refuses' is 403.", "❌ WRONG: 'Malformed request' is 400.", "❌ WRONG: 'Internal Server Error' is 500."] },
-          { id: 121, category: "Attack Identification", question: "This code allows users to update any field. What attack is this?\n\nclass User:\n  def update(self, data):\n    for key, value in data.items():\n      setattr(self, key, value)", options: ["API Mass Assignment", "SQL Injection", "XSS", "Code Injection"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Mass assignment allows updating any field without validation.", "❌ WRONG: SQL injection targets database queries.", "❌ WRONG: XSS injects scripts into web pages.", "❌ WRONG: Code injection executes malicious code."] },
-          { id: 122, category: "Attack Identification", question: "This code executes user input as Python code. What attack?\n\nuser_input = input('Enter command:')\neval(user_input)", options: ["Code Injection", "SQL Injection", "XSS", "Broken Access Control"], correctIndex: 0, optionExplanations: ["✅ CORRECT: eval() executes user input as code - code injection.", "❌ WRONG: SQL injection targets database queries.", "❌ WRONG: XSS injects scripts into web pages.", "❌ WRONG: Broken access control is about permissions."] },
-          { id: 123, category: "Variable Variations", question: "In the OA, instead of 'x' and 'y', you might see 'z' and 'w'. What should you do?", options: ["Use the new variable names in your answer", "Ignore the new names and use x,y", "Ask the proctor for clarification", "Skip the question"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Always use the exact variable names given in the problem.", "❌ WRONG: The test changes variable names to test understanding.", "❌ WRONG: Proctors can't help with content questions.", "❌ WRONG: Don't skip - adapt to the given variables."] },
-          { id: 124, category: "Exception Messages", question: "For deserialization, what exception message should you use?", options: ["'New key does not match old key'", "'Invalid data format'", "'Deserialization failed'", "'Key mismatch error'"], correctIndex: 0, optionExplanations: ["✅ CORRECT: This is the exact message from the Reddit guide.", "❌ WRONG: Too generic, not the specific message.", "❌ WRONG: Too generic, not the specific message.", "❌ WRONG: Close but not the exact wording."] }
+          { id: 109, category: "API Security", difficulty: "Medium", question: "Best way to protect API with IsAdmin field?", options: ["Resource and field-level access control", "Rate limiting", "Remove IsAdmin field", "Encrypt requests"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Field-level control restricts who can modify IsAdmin.", "❌ WRONG: Rate limiting prevents DoS, not privilege escalation.", "❌ WRONG: Removing field prevents legitimate admin creation.", "❌ WRONG: Encryption protects transit, not field access."] },
+          { id: 110, category: "SQL Injection", difficulty: "Easy", question: "Which method is used for SQL injection?", options: ["Exploiting query parameters", "Safe query parameters", "SQL composition", "Literal parameters"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Attackers inject SQL through unsanitized parameters.", "❌ WRONG: Safe parameters PREVENT injection.", "❌ WRONG: Composition is general term.", "❌ WRONG: Literals are hardcoded, not user input."] },
+          { id: 111, category: "CORS", difficulty: "Hard", question: "What does CORS allow users to do?", options: ["Override same origin policy for specific resources", "Connect web security models", "Prevent passing credentials", "Protect client header from exposure"], correctIndex: 0, optionExplanations: ["✅ CORRECT: CORS creates controlled exceptions to same-origin policy.", "❌ WRONG: Vague and meaningless phrase.", "❌ WRONG: CORS can ALLOW credentials with proper headers.", "❌ WRONG: CORS exposes headers, doesn't protect them."] },
+          { id: 112, category: "Authentication", difficulty: "Hard", question: "Which protocol caches tokens after acquisition?", options: ["MSAL", "Auth0", "LDAP", "ACL"], correctIndex: 0, optionExplanations: ["✅ CORRECT: MSAL automatically caches tokens for performance.", "❌ WRONG: Auth0 is a service, not a protocol with built-in caching.", "❌ WRONG: LDAP uses bind operations, not tokens.", "❌ WRONG: ACL defines permissions, doesn't deal with tokens."] },
+          { id: 113, category: "HTTP Status", difficulty: "Medium", question: "import requests\nurl = 'https://website.com/'\nresult = requests.get(url)\n\nWhich status code will the server return?", options: ["403", "200", "401", "400"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 403 Forbidden - no auth headers sent, access denied.", "❌ WRONG: 200 OK means success with access granted.", "❌ WRONG: 401 means auth required but missing/invalid.", "❌ WRONG: 400 means malformed request syntax."] },
+          { id: 114, category: "HTTP Status", difficulty: "Easy", question: "url = 'https://api.github.com/invalid'\nrequest_response = requests.get(url)\nrequest_response.raise_for_status()\n\nWhich response code?", options: ["404 - Not found", "200 - OK", "400 - Bad request", "401 - Unauthorized"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 404 - '/invalid' endpoint doesn't exist.", "❌ WRONG: 200 OK means resource found successfully.", "❌ WRONG: 400 means malformed syntax, not missing resource.", "❌ WRONG: 401 means auth required, not missing endpoint."] },
+          { id: 115, category: "HTTP Response", difficulty: "Easy", question: "Which response method returns information about the server's response to console?", options: ["response.content", "response.history", "response.status_code", "response.get"], correctIndex: 0, optionExplanations: ["✅ CORRECT: response.content returns raw response body as bytes.", "❌ WRONG: response.history contains redirect responses.", "❌ WRONG: response.status_code returns only the numeric code.", "❌ WRONG: response.get doesn't exist, requests.get() sends requests."] },
+          { id: 116, category: "Assertions", difficulty: "Medium", question: "def authorizeAdmin(usr):\n  assert isinstance(usr, list) and usr != [], 'No user found'\n  assert 'admin' in usr, 'No admin found.'\n  print('You are granted full access')\n\nauthorizeAdmin(['user'])\n\nWhat is the response?", options: ["AssertionError: No admin found", "AssertionError: No user found", "Authorized User", "You are granted full access"], correctIndex: 0, optionExplanations: ["✅ CORRECT: First assert passes, second fails - 'admin' not in ['user'].", "❌ WRONG: First assert passes (IS a list, NOT empty).", "❌ WRONG: This string doesn't appear in the code.", "❌ WRONG: Only prints if BOTH assertions pass."] },
+          { id: 117, category: "Status Codes", difficulty: "Easy", question: "What does HTTP status code 200 mean?", options: ["OK - Your request was successful", "Created - Resource was created", "Bad Request - Request is wrong", "Not Found - Resource doesn't exist"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 200 OK is standard success response.", "❌ WRONG: 'Resource created' is 201 Created.", "❌ WRONG: 'Bad Request' is 400.", "❌ WRONG: 'Resource doesn't exist' is 404."] },
+          { id: 118, category: "Status Codes", difficulty: "Easy", question: "What does HTTP status code 401 mean?", options: ["Unauthorized - Requires additional permissions", "Forbidden - Server refuses", "Bad Request - Malformed", "Not Found - Resource doesn't exist"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 401 means authentication needed (missing/invalid credentials).", "❌ WRONG: 'Server refuses' is 403 Forbidden.", "❌ WRONG: 'Malformed request' is 400.", "❌ WRONG: 'Resource doesn't exist' is 404."] },
+          { id: 119, category: "Status Codes", difficulty: "Easy", question: "What does HTTP status code 403 mean?", options: ["Forbidden - Server refuses to authorize", "Unauthorized - Requires authentication", "Bad Request - Malformed", "Not Found - Resource doesn't exist"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 403 means authenticated but lacking permissions.", "❌ WRONG: 'Requires authentication' is 401.", "❌ WRONG: 'Malformed request' is 400.", "❌ WRONG: 'Resource doesn't exist' is 404."] },
+          { id: 120, category: "Status Codes", difficulty: "Easy", question: "What does HTTP status code 404 mean?", options: ["Not Found - Resource doesn't exist", "Forbidden - Server refuses", "Bad Request - Malformed", "Internal Server Error"], correctIndex: 0, optionExplanations: ["✅ CORRECT: 404 means URL/resource doesn't exist.", "❌ WRONG: 'Server refuses' is 403.", "❌ WRONG: 'Malformed request' is 400.", "❌ WRONG: 'Internal Server Error' is 500."] },
+          { id: 121, category: "Attack Identification", difficulty: "Medium", question: "This code allows users to update any field. What attack is this?\n\nclass User:\n  def update(self, data):\n    for key, value in data.items():\n      setattr(self, key, value)", options: ["API Mass Assignment", "SQL Injection", "XSS", "Code Injection"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Mass assignment allows updating any field without validation.", "❌ WRONG: SQL injection targets database queries.", "❌ WRONG: XSS injects scripts into web pages.", "❌ WRONG: Code injection executes malicious code."] },
+          { id: 122, category: "Attack Identification", difficulty: "Easy", question: "This code executes user input as Python code. What attack?\n\nuser_input = input('Enter command:')\neval(user_input)", options: ["Code Injection", "SQL Injection", "XSS", "Broken Access Control"], correctIndex: 0, optionExplanations: ["✅ CORRECT: eval() executes user input as code - code injection.", "❌ WRONG: SQL injection targets database queries.", "❌ WRONG: XSS injects scripts into web pages.", "❌ WRONG: Broken access control is about permissions."] },
+          { id: 123, category: "Variable Variations", difficulty: "Medium", question: "In the OA, instead of 'x' and 'y', you might see 'z' and 'w'. What should you do?", options: ["Use the new variable names in your answer", "Ignore the new names and use x,y", "Ask the proctor for clarification", "Skip the question"], correctIndex: 0, optionExplanations: ["✅ CORRECT: Always use the exact variable names given in the problem.", "❌ WRONG: The test changes variable names to test understanding.", "❌ WRONG: Proctors can't help with content questions.", "❌ WRONG: Don't skip - adapt to the given variables."] },
+          { id: 124, category: "Exception Messages", difficulty: "Medium", question: "For deserialization, what exception message should you use?", options: ["'New key does not match old key'", "'Invalid data format'", "'Deserialization failed'", "'Key mismatch error'"], correctIndex: 0, optionExplanations: ["✅ CORRECT: This is the exact message from the Reddit guide.", "❌ WRONG: Too generic, not the specific message.", "❌ WRONG: Too generic, not the specific message.", "❌ WRONG: Close but not the exact wording."] }
         ];
 
         // Pre-Assessment detailed explanations mapping by answer option
@@ -1060,9 +1060,12 @@ ShowData()` }
           const [showJSEquiv, setShowJSEquiv] = useState(false);
           const [showMistakes, setShowMistakes] = useState(false);
           const [showOriginal, setShowOriginal] = useState(false);
+          const [practiceMode, setPracticeMode] = useState(false);
+          const [practiceAnswer, setPracticeAnswer] = useState('');
           const [showStudyTips, setShowStudyTips] = useState(false);
           const [showTimer, setShowTimer] = useState(false);
           const [showMenu, setShowMenu] = useState(false);
+          const [showReadme, setShowReadme] = useState(false);
           const [showDetailedExplanation, setShowDetailedExplanation] = useState({});
           const [timeRemaining, setTimeRemaining] = useState(14400); // 4 hours in seconds
           const [timerActive, setTimerActive] = useState(true); // Start timer by default
@@ -1203,6 +1206,8 @@ ShowData()` }
             setCurrentFlashcard(prev => (prev + 1) % shuffledFlashcards.length);
           }
           setUserAnswer('');
+          setPracticeAnswer('');
+          setPracticeMode(false);
           setSelectedOption(null);
           setShowAnswer(false);
           setShowHint(false);
@@ -1221,6 +1226,8 @@ ShowData()` }
             setCurrentFlashcard(index);
           }
           setUserAnswer('');
+          setPracticeAnswer('');
+          setPracticeMode(false);
           setSelectedOption(null);
           setShowAnswer(false);
           setShowHint(false);
@@ -1278,19 +1285,74 @@ ShowData()` }
           };
           
 
-        const getSimilarity = () => {
-          if (!userAnswer || !pattern.answer) return 0;
-          const answer = pattern.answer.toLowerCase();
-          const user = userAnswer.toLowerCase();
-          let matches = 0;
-          const words = answer.split(' ');
-          const userWords = user.split(' ');
-          for (const word of words) {
-            if (userWords.some(uw => uw.includes(word) || word.includes(uw))) {
-              matches++;
+        // Levenshtein distance algorithm for string similarity
+        // Based on: https://en.wikipedia.org/wiki/Levenshtein_distance
+        const levenshteinDistance = (str1, str2) => {
+          const len1 = str1.length;
+          const len2 = str2.length;
+          
+          // Create a 2D array for dynamic programming
+          const matrix = Array(len1 + 1).fill(null).map(() => Array(len2 + 1).fill(0));
+          
+          // Initialize first column and row
+          for (let i = 0; i <= len1; i++) matrix[i][0] = i;
+          for (let j = 0; j <= len2; j++) matrix[0][j] = j;
+          
+          // Fill the matrix
+          for (let i = 1; i <= len1; i++) {
+            for (let j = 1; j <= len2; j++) {
+              const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
+              matrix[i][j] = Math.min(
+                matrix[i - 1][j] + 1,      // deletion
+                matrix[i][j - 1] + 1,      // insertion
+                matrix[i - 1][j - 1] + cost // substitution
+              );
             }
           }
-          return Math.round((matches / words.length) * 100);
+          
+          return matrix[len1][len2];
+        };
+        
+        const getSimilarity = () => {
+          const answerToCheck = practiceMode ? practiceAnswer : userAnswer;
+          if (!answerToCheck || !pattern.answer) return 0;
+          
+          // Normalize strings (trim and convert to lowercase)
+          // Keep whitespace intact - Python indentation matters!
+          const answer = pattern.answer.trim().toLowerCase();
+          const user = answerToCheck.trim().toLowerCase();
+          
+          // Calculate Levenshtein distance
+          const distance = levenshteinDistance(answer, user);
+          
+          // Convert distance to similarity percentage
+          // Similarity = (1 - distance / maxLength) * 100
+          const maxLength = Math.max(answer.length, user.length);
+          const similarity = maxLength === 0 ? 100 : ((1 - distance / maxLength) * 100);
+          
+          return Math.round(Math.max(0, similarity));
+        };
+        
+        const isOnlyWhitespaceIssue = () => {
+          const answerToCheck = practiceMode ? practiceAnswer : userAnswer;
+          if (!answerToCheck || !pattern.answer) return false;
+          
+          // Remove all whitespace and compare
+          const answerNoWhitespace = pattern.answer.trim().toLowerCase().replace(/\s+/g, '');
+          const userNoWhitespace = answerToCheck.trim().toLowerCase().replace(/\s+/g, '');
+          
+          // If they match without whitespace but not with whitespace, it's only a whitespace issue
+          return answerNoWhitespace === userNoWhitespace && 
+                 pattern.answer.trim().toLowerCase() !== answerToCheck.trim().toLowerCase();
+        };
+        
+        const hasTrailingWhitespace = () => {
+          const answerToCheck = practiceMode ? practiceAnswer : userAnswer;
+          if (!answerToCheck || !pattern.answer) return false;
+          
+          // Check if user's answer has trailing whitespace on any line
+          const userLines = answerToCheck.split('\n');
+          return userLines.some(line => line !== line.trimEnd());
         };
 
         const conceptCorrect = Object.values(score.concepts.questionScores).filter(s => s === 'correct').length;
@@ -1347,10 +1409,8 @@ ShowData()` }
                   React.createElement('div', { className: "w-4 h-4" }, "⏱️"),
                   "Timer"
                 ),
-                React.createElement('a', { 
-                  href: "https://github.com/ZWhiteShadow/d385-study-master/blob/main/README.md", 
-                  target: "_blank", 
-                  rel: "noopener noreferrer",
+                React.createElement('button', { 
+                  onClick: () => { setShowReadme(true); setShowMenu(false); }, 
                   className: "w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-800 flex items-center gap-2" 
                 },
                   React.createElement('div', { className: "w-4 h-4" }, "📖"),
@@ -1360,6 +1420,50 @@ ShowData()` }
                     )
                   )
                 ),
+            showReadme && React.createElement('div', { className: "bg-white border border-gray-300 rounded-lg p-6 mb-4 max-h-96 overflow-y-auto" },
+              React.createElement('div', { className: "flex justify-between items-center mb-4" },
+                React.createElement('h3', { className: "text-2xl font-bold text-gray-900" }, "📖 README"),
+                React.createElement('button', { 
+                  onClick: () => setShowReadme(false), 
+                  className: "text-black hover:text-gray-600 text-2xl leading-none font-bold" 
+                }, "×")
+              ),
+              React.createElement('div', { className: "prose prose-sm max-w-none" },
+                React.createElement('p', { className: "text-gray-700 mb-4" },
+                  React.createElement('strong', null, 'D385 Study Master'),
+                  ' - A comprehensive study application for WGU\'s D385 Software Engineering Capstone course.'
+                ),
+                React.createElement('div', { className: "mb-4" },
+                  React.createElement('p', { className: "font-semibold text-gray-800 mb-2" }, "📖 Documentation:"),
+                  React.createElement('p', { className: "ml-4" },
+                    React.createElement('a', { 
+                      href: "https://zwhiteshadow.github.io/d385-study-master/",
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      className: "text-blue-600 hover:text-blue-800"
+                    }, "• README (GitHub Pages)")
+                  ),
+                  React.createElement('p', { className: "ml-4" },
+                    React.createElement('a', { 
+                      href: "https://github.com/ZWhiteShadow/d385-study-master",
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      className: "text-blue-600 hover:text-blue-800"
+                    }, "• GitHub Repository")
+                  )
+                ),
+                React.createElement('div', { className: "mb-4" },
+                  React.createElement('p', { className: "font-semibold text-gray-800 mb-2" }, "🎓 Key Features:"),
+                  React.createElement('ul', { className: "list-disc ml-8 text-gray-700 space-y-1" },
+                    React.createElement('li', null, "Learning Mode with real-time feedback"),
+                    React.createElement('li', null, "Levenshtein distance algorithm for code comparison"),
+                    React.createElement('li', null, "68 questions across 3 modes"),
+                    React.createElement('li', null, "Smart timer with weighted time tracking"),
+                    React.createElement('li', null, "Difficulty levels and category tags")
+                  )
+                )
+              )
+            ),
             showStudyTips && React.createElement('div', { className: "bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4" },
               React.createElement('div', { className: "flex justify-between items-center mb-3" },
                 React.createElement('h3', { className: "text-lg font-bold text-yellow-800 flex items-center gap-2" },
@@ -1521,19 +1625,87 @@ ShowData()` }
                   React.createElement('p', { className: "text-gray-800 font-medium" }, pattern.problem)
                 ),
                 React.createElement('div', { className: "flex flex-wrap gap-2 mb-4" },
-                  React.createElement('button', { onClick: () => setShowHint(!showHint), className: "px-3 py-1.5 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 rounded-lg text-sm flex items-center gap-1" },
+                  React.createElement('button', { 
+                    onClick: () => {
+                      const newMode = !practiceMode;
+                      setPracticeMode(newMode);
+                      if (newMode) {
+                        setShowHint(false);
+                        setShowJSEquiv(false);
+                        setShowMistakes(false);
+                        setShowOriginal(false);
+                      }
+                      setPracticeAnswer('');
+                      setUserAnswer('');
+                      setShowAnswer(false);
+                      setFeedback(null);
+                    }, 
+                    className: `px-3 py-1.5 ${practiceMode ? 'bg-blue-600 text-white' : 'bg-blue-100 hover:bg-blue-200 text-blue-800'} rounded-lg text-sm flex items-center gap-1 font-semibold` 
+                  },
+                    React.createElement(Code),
+                    practiceMode ? '✓ Learning Mode' : 'Learning Mode'
+                  ),
+                  React.createElement('button', { 
+                    onClick: () => {
+                      const newState = !showHint;
+                      setShowHint(newState);
+                      if (newState) {
+                        setPracticeMode(false);
+                        setShowJSEquiv(false);
+                        setShowMistakes(false);
+                        setShowOriginal(false);
+                      }
+                    }, 
+                    className: "px-3 py-1.5 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 rounded-lg text-sm flex items-center gap-1" 
+                  },
                     React.createElement(Lightbulb),
                     showHint ? 'Hide' : 'Show', " Hint"
                   ),
-                  React.createElement('button', { onClick: () => setShowJSEquiv(!showJSEquiv), className: "px-3 py-1.5 bg-green-100 hover:bg-green-200 text-green-800 rounded-lg text-sm flex items-center gap-1" },
+                  React.createElement('button', { 
+                    onClick: () => {
+                      const newState = !showJSEquiv;
+                      setShowJSEquiv(newState);
+                      if (newState) {
+                        setPracticeMode(false);
+                        setShowHint(false);
+                        setShowMistakes(false);
+                        setShowOriginal(false);
+                      }
+                    }, 
+                    className: "px-3 py-1.5 bg-green-100 hover:bg-green-200 text-green-800 rounded-lg text-sm flex items-center gap-1" 
+                  },
                     React.createElement(Code),
                     showJSEquiv ? 'Hide' : 'Show', " JS/Java"
                   ),
-                  React.createElement('button', { onClick: () => setShowMistakes(!showMistakes), className: "px-3 py-1.5 bg-orange-100 hover:bg-orange-200 text-orange-800 rounded-lg text-sm flex items-center gap-1" },
+                  React.createElement('button', { 
+                    onClick: () => {
+                      const newState = !showMistakes;
+                      setShowMistakes(newState);
+                      if (newState) {
+                        setPracticeMode(false);
+                        setShowHint(false);
+                        setShowJSEquiv(false);
+                        setShowOriginal(false);
+                      }
+                    }, 
+                    className: "px-3 py-1.5 bg-orange-100 hover:bg-orange-200 text-orange-800 rounded-lg text-sm flex items-center gap-1" 
+                  },
                     React.createElement(AlertCircle),
                     showMistakes ? 'Hide' : 'Show', " Mistakes"
                   ),
-                  React.createElement('button', { onClick: () => setShowOriginal(!showOriginal), className: "px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-lg text-sm flex items-center gap-1" },
+                  React.createElement('button', { 
+                    onClick: () => {
+                      const newState = !showOriginal;
+                      setShowOriginal(newState);
+                      if (newState) {
+                        setPracticeMode(false);
+                        setShowHint(false);
+                        setShowJSEquiv(false);
+                        setShowMistakes(false);
+                      }
+                    }, 
+                    className: "px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-lg text-sm flex items-center gap-1" 
+                  },
                     React.createElement(BookOpen),
                     showOriginal ? 'Hide' : 'Show', " Original Question"
                   )
@@ -1562,30 +1734,100 @@ ShowData()` }
                     )
                   )
                 ),
-                React.createElement('textarea', { 
-                  value: userAnswer, 
-                  onChange: e => setUserAnswer(e.target.value), 
-                  placeholder: "Type your Python code...", 
-                  className: "w-full p-3 border-2 rounded-lg font-mono text-sm mb-4", 
-                  rows: 6, 
-                  disabled: showAnswer 
-                }),
-                feedback && React.createElement('div', { className: `p-4 rounded-lg mb-4 ${feedback === 'correct' ? 'bg-green-50' : 'bg-red-50'}` },
-                  feedback === 'correct' ? React.createElement('span', { className: "text-green-800 font-semibold" }, "✅ Perfect!") : React.createElement('span', { className: "text-red-800 font-semibold" }, `❌ ${getSimilarity()}% Match`)
+                practiceMode ? React.createElement('div', { className: "mb-4" },
+                  React.createElement('div', { className: "grid grid-cols-2 gap-4" },
+                    React.createElement('div', null,
+                      React.createElement('div', { className: "text-sm font-semibold text-gray-700 mb-2" }, "📝 Your Code:"),
+                      React.createElement('textarea', { 
+                        value: practiceAnswer, 
+                        onChange: e => setPracticeAnswer(e.target.value), 
+                        placeholder: "Type your Python code here...", 
+                        className: "w-full p-3 border-2 border-blue-300 rounded-lg font-mono text-sm h-64", 
+                        spellCheck: false
+                      })
+                    ),
+                    React.createElement('div', null,
+                      React.createElement('div', { className: "text-sm font-semibold text-gray-700 mb-2" }, "✅ Correct Answer:"),
+                      React.createElement('pre', { className: "bg-gray-800 text-green-400 p-3 rounded text-sm whitespace-pre-wrap font-mono h-64 overflow-y-auto" }, pattern.answer)
+                    )
+                  ),
+                  practiceAnswer.trim() && React.createElement('div', null,
+                    React.createElement('div', { className: `mt-3 p-3 rounded-lg text-center ${
+                      getSimilarity() >= 90 ? 'bg-green-100 border-2 border-green-300' :
+                      getSimilarity() >= 70 ? 'bg-yellow-100 border-2 border-yellow-300' :
+                      getSimilarity() >= 50 ? 'bg-orange-100 border-2 border-orange-300' :
+                      'bg-red-100 border-2 border-red-300'
+                    }` },
+                      React.createElement('span', { className: `font-bold text-lg ${
+                        getSimilarity() >= 90 ? 'text-green-700' :
+                        getSimilarity() >= 70 ? 'text-yellow-700' :
+                        getSimilarity() >= 50 ? 'text-orange-700' :
+                        'text-red-700'
+                      }` }, `${getSimilarity()}% Match`),
+                      React.createElement('span', { className: "ml-2 text-sm text-gray-600" },
+                        getSimilarity() === 100 ? '🎉 Perfect!' :
+                        getSimilarity() >= 90 ? '✨ Almost there!' :
+                        getSimilarity() >= 70 ? '👍 Good progress!' :
+                        getSimilarity() >= 50 ? '💪 Keep going!' :
+                        '📝 Keep trying!'
+                      )
+                    ),
+                    isOnlyWhitespaceIssue() && React.createElement('div', { className: "mt-2 p-2 bg-blue-50 border-l-4 border-blue-400 rounded text-left" },
+                      React.createElement('p', { className: "text-sm text-blue-800" },
+                        React.createElement('strong', null, '💡 Indentation Tip: '),
+                        'Python officially recommends using 4 spaces per indentation level.'
+                      )
+                    ),
+                    (hasTrailingWhitespace() && getSimilarity() >= 90) && React.createElement('div', { className: "mt-2 p-2 bg-yellow-50 border-l-4 border-yellow-400 rounded text-left" },
+                      React.createElement('p', { className: "text-sm text-yellow-800" },
+                        React.createElement('strong', null, '⚠️ Whitespace Warning: '),
+                        'You have extra spaces at the end of one or more lines. Remove trailing whitespace.'
+                      )
+                    )
+                  )
+                ) : React.createElement(React.Fragment, null,
+                  React.createElement('textarea', { 
+                    value: userAnswer, 
+                    onChange: e => setUserAnswer(e.target.value), 
+                    placeholder: "Type your Python code...", 
+                    className: "w-full p-3 border-2 rounded-lg font-mono text-sm mb-4", 
+                    rows: 6, 
+                    disabled: showAnswer 
+                  }),
+                  feedback && React.createElement('div', { className: `p-4 rounded-lg mb-4 ${feedback === 'correct' ? 'bg-green-50' : 'bg-red-50'}` },
+                    feedback === 'correct' ? React.createElement('span', { className: "text-green-800 font-semibold" }, "✅ Perfect!") : React.createElement('span', { className: "text-red-800 font-semibold" }, `❌ ${getSimilarity()}% Match`)
+                  )
                 ),
                 showAnswer && React.createElement('div', { className: "bg-gray-50 p-4 rounded-lg mb-4" },
                   React.createElement('pre', { className: "bg-gray-800 text-green-400 p-3 rounded text-sm overflow-x-auto whitespace-pre-wrap" }, pattern.answer),
                   React.createElement('p', { className: "text-sm text-gray-600 mt-2" }, pattern.explanation)
                 ),
                 React.createElement('div', { className: "flex gap-3" },
+                  practiceMode && practiceAnswer.trim() && getSimilarity() === 100 && React.createElement('button', {
+                    onClick: () => {
+                      setPracticeMode(false);
+                      setUserAnswer('');
+                      setPracticeAnswer('');
+                      setShowAnswer(false);
+                      setFeedback(null);
+                    },
+                    className: "flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg animate-pulse"
+                  }, "✅ I'm Ready - Test Me!"),
                   !showAnswer ? React.createElement(React.Fragment, null,
-                    React.createElement('button', { onClick: checkPattern, disabled: !userAnswer.trim(), className: "flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 text-white font-semibold py-3 rounded-lg" }, "Check"),
+                    !practiceMode && React.createElement('button', { onClick: checkPattern, disabled: !userAnswer.trim(), className: "flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 text-white font-semibold py-3 rounded-lg" }, "Check"),
                     React.createElement('button', { onClick: next, className: "px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg flex items-center gap-2" },
                       React.createElement(SkipForward),
                       "Skip"
                     )
                   ) : React.createElement(React.Fragment, null,
-                    React.createElement('button', { onClick: retrySet, className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" }, "🔄 Retry Full Patterns Set"),
+                    React.createElement('button', { 
+                      onClick: () => {
+                        setShowAnswer(false);
+                        setFeedback(null);
+                        setUserAnswer('');
+                      }, 
+                      className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" 
+                    }, "🔄 Try Again"),
                     React.createElement('button', { onClick: next, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg" }, "Next →")
                   )
                 )
@@ -1606,9 +1848,16 @@ ShowData()` }
                         className: "text-xs text-gray-500 hover:text-gray-700" 
                       }, "Show Timer")
                     ),
-                    React.createElement('div', { className: "text-sm text-gray-500" }, `Question ${currentQuestion + 1} of 20`)
+                    React.createElement('div', { className: "text-sm text-gray-500" }, `Question ${currentQuestion + 1} of 24`)
                   ),
-                  React.createElement('span', { className: "inline-block mt-1 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm" }, question.category)
+                  React.createElement('div', { className: "flex gap-2 mt-1" },
+                    React.createElement('span', { className: "inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm" }, question.category),
+                    React.createElement('span', { className: `inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                      question.difficulty === 'Easy' ? 'bg-green-100 text-green-700' :
+                      question.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-red-100 text-red-700'
+                    }` }, question.difficulty)
+                  )
                 ),
                 React.createElement('div', { className: "bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg mb-4" },
                   React.createElement('p', { className: "text-gray-800 font-medium" }, question.question)
@@ -1731,7 +1980,14 @@ ShowData()` }
                     ),
                     React.createElement('div', { className: "text-sm text-gray-500" }, `Card ${currentFlashcard + 1} of 30`)
                   ),
-                  React.createElement('span', { className: "inline-block mt-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm" }, flashcard.category)
+                  React.createElement('div', { className: "flex gap-2 mt-1" },
+                    React.createElement('span', { className: "inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm" }, flashcard.category),
+                    React.createElement('span', { className: `inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                      flashcard.difficulty === 'Easy' ? 'bg-green-100 text-green-700' :
+                      flashcard.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
+                      'bg-red-100 text-red-700'
+                    }` }, flashcard.difficulty)
+                  )
                 ),
                 React.createElement('div', { className: "bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg mb-4" },
                   React.createElement('p', { className: "text-gray-800 font-medium" }, flashcard.question)
@@ -1772,11 +2028,11 @@ ShowData()` }
               React.createElement('div', { className: "mt-4 bg-white rounded-lg shadow-lg p-4" },
                 React.createElement('div', { className: "text-sm font-semibold text-gray-600 mb-2" }, "Progress:"),
                 React.createElement('div', { className: "flex flex-wrap gap-2" }, mode === 'patterns' ? shuffledPatterns.map((p, idx) => { 
-                  const sc = score.patterns.patternScores[p.id] || 0; 
+                  const sc = score.patterns.patternScores[p.id]; 
                   return React.createElement('button', { 
                     key: p.id, 
                     onClick: () => jump(idx), 
-                    className: `w-10 h-10 rounded flex items-center justify-center text-xs font-bold ${sc === 100 ? 'bg-green-500 text-white' : sc >= 90 ? 'bg-yellow-500 text-white' : sc > 0 ? 'bg-red-500 text-white' : idx === currentPattern ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-600'}`
+                    className: `w-10 h-10 rounded flex items-center justify-center text-xs font-bold ${sc === 'correct' ? 'bg-green-500 text-white' : sc === 'incorrect' ? 'bg-red-500 text-white' : idx === currentPattern ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-600'}`
                   }, idx + 1); 
                 }) : mode === 'concepts' ? shuffledQuestions.map((q, idx) => { 
                   const st = score.concepts.questionScores[q.id]; 
