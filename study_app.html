@@ -1176,7 +1176,40 @@ ShowData()` }
 
         const checkPattern = () => {
           const isCorrect = userAnswer.toLowerCase().trim() === pattern.answer.toLowerCase().trim();
-          setScore(prev => ({ ...prev, patterns: { correct: prev.patterns.correct + (isCorrect ? 1 : 0), total: prev.patterns.total + 1, patternScores: { ...prev.patterns.patternScores, [pattern.id]: isCorrect ? 'correct' : 'incorrect' } } }));
+          const previousScore = score.patterns.patternScores[pattern.id];
+          
+          // Only update score if: no previous score OR improving from incorrect to correct
+          const shouldUpdateScore = !previousScore || (previousScore === 'incorrect' && isCorrect);
+          
+          if (shouldUpdateScore) {
+            setScore(prev => ({ 
+              ...prev, 
+              patterns: { 
+                correct: prev.patterns.correct + (isCorrect ? 1 : 0), 
+                total: prev.patterns.total + 1, 
+                patternScores: { ...prev.patterns.patternScores, [pattern.id]: isCorrect ? 'correct' : 'incorrect' } 
+              } 
+            }));
+          } else if (previousScore === 'correct') {
+            // Already correct - keep it correct, don't update counts
+            setScore(prev => ({ 
+              ...prev, 
+              patterns: { 
+                ...prev.patterns,
+                total: prev.patterns.total + 1
+              } 
+            }));
+          } else {
+            // Already incorrect, trying again - update total only
+            setScore(prev => ({ 
+              ...prev, 
+              patterns: { 
+                ...prev.patterns,
+                total: prev.patterns.total + 1
+              } 
+            }));
+          }
+          
           setFeedback(isCorrect ? 'correct' : 'incorrect');
           setShowAnswer(true);
           updateStatus(); // Update status only when question is completed
@@ -1802,6 +1835,20 @@ ShowData()` }
                   React.createElement('pre', { className: "bg-gray-800 text-green-400 p-3 rounded text-sm overflow-x-auto whitespace-pre-wrap" }, pattern.answer),
                   React.createElement('p', { className: "text-sm text-gray-600 mt-2" }, pattern.explanation)
                 ),
+                feedback === 'incorrect' && !practiceMode && React.createElement('button', {
+                  onClick: () => {
+                    setPracticeMode(true);
+                    setShowHint(false);
+                    setShowJSEquiv(false);
+                    setShowMistakes(false);
+                    setShowOriginal(false);
+                    setPracticeAnswer('');
+                    setUserAnswer('');
+                    setShowAnswer(false);
+                    setFeedback(null);
+                  },
+                  className: "w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg mb-4 animate-pulse"
+                }, "🎓 Try Learning Mode"),
                 React.createElement('div', { className: "flex gap-3" },
                   practiceMode && practiceAnswer.trim() && getSimilarity() === 100 && React.createElement('button', {
                     onClick: () => {
@@ -1827,8 +1874,14 @@ ShowData()` }
                         setUserAnswer('');
                       }, 
                       className: "flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg" 
-                    }, "🔄 Try Again"),
-                    React.createElement('button', { onClick: next, className: "flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg" }, "Next →")
+                    }, feedback === 'incorrect' ? "🔄 Retry" : "🔄 Try Again"),
+                    React.createElement('button', { 
+                      onClick: next, 
+                      className: `flex-1 ${feedback === 'incorrect' ? 'bg-gray-200 hover:bg-gray-300 text-gray-700' : 'bg-indigo-600 hover:bg-indigo-700 text-white'} font-semibold py-3 rounded-lg flex items-center gap-2 justify-center` 
+                    },
+                      feedback === 'incorrect' && React.createElement(SkipForward),
+                      feedback === 'incorrect' ? "Skip" : "Next →"
+                    )
                   )
                 )
               ) : mode === 'concepts' ? (question ? React.createElement('div', { className: "bg-white rounded-lg shadow-lg p-6" },
