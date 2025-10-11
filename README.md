@@ -22,11 +22,9 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 
 ### ⏱️ Smart Timer
 - **4-hour countdown timer** matching the actual exam duration
-- **Weighted time tracking** based on test distribution:
-  - Patterns: 40% of test time (~6.86 min each)
-  - Quiz: 35% of test time (~3.5 min each)
-  - Flashcards: 25% of test time (~1.94 min each)
+- **Simple time tracking**: 3.5 minutes per question (all modes)
 - **Progress indicators** showing if you're ahead or behind schedule
+  - Formula: `(questions_answered × 3.5 min) - time_elapsed`
 
 ### 🎯 Study Tools
 - **Study Tips Panel**: Consolidated Reddit wisdom and best practices
@@ -78,7 +76,7 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 ### Timer Features
 - **Start/Pause/Reset**: Control the 4-hour countdown
 - **Progress Tracking**: See if you're ahead or behind schedule
-- **Weighted Calculation**: Time allocation based on test distribution
+- **Simple Calculation**: 3.5 minutes per question across all modes
 
 ## 🛠️ Technical Details
 
@@ -92,19 +90,21 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 
 Based on Reddit community feedback and exam analysis:
 
-| Section     | Questions | Time Allocation | Weight  |
-|-------------|-----------|-----------------|---------|
-| Patterns    |    14     |   96 minutes    |  40%    |
-| Quiz        |    24     |   84 minutes    |  35%    |
-| Flashcards  |    30     |   60 minutes    |  25%    |
-| **Total**   |  **68**   | **240 minutes** | **100%**|
+| Section     | Questions | Time per Question | Total Time      |
+|-------------|-----------|-------------------|-----------------|
+| Patterns    |    14     |   3.5 minutes     |  49 minutes     |
+| Quiz        |    24     |   3.5 minutes     |  84 minutes     |
+| Flashcards  |    30     |   3.5 minutes     | 105 minutes     |
+| **Total**   |  **68**   | **3.5 minutes**   | **238 minutes** |
+
+*Note: 2 minutes buffer for review/breaks*
 
 ## 🎯 Study Strategy
 
-1. **Start with Patterns**: They're 40% of the exam
-2. **Practice Quiz Questions**: 35% of the exam
-3. **Review Flashcards**: 25% of the exam
-4. **Use the Timer**: Stay on track with weighted time allocation
+1. **Start with Patterns**: 14 coding patterns to master
+2. **Practice Quiz Questions**: 24 multiple choice questions
+3. **Review Flashcards**: 30 key concepts and definitions
+4. **Use the Timer**: Stay on track with 3.5 minutes per question
 5. **Check Study Tips**: Access Reddit wisdom and best practices
 
 ## 🤝 Contributing

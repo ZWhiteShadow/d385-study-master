@@ -1116,22 +1116,8 @@ ShowData()` }
                                  Object.keys(score.flashcards.cardScores).length;
             
             if (timeSpentSeconds > 60 && totalCompleted >= 3) {
-              // Calculate weighted time based on test percentages
-              const patternsCompleted = Object.keys(score.patterns.patternScores).length;
-              const quizCompleted = Object.keys(score.concepts.questionScores).length;
-              const flashcardsCompleted = Object.keys(score.flashcards.cardScores).length;
-              
-              // Test weights: Patterns 40%, Quiz 35%, Flashcards 25%
-              const patternsWeight = 0.40;
-              const quizWeight = 0.35;
-              const flashcardsWeight = 0.25;
-              
-              // Calculate expected time based on weighted completion
-              const patternsExpectedTime = (patternsCompleted / PATTERNS.length) * patternsWeight * 240 * 60; // seconds
-              const quizExpectedTime = (quizCompleted / MC_QUESTIONS.length) * quizWeight * 240 * 60; // seconds
-              const flashcardsExpectedTime = (flashcardsCompleted / FLASHCARDS.length) * flashcardsWeight * 240 * 60; // seconds
-              
-              const expectedTimeSpent = patternsExpectedTime + quizExpectedTime + flashcardsExpectedTime;
+              // Simple calculation: 3.5 minutes per question
+              const expectedTimeSpent = totalCompleted * 3.5 * 60; // 3.5 minutes in seconds
               const timeDiff = expectedTimeSpent - timeSpentSeconds;
               const minutesDiff = Math.floor(timeDiff / 60);
               
