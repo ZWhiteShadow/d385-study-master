@@ -1594,6 +1594,51 @@ ShowData()` }
                     "💡 Tip: 4 hours total = 3.6 minutes per question. Focus on patterns first!"
                   )
                 ),
+                // Overall Score Display with Weighted Calculation
+                // Patterns: 70% weight (14 questions)
+                // Quiz + Cards: 30% weight (24 + 30 = 54 questions)
+                (() => {
+                  const totalQuestions = 14 + 24 + 30; // 68 total
+                  const totalCorrect = masteredPatterns.size + conceptCorrect + flashcardCorrect;
+                  
+                  // Weighted score calculation
+                  const patternsPercent = (masteredPatterns.size / 14) * 100;
+                  const quizCardsPercent = ((conceptCorrect + flashcardCorrect) / 54) * 100;
+                  const weightedScore = (patternsPercent * 0.70) + (quizCardsPercent * 0.30);
+                  const overallPercentage = Math.round(weightedScore);
+                  
+                  const allCompleted = totalCorrect === totalQuestions;
+                  const passed = overallPercentage >= 70;
+                  
+                  if (allCompleted) {
+                    return React.createElement('div', { 
+                      className: `mb-4 p-4 rounded-lg border-2 text-center ${passed ? 'bg-green-50 border-green-300' : 'bg-yellow-50 border-yellow-300'}`
+                    },
+                      React.createElement('div', { className: "text-3xl font-bold mb-2" }, 
+                        passed ? "🎉" : "📚"
+                      ),
+                      React.createElement('div', { className: `text-2xl font-bold mb-1 ${passed ? 'text-green-700' : 'text-yellow-700'}` }, 
+                        `Weighted Score: ${overallPercentage}%`
+                      ),
+                      React.createElement('div', { className: "text-sm text-gray-600 mb-2" }, 
+                        `Patterns: ${masteredPatterns.size}/14 (70% weight) | Quiz+Cards: ${conceptCorrect + flashcardCorrect}/54 (30% weight)`
+                      ),
+                      React.createElement('div', { className: `text-lg font-semibold ${passed ? 'text-green-600' : 'text-yellow-600'}` }, 
+                        passed ? "🎓 Congratulations, you passed!" : "Keep studying! You need 70% to pass."
+                      )
+                    );
+                  } else if (totalCorrect > 0) {
+                    return React.createElement('div', { className: "mb-4 p-3 bg-gray-50 rounded-lg border border-gray-200 text-center" },
+                      React.createElement('div', { className: "text-lg font-semibold text-gray-700" }, 
+                        `Weighted Progress: ${overallPercentage}%`
+                      ),
+                      React.createElement('div', { className: "text-xs text-gray-500 mt-1" }, 
+                        `Patterns: ${masteredPatterns.size}/14 (70%) | Quiz+Cards: ${conceptCorrect + flashcardCorrect}/54 (30%)`
+                      )
+                    );
+                  }
+                  return null;
+                })(),
                 React.createElement('div', { className: "flex gap-2 mb-4" },
                   React.createElement('button', { 
                     onClick: () => switchMode('patterns'), 
@@ -1620,15 +1665,30 @@ ShowData()` }
                 React.createElement('div', { className: "grid grid-cols-3 gap-3" },
                   React.createElement('div', { className: "bg-indigo-50 p-3 rounded-lg" },
                     React.createElement('div', { className: "text-sm text-gray-600" }, "Patterns"),
-                    React.createElement('div', { className: "text-2xl font-bold text-indigo-600" }, `${masteredPatterns.size}/14`)
+                    React.createElement('div', { className: "text-2xl font-bold text-indigo-600" }, `${masteredPatterns.size}/14`),
+                    (() => {
+                      const patternsPercent = Math.round((masteredPatterns.size / 14) * 100);
+                      const patternsPassed = patternsPercent >= 70;
+                      return patternsPassed ? React.createElement('div', { className: "text-xs font-semibold text-green-600 mt-1" }, `✓ Passed! (${patternsPercent}%)`) : (masteredPatterns.size > 0 ? React.createElement('div', { className: "text-xs text-gray-500 mt-1" }, `${patternsPercent}%`) : null);
+                    })()
                   ),
                   React.createElement('div', { className: "bg-purple-50 p-3 rounded-lg" },
                     React.createElement('div', { className: "text-sm text-gray-600" }, "Quiz"),
-                    React.createElement('div', { className: "text-2xl font-bold text-purple-600" }, `${conceptCorrect}/24`)
+                    React.createElement('div', { className: "text-2xl font-bold text-purple-600" }, `${conceptCorrect}/24`),
+                    (() => {
+                      const quizPercent = Math.round((conceptCorrect / 24) * 100);
+                      const quizPassed = quizPercent >= 70;
+                      return quizPassed ? React.createElement('div', { className: "text-xs font-semibold text-green-600 mt-1" }, `✓ Passed! (${quizPercent}%)`) : (conceptCorrect > 0 ? React.createElement('div', { className: "text-xs text-gray-500 mt-1" }, `${quizPercent}%`) : null);
+                    })()
                   ),
                   React.createElement('div', { className: "bg-green-50 p-3 rounded-lg" },
                     React.createElement('div', { className: "text-sm text-gray-600" }, "Cards"),
-                    React.createElement('div', { className: "text-2xl font-bold text-green-600" }, `${flashcardCorrect}/30`)
+                    React.createElement('div', { className: "text-2xl font-bold text-green-600" }, `${flashcardCorrect}/30`),
+                    (() => {
+                      const cardsPercent = Math.round((flashcardCorrect / 30) * 100);
+                      const cardsPassed = cardsPercent >= 70;
+                      return cardsPassed ? React.createElement('div', { className: "text-xs font-semibold text-green-600 mt-1" }, `✓ Passed! (${cardsPercent}%)`) : (flashcardCorrect > 0 ? React.createElement('div', { className: "text-xs text-gray-500 mt-1" }, `${cardsPercent}%`) : null);
+                    })()
                   )
                 )
               ),
