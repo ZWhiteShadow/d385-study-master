@@ -7,9 +7,10 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 ## 🌟 Key Features
 
 ### 📊 Smart Weighted Scoring
-- **Patterns: 70%** | **Quiz+Cards: 30%** (reflects real exam weight)
+- **Patterns: 45%** | **Quiz+Cards: 55%** (reflects real exam: 14/31 vs 17/31 questions)
+- We have 68 practice questions, exam has 31 (14 patterns + 17 other)
 - Individual pass/fail indicators per mode (70% threshold)
-- "🎓 Congratulations, you passed!" message when you hit 70% weighted score
+- "🎓 Congratulations, you're ready!" when you hit 70% exam readiness
 - Real-time progress tracking with percentages
 
 ### ⏱️ Intelligent Timer (4 hours)
@@ -48,20 +49,20 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 
 ## 📖 How to Use
 
-### 🔵 Patterns Mode (70% of score)
-- Practice 14 coding patterns with hints, explanations, and full test questions
+### 🔵 Patterns Mode (45% of exam score)
+- Practice 14 coding patterns (same 14 that appear on real exam!)
 - **Learning Mode**: Side-by-side code editor with real-time Levenshtein distance feedback
   - Color-coded similarity (Green 90%+, Yellow 70-89%, Orange 50-69%, Red <50%)
   - Smart indentation and trailing whitespace detection
   - "I'm Ready - Test Me!" button at 100% match
 - Unlimited retries to master each pattern
 
-### 🟣 Quiz Mode (15% of score - part of 30%)
+### 🟣 Quiz Mode (part of 55% - exam has 17, we have 54 practice)
 - 24 multiple choice questions with detailed explanations for all options
 - Once answered, can't re-answer (simulate exam conditions)
 - View right/wrong answers even after completion
 
-### 🟢 Flashcards Mode (15% of score - part of 30%)
+### 🟢 Flashcards Mode (part of 55% - exam has 17, we have 54 practice)
 - 30 key concepts covering HTTP status codes, attacks, and prevention
 - Self-assess as "Got it right" or "Got it wrong"
 - Once answered, can't re-answer (locked like quiz)
@@ -74,40 +75,44 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 - **Babel**: JSX transpilation in the browser
 - **Local Storage**: Progress is saved in your browser
 
-## 📊 Test Distribution & Weighted Scoring
+## 📊 Real Exam vs Practice App
 
-Based on Reddit community feedback and exam analysis:
+### Real D385 Exam
+- **Total**: 31 questions in 4 hours
+- **Patterns**: 14 questions (45% of exam)
+- **Other**: 17 questions (55% of exam - mix of quiz/concept questions)
 
-| Section     | Questions | Weight | Time Allocation | Pass Threshold |
-|-------------|-----------|--------|-----------------|----------------|
-| Patterns    |    14     |  70%   |  49 minutes     |     70%        |
-| Quiz        |    24     |  30%*  |  84 minutes     |     70%        |
-| Flashcards  |    30     |  30%*  | 105 minutes     |     70%        |
-| **Total**   |  **68**   | **100%** | **238 minutes** |   **70%**      |
-
-*\*Quiz and Flashcards combined = 30% weight (54 questions total)*
+### Our Practice App
+- **Total**: 68 practice questions
+- **Patterns**: 14 questions (same as exam!)
+- **Quiz**: 24 questions (extra practice)
+- **Flashcards**: 30 questions (extra practice)
 
 ### Weighted Score Formula
+Your "Exam Readiness" score simulates the real exam weighting:
+
 ```
-Final Score = (Patterns % × 0.70) + ((Quiz + Cards) % × 0.30)
+Exam Readiness = (Patterns % × 0.45) + ((Quiz + Cards) % × 0.55)
 ```
 
 **Example:**
 - Patterns: 12/14 = 85.7%
 - Quiz + Cards: 40/54 = 74.1%
-- **Weighted Score**: (85.7 × 0.70) + (74.1 × 0.30) = **60% + 22.2% = 82.2%** ✅ PASSED!
+- **Exam Readiness**: (85.7 × 0.45) + (74.1 × 0.55) = **38.6% + 40.8% = 79.4%** ✅ READY!
+
+**Why this matters**: The exam only has 17 non-pattern questions, but we give you 54 for practice. Your performance on all 54 estimates how you'd do on the 17 real ones.
 
 ## 🎯 Study Strategy
 
-1. **Focus on Patterns FIRST**: They're 70% of your final score! Master all 14 patterns
-2. **Use Learning Mode**: Practice patterns side-by-side with real-time feedback
-3. **Complete Quiz Questions**: Test your conceptual understanding (24 questions)
-4. **Review Flashcards**: Reinforce key concepts and definitions (30 cards)
-5. **Monitor Your Progress**: Watch the weighted score and individual mode percentages
-6. **Use the Timer**: Stay on track - aim for 3.5 minutes per correct answer
-7. **Check Study Tips**: Access consolidated Reddit wisdom and best practices
+1. **Master ALL 14 Patterns**: They're 45% of exam - these exact patterns appear on the test!
+2. **Use Learning Mode**: Practice side-by-side until you hit 100% match consistently
+3. **Complete Quiz Questions**: Build conceptual understanding (54 practice vs 17 on exam)
+4. **Review Flashcards**: Memorize key concepts, HTTP codes, and security principles
+5. **Monitor "Exam Readiness"**: Aim for 80%+ weighted score for confidence
+6. **Use the Timer**: Simulate exam pressure - 3.5 minutes per correct answer
+7. **Check Study Tips**: Reddit wisdom and best practices in the menu
 
-**Pro Tip**: Since Patterns are 70% of your score, getting 14/14 Patterns (100%) and only 27/54 Quiz+Cards (50%) still gives you a passing score of 85%!
+**Pro Tip**: Getting 14/14 Patterns (100%) + 30/54 Quiz+Cards (55.6%) = **75.6% Exam Readiness** ✅ That's a pass! Focus on patterns!
 
 ## 🤝 Contributing
 

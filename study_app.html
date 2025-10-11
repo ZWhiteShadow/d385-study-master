@@ -1595,16 +1595,17 @@ ShowData()` }
                   )
                 ),
                 // Overall Score Display with Weighted Calculation
-                // Patterns: 70% weight (14 questions)
-                // Quiz + Cards: 30% weight (24 + 30 = 54 questions)
+                // REAL EXAM: 31 questions total
+                // Patterns: 14/31 = 45% of exam
+                // Quiz+Cards: 17/31 = 55% of exam (but we have 54 practice questions)
                 (() => {
-                  const totalQuestions = 14 + 24 + 30; // 68 total
+                  const totalQuestions = 14 + 24 + 30; // 68 practice questions
                   const totalCorrect = masteredPatterns.size + conceptCorrect + flashcardCorrect;
                   
-                  // Weighted score calculation
+                  // Weighted score calculation based on REAL EXAM (31 questions)
                   const patternsPercent = (masteredPatterns.size / 14) * 100;
                   const quizCardsPercent = ((conceptCorrect + flashcardCorrect) / 54) * 100;
-                  const weightedScore = (patternsPercent * 0.70) + (quizCardsPercent * 0.30);
+                  const weightedScore = (patternsPercent * 0.45) + (quizCardsPercent * 0.55);
                   const overallPercentage = Math.round(weightedScore);
                   
                   const allCompleted = totalCorrect === totalQuestions;
@@ -1618,22 +1619,22 @@ ShowData()` }
                         passed ? "🎉" : "📚"
                       ),
                       React.createElement('div', { className: `text-2xl font-bold mb-1 ${passed ? 'text-green-700' : 'text-yellow-700'}` }, 
-                        `Weighted Score: ${overallPercentage}%`
+                        `Exam Readiness: ${overallPercentage}%`
                       ),
                       React.createElement('div', { className: "text-sm text-gray-600 mb-2" }, 
-                        `Patterns: ${masteredPatterns.size}/14 (70% weight) | Quiz+Cards: ${conceptCorrect + flashcardCorrect}/54 (30% weight)`
+                        `Patterns: ${masteredPatterns.size}/14 (45% of exam) | Quiz+Cards: ${conceptCorrect + flashcardCorrect}/54 (55% of exam)`
                       ),
                       React.createElement('div', { className: `text-lg font-semibold ${passed ? 'text-green-600' : 'text-yellow-600'}` }, 
-                        passed ? "🎓 Congratulations, you passed!" : "Keep studying! You need 70% to pass."
+                        passed ? "🎓 Congratulations, you're ready for the exam!" : "Keep studying! You need 70% to pass."
                       )
                     );
                   } else if (totalCorrect > 0) {
                     return React.createElement('div', { className: "mb-4 p-3 bg-gray-50 rounded-lg border border-gray-200 text-center" },
                       React.createElement('div', { className: "text-lg font-semibold text-gray-700" }, 
-                        `Weighted Progress: ${overallPercentage}%`
+                        `Exam Readiness: ${overallPercentage}%`
                       ),
                       React.createElement('div', { className: "text-xs text-gray-500 mt-1" }, 
-                        `Patterns: ${masteredPatterns.size}/14 (70%) | Quiz+Cards: ${conceptCorrect + flashcardCorrect}/54 (30%)`
+                        `Patterns: ${masteredPatterns.size}/14 (45%) | Quiz+Cards: ${conceptCorrect + flashcardCorrect}/54 (55%)`
                       )
                     );
                   }
