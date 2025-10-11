@@ -4,45 +4,30 @@
 
 A comprehensive study application for WGU's D385 Software Engineering Capstone course, featuring interactive patterns, quiz questions, and flashcards to help you master the material.
 
-## 🌟 Features
+## 🌟 Key Features
 
-### 📚 Three Study Modes
-- **Patterns (14)**: Interactive coding patterns with hints, explanations, and original questions
-  - **Learning Mode**: Side-by-side code editor with real-time similarity feedback
-  - Uses Levenshtein distance algorithm for accurate code comparison
-  - Smart indentation and whitespace detection
-  - "I'm Ready" button appears at 100% to test your knowledge
-- **Quiz (24)**: Multiple choice questions with detailed explanations
-  - Difficulty levels: Easy, Medium, Hard
-  - Category tags for organized studying
-  - Detailed explanations for all answer options
-- **Flashcards (30)**: Self-paced flashcard review system
-  - Difficulty levels and category tags
-  - Covers HTTP status codes, attacks, prevention, and more
+### 📊 Smart Weighted Scoring
+- **Patterns: 70%** | **Quiz+Cards: 30%** (reflects real exam weight)
+- Individual pass/fail indicators per mode (70% threshold)
+- "🎓 Congratulations, you passed!" message when you hit 70% weighted score
+- Real-time progress tracking with percentages
 
-### ⏱️ Smart Timer
-- **4-hour countdown timer** matching the actual exam duration
-- **Intelligent time tracking**: 3.5 minutes per CORRECT question
-- **Progress indicators** showing if you're ahead or behind schedule
-  - Updates every 3.5 minutes and when you answer correctly
-  - Only counts correct answers toward expected time
-  - Formula: `(correct_answers × 3.5 min) - time_elapsed`
+### ⏱️ Intelligent Timer (4 hours)
+- Auto-starts, counts down from 4:00:00
+- Tracks only **correct answers** (3.5 min each)
+- Shows "+X Min Ahead" or "-X Min Behind" status
+- Updates every 3.5 minutes + when you answer
 
-### 🎯 Scoring System
-- **Weighted Final Score**: Patterns 70%, Quiz+Cards 30%
-  - Reflects actual exam importance
-  - Shows individual pass/fail for each mode (70% threshold)
-  - Overall "Congratulations, you passed!" message when complete
-- **Individual Mode Progress**: Track percentage for Patterns, Quiz, and Cards separately
-- **Retry Options**: 
-  - Retry individual modes (clears that mode's scores, timer keeps running)
-  - Reset All (clears everything and resets timer to 4 hours)
+### 🎓 Three Study Modes (68 questions)
+- **Patterns (14)**: Interactive coding with Learning Mode, hints, full test questions
+- **Quiz (24)**: Multiple choice with detailed explanations, difficulty tags
+- **Flashcards (30)**: Self-paced review with category tags
 
-### 🎓 Study Tools
-- **Study Tips Panel**: Consolidated Reddit wisdom and best practices
-- **Progress Tracking**: Visual indicators for completed questions
-- **Randomization**: Questions and patterns shuffle on each session
-- **Original Questions**: Full-length test questions with line numbers
+### 🛠️ Advanced Tools
+- **Learning Mode**: Side-by-side code editor with Levenshtein distance (real-time % match)
+- **Study Tips**: Consolidated Reddit wisdom
+- **Retry Options**: Reset individual modes or full app
+- **Progress Bars**: Visual tracking for all 68 questions
 
 ## 🚀 Quick Start
 
@@ -63,34 +48,23 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 
 ## 📖 How to Use
 
-### Patterns Mode
-- Practice coding patterns with hints and explanations
-- Click "Show Original Question" to see full test questions
-- Get immediate feedback with Levenshtein distance similarity scoring
-- **Learning Mode**: 
-  - Toggle side-by-side comparison with correct answer
-  - Real-time percentage match as you type
-  - Color-coded feedback (Green 90%+, Yellow 70-89%, Orange 50-69%, Red <50%)
-  - Indentation warning: Detects when you use wrong number of spaces (PEP 8 recommends 4)
-  - Trailing whitespace detection: Alerts you to extra spaces at line ends
-  - "I'm Ready - Test Me!" button appears when you reach 100% match
+### 🔵 Patterns Mode (70% of score)
+- Practice 14 coding patterns with hints, explanations, and full test questions
+- **Learning Mode**: Side-by-side code editor with real-time Levenshtein distance feedback
+  - Color-coded similarity (Green 90%+, Yellow 70-89%, Orange 50-69%, Red <50%)
+  - Smart indentation and trailing whitespace detection
+  - "I'm Ready - Test Me!" button at 100% match
+- Unlimited retries to master each pattern
 
-### Quiz Mode
-- Answer multiple choice questions
-- View detailed explanations for each option
-- Track your progress with visual indicators
+### 🟣 Quiz Mode (15% of score - part of 30%)
+- 24 multiple choice questions with detailed explanations for all options
+- Once answered, can't re-answer (simulate exam conditions)
+- View right/wrong answers even after completion
 
-### Flashcards Mode
-- Review key concepts and definitions
-- Rate yourself as "Got it right" or "Got it wrong"
-- Self-paced learning with progress tracking
-
-### Timer Features
-- **Auto-Start**: Timer starts automatically when you begin
-- **Start/Pause/Reset**: Full control over the 4-hour countdown
-- **Real-Time Progress**: See if you're ahead or behind schedule
-- **Smart Calculation**: Only counts correct answers (3.5 minutes each)
-- **Updates every 3.5 minutes**: Status refreshes periodically for accuracy
+### 🟢 Flashcards Mode (15% of score - part of 30%)
+- 30 key concepts covering HTTP status codes, attacks, and prevention
+- Self-assess as "Got it right" or "Got it wrong"
+- Once answered, can't re-answer (locked like quiz)
 
 ## 🛠️ Technical Details
 
