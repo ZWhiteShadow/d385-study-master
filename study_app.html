@@ -1107,17 +1107,20 @@ ShowData()` }
           setTimerDisplay(prev => ({ ...prev, timeSpent: timeSpentStr }));
         }, [sessionStartTime, timeRemaining]);
 
-        // Update status calculation
+        // Update status calculation every 3.5 minutes (210 seconds)
         useEffect(() => {
           const getOverallProgress = () => {
             const timeSpentSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
-            const totalCompleted = Object.keys(score.patterns.patternScores).length + 
-                                 Object.keys(score.concepts.questionScores).length + 
-                                 Object.keys(score.flashcards.cardScores).length;
             
-            if (timeSpentSeconds > 60 && totalCompleted >= 3) {
-              // Simple calculation: 3.5 minutes per question
-              const expectedTimeSpent = totalCompleted * 3.5 * 60; // 3.5 minutes in seconds
+            // Count only CORRECT answers for progress calculation
+            const correctPatterns = Object.values(score.patterns.patternScores).filter(s => s === 'correct').length;
+            const correctQuiz = Object.values(score.concepts.questionScores).filter(s => s === 'correct').length;
+            const correctFlashcards = Object.values(score.flashcards.cardScores).filter(s => s === 'correct').length;
+            const totalCorrect = correctPatterns + correctQuiz + correctFlashcards;
+            
+            if (totalCorrect > 0) {
+              // Simple calculation: 3.5 minutes per CORRECT question
+              const expectedTimeSpent = totalCorrect * 3.5 * 60; // 3.5 minutes in seconds
               const timeDiff = expectedTimeSpent - timeSpentSeconds;
               const minutesDiff = Math.floor(timeDiff / 60);
               
@@ -1132,7 +1135,15 @@ ShowData()` }
             return "";
           };
           
+          // Update status immediately
           setTimerDisplay(prev => ({ ...prev, status: getOverallProgress() }));
+          
+          // Then update every 3.5 minutes (210 seconds)
+          const statusInterval = setInterval(() => {
+            setTimerDisplay(prev => ({ ...prev, status: getOverallProgress() }));
+          }, 210000); // 210,000 milliseconds = 3.5 minutes
+          
+          return () => clearInterval(statusInterval);
         }, [score, sessionStartTime]);
 
         const formatTime = (seconds) => {
