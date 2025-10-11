@@ -1275,6 +1275,7 @@ ShowData()` }
         };
 
         const retrySet = () => {
+          // Reset the mode's scores to 0 and clear all correct/incorrect status
           if (mode === 'patterns') {
             setScore(prev => ({ ...prev, patterns: { correct: 0, total: 0, patternScores: {} } }));
             setCurrentPattern(0);
@@ -1289,6 +1290,8 @@ ShowData()` }
               setCurrentFlashcard(0);
               setShuffledFlashcards(shuffleArray(FLASHCARDS));
             }
+            
+            // Timer keeps running - only scores reset
             setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null);
           };
 
@@ -1296,6 +1299,7 @@ ShowData()` }
           const switchMode = m => { setMode(m); setUserAnswer(''); setSelectedOption(null); setShowAnswer(false); setShowHint(false); setShowJSEquiv(false); setShowMistakes(false); setShowOriginal(false); setFeedback(null); };
           
           const reset = () => { 
+            // Reset ALL scores across all modes
             setScore({ patterns: { correct: 0, total: 0, patternScores: {} }, concepts: { correct: 0, total: 0, questionScores: {}, selectedOptions: {} }, flashcards: { correct: 0, total: 0, cardScores: {} } }); 
             setMasteredPatterns(new Set()); 
             setCurrentPattern(0); 
@@ -1304,6 +1308,11 @@ ShowData()` }
             setShuffledPatterns(shuffleArray(PATTERNS));
             setShuffledQuestions(shuffleArray(MC_QUESTIONS));
             setShuffledFlashcards(shuffleArray(FLASHCARDS));
+            
+            // Reset timer and session
+            setSessionStartTime(Date.now());
+            setTimeRemaining(14400); // Reset to 4 hours
+            
             setUserAnswer(''); 
             setSelectedOption(null); 
             setShowAnswer(false); 
