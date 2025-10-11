@@ -7,17 +7,19 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 ## 🌟 Key Features
 
 ### 📊 Smart Weighted Scoring
-- **Patterns: 45%** | **Quiz+Cards: 55%** (reflects real exam: 14/31 vs 17/31 questions)
-- We have 68 practice questions, exam has 31 (14 patterns + 17 other)
+- **Patterns: 45%** | **Quiz: 35%** | **Cards: 20%** (reflects exam importance & time)
+- Real exam: 31 questions (14 patterns + 17 other)
+- Practice app: 68 questions for thorough preparation
 - Individual pass/fail indicators per mode (70% threshold)
 - "🎓 Congratulations, you're ready!" when you hit 70% exam readiness
 - Real-time progress tracking with percentages
 
 ### ⏱️ Intelligent Timer (4 hours)
 - Auto-starts, counts down from 4:00:00
-- Tracks only **correct answers** (3.5 min each)
+- **Weighted time tracking** (Patterns: 7.7 min, Quiz: 3.5 min, Cards: 1.6 min)
+- Tracks only **correct answers**
 - Shows "+X Min Ahead" or "-X Min Behind" status
-- Updates every 3.5 minutes + when you answer
+- Updates every 2 minutes + when you answer
 
 ### 🎓 Three Study Modes (68 questions)
 - **Patterns (14)**: Interactive coding with Learning Mode, hints, full test questions
@@ -89,18 +91,22 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 - **Flashcards**: 30 questions (extra practice)
 
 ### Weighted Score Formula
-Your "Exam Readiness" score simulates the real exam weighting:
+Your "Exam Readiness" score reflects exam priorities:
 
 ```
-Exam Readiness = (Patterns % × 0.45) + ((Quiz + Cards) % × 0.55)
+Exam Readiness = (Patterns % × 0.45) + (Quiz % × 0.35) + (Cards % × 0.20)
 ```
+
+**Time Allocation:**
+- Patterns: 108 minutes (45%) → 7.7 min each
+- Quiz: 84 minutes (35%) → 3.5 min each  
+- Cards: 48 minutes (20%) → 1.6 min each
 
 **Example:**
 - Patterns: 12/14 = 85.7%
-- Quiz + Cards: 40/54 = 74.1%
-- **Exam Readiness**: (85.7 × 0.45) + (74.1 × 0.55) = **38.6% + 40.8% = 79.4%** ✅ READY!
-
-**Why this matters**: The exam only has 17 non-pattern questions, but we give you 54 for practice. Your performance on all 54 estimates how you'd do on the 17 real ones.
+- Quiz: 20/24 = 83.3%
+- Cards: 25/30 = 83.3%
+- **Exam Readiness**: (85.7 × 0.45) + (83.3 × 0.35) + (83.3 × 0.20) = **38.6% + 29.2% + 16.7% = 84.5%** ✅ READY!
 
 ## 🎯 Study Strategy
 

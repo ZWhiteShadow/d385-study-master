@@ -1107,7 +1107,8 @@ ShowData()` }
           setTimerDisplay(prev => ({ ...prev, timeSpent: timeSpentStr }));
         }, [sessionStartTime, timeRemaining]);
 
-        // Update status calculation every 3.5 minutes (210 seconds)
+        // Update status calculation with weighted time per question
+        // Patterns: 7.7 min, Quiz: 3.5 min, Cards: 1.6 min
         useEffect(() => {
           const getOverallProgress = () => {
             const timeSpentSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
@@ -1116,11 +1117,19 @@ ShowData()` }
             const correctPatterns = Object.values(score.patterns.patternScores).filter(s => s === 'correct').length;
             const correctQuiz = Object.values(score.concepts.questionScores).filter(s => s === 'correct').length;
             const correctFlashcards = Object.values(score.flashcards.cardScores).filter(s => s === 'correct').length;
-            const totalCorrect = correctPatterns + correctQuiz + correctFlashcards;
             
-            if (totalCorrect > 0) {
-              // Simple calculation: 3.5 minutes per CORRECT question
-              const expectedTimeSpent = totalCorrect * 3.5 * 60; // 3.5 minutes in seconds
+            const hasCompleted = correctPatterns + correctQuiz + correctFlashcards > 0;
+            
+            if (hasCompleted) {
+              // Weighted time allocation:
+              // Patterns: 7.7 min each (108 min / 14 = 7.714)
+              // Quiz: 3.5 min each (84 min / 24 = 3.5)
+              // Cards: 1.6 min each (48 min / 30 = 1.6)
+              const expectedTimeSpent = 
+                (correctPatterns * 7.714 * 60) +  // Patterns
+                (correctQuiz * 3.5 * 60) +         // Quiz
+                (correctFlashcards * 1.6 * 60);    // Cards
+              
               const timeDiff = expectedTimeSpent - timeSpentSeconds;
               const minutesDiff = Math.floor(timeDiff / 60);
               
@@ -1138,10 +1147,10 @@ ShowData()` }
           // Update status immediately
           setTimerDisplay(prev => ({ ...prev, status: getOverallProgress() }));
           
-          // Then update every 3.5 minutes (210 seconds)
+          // Then update every 2 minutes (120 seconds)
           const statusInterval = setInterval(() => {
             setTimerDisplay(prev => ({ ...prev, status: getOverallProgress() }));
-          }, 210000); // 210,000 milliseconds = 3.5 minutes
+          }, 120000); // 120,000 milliseconds = 2 minutes
           
           return () => clearInterval(statusInterval);
         }, [score, sessionStartTime]);
@@ -1596,16 +1605,17 @@ ShowData()` }
                 ),
                 // Overall Score Display with Weighted Calculation
                 // REAL EXAM: 31 questions total
-                // Patterns: 14/31 = 45% of exam
-                // Quiz+Cards: 17/31 = 55% of exam (but we have 54 practice questions)
+                // Time allocation: Patterns 45%, Quiz 35%, Cards 20%
                 (() => {
                   const totalQuestions = 14 + 24 + 30; // 68 practice questions
                   const totalCorrect = masteredPatterns.size + conceptCorrect + flashcardCorrect;
                   
-                  // Weighted score calculation based on REAL EXAM (31 questions)
+                  // Separate weighted score calculation
+                  // Patterns: 45%, Quiz: 35%, Cards: 20%
                   const patternsPercent = (masteredPatterns.size / 14) * 100;
-                  const quizCardsPercent = ((conceptCorrect + flashcardCorrect) / 54) * 100;
-                  const weightedScore = (patternsPercent * 0.45) + (quizCardsPercent * 0.55);
+                  const quizPercent = (conceptCorrect / 24) * 100;
+                  const cardsPercent = (flashcardCorrect / 30) * 100;
+                  const weightedScore = (patternsPercent * 0.45) + (quizPercent * 0.35) + (cardsPercent * 0.20);
                   const overallPercentage = Math.round(weightedScore);
                   
                   const allCompleted = totalCorrect === totalQuestions;
@@ -1622,7 +1632,7 @@ ShowData()` }
                         `Exam Readiness: ${overallPercentage}%`
                       ),
                       React.createElement('div', { className: "text-sm text-gray-600 mb-2" }, 
-                        `Patterns: ${masteredPatterns.size}/14 (45% of exam) | Quiz+Cards: ${conceptCorrect + flashcardCorrect}/54 (55% of exam)`
+                        `Patterns: ${masteredPatterns.size}/14 (45%) | Quiz: ${conceptCorrect}/24 (35%) | Cards: ${flashcardCorrect}/30 (20%)`
                       ),
                       React.createElement('div', { className: `text-lg font-semibold ${passed ? 'text-green-600' : 'text-yellow-600'}` }, 
                         passed ? "🎓 Congratulations, you're ready for the exam!" : "Keep studying! You need 70% to pass."
@@ -1634,7 +1644,7 @@ ShowData()` }
                         `Exam Readiness: ${overallPercentage}%`
                       ),
                       React.createElement('div', { className: "text-xs text-gray-500 mt-1" }, 
-                        `Patterns: ${masteredPatterns.size}/14 (45%) | Quiz+Cards: ${conceptCorrect + flashcardCorrect}/54 (55%)`
+                        `Patterns: ${masteredPatterns.size}/14 (45%) | Quiz: ${conceptCorrect}/24 (35%) | Cards: ${flashcardCorrect}/30 (20%)`
                       )
                     );
                   }
