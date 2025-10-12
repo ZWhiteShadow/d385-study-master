@@ -1044,6 +1044,37 @@ ShowData()` }
           return shuffled;
         };
 
+        // Shuffle options within quiz questions and update correct index
+        const shuffleQuestionOptions = (questions) => {
+          return questions.map(q => {
+            const correctOption = q.options[q.correctIndex];
+            const correctExplanation = q.optionExplanations[q.correctIndex];
+            
+            // Create array of indices and shuffle them
+            const indices = Array.from({ length: q.options.length }, (_, i) => i);
+            const shuffledIndices = [];
+            for (let i = indices.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [indices[i], indices[j]] = [indices[j], indices[i]];
+            }
+            shuffledIndices.push(...indices);
+            
+            // Reorder options and explanations based on shuffled indices
+            const shuffledOptions = shuffledIndices.map(i => q.options[i]);
+            const shuffledExplanations = shuffledIndices.map(i => q.optionExplanations[i]);
+            
+            // Find new position of correct answer
+            const newCorrectIndex = shuffledOptions.indexOf(correctOption);
+            
+            return {
+              ...q,
+              options: shuffledOptions,
+              optionExplanations: shuffledExplanations,
+              correctIndex: newCorrectIndex
+            };
+          });
+        };
+
         // React hooks
         const { useState, useEffect } = React;
 
@@ -1076,7 +1107,7 @@ ShowData()` }
           const [score, setScore] = useState({ patterns: { correct: 0, total: 0, patternScores: {} }, concepts: { correct: 0, total: 0, questionScores: {}, selectedOptions: {} }, flashcards: { correct: 0, total: 0, cardScores: {} } });
           const [masteredPatterns, setMasteredPatterns] = useState(new Set());
           const [shuffledPatterns, setShuffledPatterns] = useState(() => shuffleArray(PATTERNS));
-          const [shuffledQuestions, setShuffledQuestions] = useState(() => shuffleArray(MC_QUESTIONS));
+          const [shuffledQuestions, setShuffledQuestions] = useState(() => shuffleQuestionOptions(shuffleArray(MC_QUESTIONS)));
           const [shuffledFlashcards, setShuffledFlashcards] = useState(() => shuffleArray(FLASHCARDS));
 
         // Timer effect
@@ -1293,7 +1324,7 @@ ShowData()` }
           } else if (mode === 'concepts') {
             setScore(prev => ({ ...prev, concepts: { correct: 0, total: 0, questionScores: {}, selectedOptions: {} } }));
             setCurrentQuestion(0);
-            setShuffledQuestions(shuffleArray(MC_QUESTIONS));
+            setShuffledQuestions(shuffleQuestionOptions(shuffleArray(MC_QUESTIONS)));
             } else if (mode === 'flashcards') {
               setScore(prev => ({ ...prev, flashcards: { correct: 0, total: 0, cardScores: {} } }));
               setCurrentFlashcard(0);
@@ -1315,7 +1346,7 @@ ShowData()` }
             setCurrentQuestion(0); 
             setCurrentFlashcard(0);
             setShuffledPatterns(shuffleArray(PATTERNS));
-            setShuffledQuestions(shuffleArray(MC_QUESTIONS));
+            setShuffledQuestions(shuffleQuestionOptions(shuffleArray(MC_QUESTIONS)));
             setShuffledFlashcards(shuffleArray(FLASHCARDS));
             
             // Reset timer and session
