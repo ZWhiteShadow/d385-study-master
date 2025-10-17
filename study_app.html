@@ -1211,10 +1211,30 @@ ShowData()` }
                 setMasteredPatterns(new Set(parsed.masteredPatterns));
               }
               
-              console.log('✅ Progress restored from localStorage');
+              // Detailed load summary
+              const totalAnswered = (parsed.score?.patterns?.total || 0) + 
+                                   (parsed.score?.concepts?.total || 0) + 
+                                   (parsed.score?.flashcards?.total || 0);
+              const timeRemainingMin = Math.floor((parsed.timeRemaining || 14400) / 60);
+              
+              console.log(`
+╔════════════════════════════════════════════════════════════════╗
+║  📂 PROGRESS LOADED FROM LOCALSTORAGE                          ║
+╠════════════════════════════════════════════════════════════════╣
+║  📊 Total Questions Answered: ${totalAnswered}                              ║
+║  🔷 Patterns: ${parsed.score?.patterns?.correct || 0}/${parsed.score?.patterns?.total || 0} correct                               ║
+║  🔶 Quiz: ${parsed.score?.concepts?.correct || 0}/${parsed.score?.concepts?.total || 0} correct                                   ║
+║  🔸 Flashcards: ${parsed.score?.flashcards?.correct || 0}/${parsed.score?.flashcards?.total || 0} correct                         ║
+║  ⏱️  Timer: ${timeRemainingMin} minutes remaining                            ║
+║  📍 Mode: ${parsed.mode || 'patterns'}                                        ║
+║  📅 Last Saved: ${parsed.savedAt ? new Date(parsed.savedAt).toLocaleString() : 'Unknown'}  ║
+╚════════════════════════════════════════════════════════════════╝
+              `);
+            } else {
+              console.log('🆕 No saved progress found - starting fresh!');
             }
           } catch (error) {
-            console.error('Error loading saved state:', error);
+            console.error('❌ Error loading saved state:', error);
           }
         }, []); // Only run on mount
 
