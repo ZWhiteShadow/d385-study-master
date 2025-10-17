@@ -1,6 +1,6 @@
 # D385 Study Master 🎓
 
-**[🚀 Try the Live App]g
+**[🚀 Try the Live App](https://zwhiteshadow.github.io/d385-study-master/study_app.html)**
 
 A comprehensive study application for WGU's D385 Software Engineering Capstone course, featuring interactive patterns, quiz questions, and flashcards to help you master the material.
 
@@ -36,12 +36,13 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/d385-study-master.git
+   git clone https://github.com/ZWhiteShadow/d385-study-master.git
    cd d385-study-master
    ```
 
 2. **Open the app**:
-   - Simply open `study_app.html` in any modern web browser
+   - **Option A**: Use the [Live App](https://zwhiteshadow.github.io/d385-study-master/study_app.html) - No download needed!
+   - **Option B**: Open `study_app.html` locally in any modern web browser
    - No installation or setup required!
 
 3. **Start studying**:
