@@ -788,6 +788,27 @@ ShowData()` }
             title: "Buffer overflow (WRONG)",
             content: "Buffer overflow is a **memory corruption** vulnerability that occurs when a program writes more data to a buffer than it can hold, potentially overwriting adjacent memory. This is completely unrelated to HSTS headers or transport layer security. HSTS operates at the HTTP protocol level to enforce encrypted connections, while buffer overflows are low-level memory issues in compiled code (like C/C++). Python doesn't even have traditional buffer overflow vulnerabilities due to automatic memory management."
           },
+          // Quiz question 108 - Access Control (from 20-Hacker.md)
+          "q108_0": {
+            title: "Broken access control (CORRECT)",
+            content: "The scenario described, where an attacker took over multiple users' accounts, indicates a **broken access control** vulnerability. Broken access control refers to a situation where the system's access control mechanisms fail to prevent unauthorized users from accessing resources or performing actions that they should not have access to.\n\nIn this case, the attacker was able to gain unauthorized access to user accounts, suggesting a weakness in the access control measures that should have prevented such unauthorized actions. This is one of the most critical security vulnerabilities because it directly compromises user data and system integrity."
+          },
+          "q108_1": {
+            title: "Function level auth (WRONG)",
+            content: "Broken function level authorization refers to issues where different user roles should have different levels of access to functions, but the implementation allows users to access functions they shouldn't based on their role. While related to access control, this is more specific to role-based access to functionality rather than the broader account takeover scenario described in the question."
+          },
+          "q108_2": {
+            title: "API mass assignment (WRONG)",
+            content: "API mass assignment refers to vulnerabilities in APIs (Application Programming Interfaces) where attackers can manipulate input to modify more data than they should be allowed to. For example, an attacker might add an \"isAdmin\" field to a request to grant themselves admin privileges. While this is a security vulnerability, it's not what's described in the scenario of taking over multiple user accounts."
+          },
+          "q108_3": {
+            title: "Privilege escalation (WRONG)",
+            content: "Privilege escalation refers to gaining higher-level access than initially granted, which is not precisely what's described in the scenario. In privilege escalation, an attacker with low-level access gains admin or elevated privileges **within their own account**. In the scenario, the focus is on unauthorized access to **multiple user accounts**, not elevating privileges within a single account. This is a broader access control failure."
+          },
+          "q108_4": {
+            title: "Insecure direct object reference (WRONG)",
+            content: "Insecure Direct Object Reference (IDOR) is a vulnerability where an application exposes a reference to an internal object (like a database key or filename) and allows attackers to manipulate it to access unauthorized data. For example, changing a URL from `user=123` to `user=124` to access another user's data. While IDOR can lead to unauthorized access, the question describes taking over **multiple accounts**, suggesting a broader broken access control issue rather than exploiting specific object references."
+          },
           // Quiz question 109 - API Security (from 21-PrivilegeEscalationAPI.md)
           "q109_0": {
             title: "Resource and field-level access control (CORRECT)",
