@@ -31,6 +31,7 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 - **Study Tips**: Consolidated Reddit wisdom
 - **Retry Options**: Reset individual modes or full app
 - **Progress Bars**: Visual tracking for all 68 questions
+- **Auto-Save Progress**: All progress automatically saved to browser localStorage - close and resume anytime!
 
 ## 🚀 Quick Start
 
@@ -76,7 +77,12 @@ A comprehensive study application for WGU's D385 Software Engineering Capstone c
 - **React 18**: Modern component-based architecture
 - **Tailwind CSS**: Responsive and beautiful styling
 - **Babel**: JSX transpilation in the browser
-- **Local Storage**: Progress is saved in your browser
+- **localStorage Persistence**: Auto-saves all progress including:
+  - Timer state (time remaining, running/paused)
+  - Current position in each mode
+  - All scores and completed questions
+  - Pattern mastery status
+  - Resume exactly where you left off!
 
 ## 📊 Real Exam vs Practice App
 

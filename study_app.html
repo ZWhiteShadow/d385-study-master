@@ -1167,6 +1167,78 @@ ShowData()` }
           const [shuffledQuestions, setShuffledQuestions] = useState(() => shuffleQuestionOptions(shuffleArray(MC_QUESTIONS)));
           const [shuffledFlashcards, setShuffledFlashcards] = useState(() => shuffleArray(FLASHCARDS));
 
+        // localStorage key
+        const STORAGE_KEY = 'd385_study_app_state';
+
+        // Load saved state from localStorage on mount
+        useEffect(() => {
+          try {
+            const savedState = localStorage.getItem(STORAGE_KEY);
+            if (savedState) {
+              const parsed = JSON.parse(savedState);
+              
+              // Restore all saved state
+              if (parsed.mode) setMode(parsed.mode);
+              if (parsed.currentPattern !== undefined) setCurrentPattern(parsed.currentPattern);
+              if (parsed.currentQuestion !== undefined) setCurrentQuestion(parsed.currentQuestion);
+              if (parsed.currentFlashcard !== undefined) setCurrentFlashcard(parsed.currentFlashcard);
+              if (parsed.timeRemaining !== undefined) setTimeRemaining(parsed.timeRemaining);
+              if (parsed.timerActive !== undefined) setTimerActive(parsed.timerActive);
+              if (parsed.sessionStartTime) setSessionStartTime(parsed.sessionStartTime);
+              if (parsed.score) {
+                // Convert patternScores back to proper format
+                const restoredScore = {
+                  patterns: {
+                    correct: parsed.score.patterns.correct || 0,
+                    total: parsed.score.patterns.total || 0,
+                    patternScores: parsed.score.patterns.patternScores || {}
+                  },
+                  concepts: {
+                    correct: parsed.score.concepts.correct || 0,
+                    total: parsed.score.concepts.total || 0,
+                    questionScores: parsed.score.concepts.questionScores || {},
+                    selectedOptions: parsed.score.concepts.selectedOptions || {}
+                  },
+                  flashcards: {
+                    correct: parsed.score.flashcards.correct || 0,
+                    total: parsed.score.flashcards.total || 0,
+                    cardScores: parsed.score.flashcards.cardScores || {}
+                  }
+                };
+                setScore(restoredScore);
+              }
+              if (parsed.masteredPatterns) {
+                setMasteredPatterns(new Set(parsed.masteredPatterns));
+              }
+              
+              console.log('✅ Progress restored from localStorage');
+            }
+          } catch (error) {
+            console.error('Error loading saved state:', error);
+          }
+        }, []); // Only run on mount
+
+        // Save state to localStorage whenever important state changes
+        useEffect(() => {
+          try {
+            const stateToSave = {
+              mode,
+              currentPattern,
+              currentQuestion,
+              currentFlashcard,
+              timeRemaining,
+              timerActive,
+              sessionStartTime,
+              score,
+              masteredPatterns: Array.from(masteredPatterns),
+              savedAt: new Date().toISOString()
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave));
+          } catch (error) {
+            console.error('Error saving state:', error);
+          }
+        }, [mode, currentPattern, currentQuestion, currentFlashcard, timeRemaining, timerActive, score, masteredPatterns]);
+
         // Timer effect
         useEffect(() => {
           let interval;
@@ -1405,6 +1477,14 @@ ShowData()` }
             setShuffledPatterns(shuffleArray(PATTERNS));
             setShuffledQuestions(shuffleQuestionOptions(shuffleArray(MC_QUESTIONS)));
             setShuffledFlashcards(shuffleArray(FLASHCARDS));
+            
+            // Clear saved progress from localStorage
+            try {
+              localStorage.removeItem(STORAGE_KEY);
+              console.log('🗑️ Progress cleared from localStorage');
+            } catch (error) {
+              console.error('Error clearing localStorage:', error);
+            }
             
             // Reset timer and session
             setSessionStartTime(Date.now());
